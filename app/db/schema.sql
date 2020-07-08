@@ -1,28 +1,28 @@
-DROP DATABASE IF EXISTS MixUpTape_db;
-CREATE DATABASE MixUpTape_db;
+DROP DATABASE IF EXISTS mixuptape_db;
+CREATE DATABASE mixuptape_db;
 
-USE MixUpTape_db;
+USE mixuptape_db;
 
 -- password data goes here?
-CREATE TABLE UserTable (
+CREATE TABLE usertable (
   id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  userName varchar(30) NOT NULL
+  username varchar(30) NOT NULL
 );
 
 
-CREATE TABLE PlaylistTable (
+CREATE TABLE playlisttable (
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  UserTable_id  INTEGER,
+  usertable_id  INTEGER,
 --   super long text here 
-  playlistString varchar(255) NOT NULL,
-  FOREIGN KEY (UserTable_id) REFERENCES UserTable(id)
+  playliststring varchar(255) NOT NULL,
+  FOREIGN KEY (usertable_id) REFERENCES usertable(id)
 );
 
 
-CREATE TABLE Upvote (
-  PlaylistTable_id  INTEGER,
-  UserTable_id  INTEGER,
-  Upvote boolean,
-  FOREIGN KEY (PlaylistTable_id) REFERENCES PlaylistTable(id),
-  FOREIGN KEY (UserTable_id) REFERENCES UserTable(id)
+CREATE TABLE upvote (
+  playlisttable_id  INTEGER,
+  usertable_id  INTEGER,
+  upvote boolean,
+  FOREIGN KEY (playlisttable_id) REFERENCES playlisttable(id),
+  FOREIGN KEY (usertable) REFERENCES usertable(id)
 );
