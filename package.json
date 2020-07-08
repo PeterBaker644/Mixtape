@@ -20,11 +20,14 @@
   },
   "homepage": "https://github.com/PeterBaker644/Project-2#readme",
   "dependencies": {
+    "argon2": "^0.26.2",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1"
   },
   "devDependencies": {
-    "eslint": "^7.4.0"
+    "eslint": "^7.4.0",
+    "nodemon": "^2.0.4"
   }
 }
