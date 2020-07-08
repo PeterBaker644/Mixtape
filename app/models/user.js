@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
             await argon2.verify(password, this.password);
             // P: password and this.password might be backward.
         } catch (err) {
-            // internal failure
+            console.log(err);
         }
     };
     // Hooks are automatic methods that run during various phases of the User Model lifecycle
