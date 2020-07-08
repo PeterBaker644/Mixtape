@@ -1,2 +1,2 @@
-app/models/index.js
+./app/models/index.js
 node_modules
