@@ -12,17 +12,17 @@ CREATE TABLE user (
 
 CREATE TABLE playlist (
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  UserTable_id  INTEGER,
+  user_id  INTEGER,
 --   super long text here 
-  playlistString varchar(255) NOT NULL,
+  playlist_string varchar(255) NOT NULL,
   FOREIGN KEY (UserTable_id) REFERENCES UserTable(id)
 );
 
 
-CREATE TABLE upvote (
+CREATE TABLE vote (
   PlaylistTable_id  INTEGER,
   UserTable_id  INTEGER,
-  Upvote boolean,
+  upvote boolean,
   FOREIGN KEY (PlaylistTable_id) REFERENCES PlaylistTable(id),
   FOREIGN KEY (UserTable_id) REFERENCES UserTable(id)
 );
