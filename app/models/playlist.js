@@ -2,14 +2,14 @@
 // For now we will only use a string, but we may want to create a songs table later as a website like this would use something like this for data analysis.
 module.exports = function (sequelize, DataTypes) {
     const Playlist = sequelize.define("Playlist", {
-        playlist_title: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 isEmpty: false
             }
         },
-        playlist_string: {
+        string: {
             type: DataTypes.TEXT,
             allowNull: false,
             validate: {
