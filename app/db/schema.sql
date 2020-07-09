@@ -15,14 +15,16 @@ CREATE TABLE playlist (
   user_id  INTEGER,
 --   super long text here 
   playlist_string varchar(255) NOT NULL,
-  FOREIGN KEY (UserTable_id) REFERENCES UserTable(id)
+  FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
 
 CREATE TABLE vote (
-  PlaylistTable_id  INTEGER,
-  UserTable_id  INTEGER,
+  playlist_id  INTEGER,
+  user_id  INTEGER,
   upvote boolean,
-  FOREIGN KEY (PlaylistTable_id) REFERENCES PlaylistTable(id),
-  FOREIGN KEY (UserTable_id) REFERENCES UserTable(id)
+  FOREIGN KEY (playlist_id) REFERENCES playlist(id),
+  FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
+-- This file is not necessary as sequelize creates all tables automatically, but it is useful for visualization. It also no longer reflects the structure of the tables that are being authored by sequelize as defined in our user, playlist, and vote methods.
