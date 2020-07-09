@@ -9,4 +9,4 @@ cache:
 services:
   - mysql
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS MixUpTape_db;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS mixtape_db;'
