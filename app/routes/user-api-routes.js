@@ -33,20 +33,28 @@ module.exports = function (app) {
         res.redirect("/");
     });
 
-    app.get("/api/user_data", (req, res) => {
+    app.get("/api/profile/:username", (req, res) => {
+        db.User.findOne({
+            attributes: ["username","last_login","createdAt"],
+            where: {
+                username: req.params.username
+            }
+        }).then(dbUser => res.json({dbUser}));
+    });
+
+    // Would like this to display the username in the api path, but I don't know how I want to do that now. Revisit later.
+    app.get("/api/profile/settings", (req, res) => {
         if (!req.user) {
             // The user is not logged in, send back an empty object
             res.json({});
         } else {
-            // req.user should contain all the information we need normally, but this will be used on things like our profile page where we want to display user information.
-            res.json({
-                first_name: req.body.firstName,
-                last_name: req.body.lastName,
-                email: req.user.email,
-                username: req.body.username,
-                id: req.user.id,
-                last_login: req.body.lastLogin
-            });
+            // req.user should contain only id, username and role, so we have to call the databse for everything else, only calling for things the we don't have stored, and only exposing data that is safe to do so.
+            db.User.findOne({
+                attributes: [{exclude: ["password","id","role"]}],
+                where: {
+                    username: req.user.username
+                }
+            }).then(dbUser => res.json({dbUser}));
         }
     });
 };
