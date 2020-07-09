@@ -1,28 +1,30 @@
-DROP DATABASE IF EXISTS mixuptape_db;
-CREATE DATABASE mixuptape_db;
+DROP DATABASE IF EXISTS mixtape_db;
+CREATE DATABASE mixtape_db;
 
-USE mixuptape_db;
+USE mixtape_db;
 
 -- password data goes here?
-CREATE TABLE usertable (
+CREATE TABLE user (
   id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   username varchar(30) NOT NULL
 );
 
 
-CREATE TABLE playlisttable (
+CREATE TABLE playlist (
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  usertable_id  INTEGER,
+  user_id  INTEGER,
 --   super long text here 
-  playliststring varchar(255) NOT NULL,
-  FOREIGN KEY (usertable_id) REFERENCES usertable(id)
+  playlist_string varchar(255) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
 
-CREATE TABLE upvote (
-  playlisttable_id  INTEGER,
-  usertable_id  INTEGER,
+CREATE TABLE vote (
+  playlist_id  INTEGER,
+  user_id  INTEGER,
   upvote boolean,
-  FOREIGN KEY (playlisttable_id) REFERENCES playlisttable(id),
-  FOREIGN KEY (usertable) REFERENCES usertable(id)
+  FOREIGN KEY (playlist_id) REFERENCES playlist(id),
+  FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
+-- This file is not necessary as sequelize creates all tables automatically, but it is useful for visualization. It also no longer reflects the structure of the tables that are being authored by sequelize as defined in our user, playlist, and vote methods.
