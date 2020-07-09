@@ -1,16 +1,16 @@
-DROP DATABASE IF EXISTS MixUpTape_db;
-CREATE DATABASE MixUpTape_db;
+DROP DATABASE IF EXISTS mixtape_db;
+CREATE DATABASE mixtape_db;
 
-USE MixUpTape_db;
+USE mixtape_db;
 
 -- password data goes here?
-CREATE TABLE UserTable (
+CREATE TABLE user (
   id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  userName varchar(30) NOT NULL
+  username varchar(30) NOT NULL
 );
 
 
-CREATE TABLE PlaylistTable (
+CREATE TABLE playlist (
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   UserTable_id  INTEGER,
 --   super long text here 
@@ -19,7 +19,7 @@ CREATE TABLE PlaylistTable (
 );
 
 
-CREATE TABLE Upvote (
+CREATE TABLE upvote (
   PlaylistTable_id  INTEGER,
   UserTable_id  INTEGER,
   Upvote boolean,

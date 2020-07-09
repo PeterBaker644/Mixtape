@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         role: {
             type: DataTypes.STRING,
-            validate: { isIn: [["user","admin"]] }
+            validate: { isIn: [["user", "admin"]] }
         },
         username: {
             type: DataTypes.STRING,
@@ -34,12 +34,21 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             // We're validating for a minimum length of 8 characters here. Have to figure out how to send this error down the line. Hopefully it works with the hook.
-            validate: { len: [8,128] }
+            validate: { len: [8, 128] }
         },
         // eslint-disable-next-line camelcase
         last_login: DataTypes.DATE
     });
 
+    // I don't feel confident about this, something I hope Gene will look into.
+    User.associate = function (models) {
+        User.hasMany(models.Playlist, {
+            onDelete: "cascade"
+        });
+        User.hasMany(models.Vote, {
+            onDelete: "cascade"
+        });
+    };
     User.prototype.validPassword = async (password) => {
         try {
             return await argon2.verify(password, this.password);
