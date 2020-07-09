@@ -18,7 +18,7 @@ module.exports = function (app) {
 
     app.get("/:username", async function (req, res) {
         try {
-            const userExists = await db.User.findAll(
+            const userExists = await db.User.findOne(
                 { where: { username: req.params.username } }
             );
             if (userExists) {
@@ -30,5 +30,3 @@ module.exports = function (app) {
         }
     });
 };
-
-module.exports = app;
