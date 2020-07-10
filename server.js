@@ -16,12 +16,12 @@ app.use(session({ secret: "change me later", resave: true, saveUninitialized: tr
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use((req, res, next) => {
-//     if (req.isAuthenticated) {
-//         res.locals.isAuthenticated = req.isAuthenticated();
-//     }
-//     next();
-// });
+app.use((req, res, next) => {
+    if (req.isAuthenticated) {
+        res.locals.isAuthenticated = req.isAuthenticated();
+    }
+    next();
+});
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");

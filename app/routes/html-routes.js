@@ -10,6 +10,12 @@ module.exports = function (app) {
         res.render("login");
     });
 
+    app.get("/logout", (req, res) => {
+        console.log(req.user.username);
+        req.logout();
+        res.redirect("/playlists");
+    });
+
     app.get("/signup", function (req, res) {
         res.render("signup");
     });
@@ -18,7 +24,7 @@ module.exports = function (app) {
         res.render("settings");
     });
 
-    app.get("/:username", async function (req, res) {
+    app.get("/user/:username", async function (req, res) {
         try {
             const userExists = await db.User.findOne(
                 { where: { username: req.params.username } }

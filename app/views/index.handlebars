@@ -2,11 +2,17 @@ The Handlebars templating engine, used in Node.js by means of the express-handle
 
 <div class="container">
     {{!-- make sure we don't need to use a sub-expression --}}
-    {{#if user}}
+    {{#if isAuthenticated}}
         {{!-- {{> header-user}} --}}
         <h2>The user is authenticated.</h2>
     {{else}}
         {{!-- {{> header-login}} --}}
         <h2>The user is not authenticated.</h2>
     {{/if}}
+    <a class="navbar-brand" href="/signup">
+        Sign Up
+    </a>
+    <a class="navbar-brand" href="/logout">
+        Logout
+    </a>
 </div>

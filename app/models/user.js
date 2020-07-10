@@ -49,17 +49,17 @@ module.exports = function (sequelize, DataTypes) {
             onDelete: "cascade"
         });
     };
-    User.prototype.validPassword = async (password) => {
+    User.prototype.validPassword = async (user, password) => {
         try {
-            return await argon2.verify(password, this.password);
-            // P: password and this.password might be backward.
+            console.log(password + " " + user.password);
+            return await argon2.verify(user.password, password);
         } catch (err) {
             console.log(err);
         }
     };
     User.addHook("beforeCreate", async (user) => {
         try {
-            return await argon2.hash(user.password);
+            user.password = await argon2.hash(user.password);
         } catch (err) {
             //reevaluate what we might actually want here.
             console.log(err);

@@ -4,8 +4,9 @@ const passport = require("../config/passport");
 
 module.exports = function (app) {
 
-    // where are we calling req.login?
+    // we are currently automatically pushing the user to login after signup.
     app.post("/api/login", passport.authenticate("local"), (req, res) => {
+        console.log(req.user);
         res.json({
             username: req.user.username,
             id: req.user.id
@@ -28,11 +29,6 @@ module.exports = function (app) {
                 res.status(401).json(err);
                 console.log(err);
             });
-    });
-
-    app.get("/logout", (req, res) => {
-        req.logout();
-        res.redirect("/");
     });
 
     app.get("/api/profile/:username", (req, res) => {
