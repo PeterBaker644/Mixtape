@@ -23,8 +23,11 @@
     "argon2": "^0.26.2",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
-    "mysql": "^2.18.1",
-    "passport": "^0.4.1"
+    "express-session": "^1.17.1",
+    "mysql2": "^2.1.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "sequelize": "^6.3.0"
   },
   "devDependencies": {
     "eslint": "^7.4.0",

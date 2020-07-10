@@ -1,3 +1,5 @@
+const isAuthenticated = require("../config/middleware/isAuthenticated");
+
 module.exports = function (app) {
 
     app.get("/playlists", function (req, res) {
@@ -12,7 +14,7 @@ module.exports = function (app) {
         res.render("signup");
     });
 
-    app.get("/settings/profile", function (req, res) {
+    app.get("/settings/profile", isAuthenticated, function (req, res) {
         res.render("settings");
     });
 
@@ -25,8 +27,11 @@ module.exports = function (app) {
                 res.render("profile");
             }
         } catch (err) {
-            // Maybe throw some kind of 'user not found' alert.
-            res.status(404).render("index");
+            // Maybe throw some kind of 'user not found' alert. This needs to be handled in the html with handlebars. See example for details.
+            res.status(404).render("index", {
+                message: "User not found.",
+                messageClass: "alert-danger"
+            });
         }
     });
 };
