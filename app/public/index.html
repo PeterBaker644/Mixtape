@@ -1,89 +1,93 @@
 <!DOCTYPE html>
-<html lang="en-us">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="HandheldFriendly" content="true">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rock+Salt&family=Teko:wght@500&display=swap" rel="stylesheet">
-    <title>Mixtape</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous">
+    <title>Document</title>
 </head>
-
 <body>
-    <div class="header">
-        <h1>Mixtape</h1>
-        <div>
-            <ul>
-                <li>
-                    <a href="#search-engine-optimization">Home</a>
-                </li>
-                <li>
-                    <a href="#online-reputation-management"></a>Create Play List</a>
-                </li>
-                <li>
-                    <a href="#social-media-marketing">Account Settings</a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">Mixtape</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="profile.html">Profile <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Favorites</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
         </div>
-    </div>
-    <div class="hero"></div>
-    <div class="content">
-        <div id="search-engine-optimization" class="search-engine-optimization">
-            <h2>It's my playlist post.</h2>
-            <p>
-                Song 1 </br>
-                Song 2 </br>
-                Song 3 </br>
-                Song 4 </br>  
-            </p>
+      </nav>
+
+      <div id= logbox class="container px-lg-5">
+        <div class="row mx-lg-n5">
+          <div class="col py-3 px-lg-5 border bg-light">
+            
+                <div class="container">
+                  <h1 class="display-4">New User</h1>
+                  <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">I have read and understand</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+
+
+          </div>
+          <div class="col py-3 px-lg-5 border bg-light">
+            <div class="container">
+                <h1 class="display-4">Existing User</h1>
+                <form>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword2">
+                  </div>
+                  <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">I have read and understand</label>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>Custom column padding
+            </div>
         </div>
-        <div id="online-reputation-management" class="online-reputation-management">
-            <h2>It's my playlist post.</h2>
-            <p>
-                Song 1 </br>
-                Song 2 </br>
-                Song 3 </br>
-                Song 4 </br>  
-            </p>
-        </div>
-        <div id="social-media-marketing" class="social-media-marketing">
-            <h2>It's my playlist post.</h2>
-            <p>
-                Song 1 </br>
-                Song 2 </br>
-                Song 3 </br>
-                Song 4 </br>  
-            </p>
-        </div>
-    </div>
-    <div class="benefits">
-        <div class="benefit-lead">
-            <h3>Playlist 1</h3>
-            <p>
-                Song 1 </br>
-                Song 2 </br>
-            </p>
-        </div>
-        <div class="benefit-brand">
-            <h3>Playist 2</h3>
-            <p>
-                    Song 1 </br>
-                    Song 2 </br>
-            </p>
-        </div>
-        <div class="benefit-cost">
-            <h3>Playist 3</h3>
-            <p>
-               Song 1 </br>
-               Song 2 </br>
-            </p>
-        </div>
-    </div>
-    <div class="footer">
-        <h2>Made by....</h2>
-    </div>
+      </div>
+
+
+    
 </body>
 
 </html>
