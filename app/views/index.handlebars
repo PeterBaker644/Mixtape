@@ -1,0 +1,8 @@
+<div class="container">
+    {{!-- make sure we don't need to use a sub-expression --}}
+    {{#if isAuthenticated}}
+        {{> header-user}}
+    {{else}}
+        {{> header-login}}
+    {{/if}}
+</div>
