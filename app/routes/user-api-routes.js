@@ -4,6 +4,7 @@ const passport = require("../config/passport");
 
 module.exports = function (app) {
 
+    // where are we calling req.login?
     app.post("/api/login", passport.authenticate("local"), (req, res) => {
         res.json({
             username: req.user.username,
@@ -25,6 +26,7 @@ module.exports = function (app) {
             })
             .catch(err => {
                 res.status(401).json(err);
+                console.log(err);
             });
     });
 
