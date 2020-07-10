@@ -6,19 +6,19 @@ module.exports = function (sequelize, DataTypes) {
         first_name: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: { isEmpty: false }
+            // validate: { notEmpty: false }
         },
         // eslint-disable-next-line camelcase
         last_name: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: { isEmpty: false }
+            // validate: { notEmpty: false }
         },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
-            validate: { isEmail: false }
+            validate: { isEmail: true }
         },
         role: {
             type: DataTypes.STRING,
@@ -28,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
-            validate: { isEmpty: false }
+            // validate: { notEmpty: false }
         },
         password: {
             type: DataTypes.STRING,
