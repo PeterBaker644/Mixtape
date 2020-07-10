@@ -12,6 +12,11 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             }
         });
+        Vote.belongsTo(models.Playlist, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
     };
 
     return Vote;
