@@ -6,13 +6,13 @@ module.exports = function (sequelize, DataTypes) {
         first_name: {
             type: DataTypes.STRING,
             allowNull: false,
-            // validate: { notEmpty: false }
+            // validate: { notEmpty: true }
         },
         // eslint-disable-next-line camelcase
         last_name: {
             type: DataTypes.STRING,
             allowNull: false,
-            // validate: { notEmpty: false }
+            // validate: { notEmpty: true }
         },
         email: {
             type: DataTypes.STRING,
@@ -28,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
-            // validate: { notEmpty: false }
+            // validate: { notEmpty: true }
         },
         password: {
             type: DataTypes.STRING,
@@ -41,6 +41,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     // I don't feel confident about this, something I hope Gene will look into.
+
     User.associate = function (models) {
         User.hasMany(models.Playlist, {
             onDelete: "cascade"

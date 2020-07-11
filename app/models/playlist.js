@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 
-
 // For now we will only use a string, but we may want to create a songs table later as a website like this would use something like this for data analysis.
 module.exports = function (sequelize, DataTypes) {
     const Playlist = sequelize.define("Playlist", {
@@ -8,28 +7,28 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isEmpty: false
+                notEmpty: true
             }
         },
         string: {
             type: DataTypes.TEXT,
             allowNull: false,
             validate: {
-                isEmpty: false
+                notEmpty: true
             }
         }
     });
 
+
+    // We're saying that a Playlist should belong to a User
+    // A Playlist can't be created without an User due to the foreign key constraint
+
     Playlist.associate = function (models) {
-        // We're saying that a Playlist should belong to a User
-        // A Playlist can't be created without an User due to the foreign key constraint
         Playlist.hasMany(models.Vote, {
             foreignKey: {
                 allowNull: false
             }
         });
     };
-
     return Playlist;
 };
-
