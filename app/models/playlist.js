@@ -26,16 +26,47 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
+
+    // We're saying that a Playlist should belong to a User
+    // A Playlist can't be created without an User due to the foreign key constraint
+
     Playlist.associate = function (models) {
-        // We're saying that a Playlist should belong to a User
-        // A Playlist can't be created without an User due to the foreign key constraint
-        Playlist.belongsTo(models.User, {
+        Playlist.hasMany(models.Vote, {
             foreignKey: {
                 allowNull: false
             }
         });
     };
-
     return Playlist;
 };
+//old peter code, mostly viable
+// module.exports = function (sequelize, DataTypes) {
+//     const Playlist = sequelize.define("Playlist", {
+//         title: {
+//             type: DataTypes.STRING,
+//             allowNull: false,
+//             validate: {
+//                 isEmpty: false
+//             }
+//         },
+//         string: {
+//             type: DataTypes.TEXT,
+//             allowNull: false,
+//             validate: {
+//                 isEmpty: false
+//             }
+//         }
+//     });
 
+//     Playlist.associate = function (models) {
+//         // We're saying that a Playlist should belong to a User
+//         // A Playlist can't be created without an User due to the foreign key constraint
+//         Playlist.belongsTo(models.User, {
+//             foreignKey: {
+//                 allowNull: false
+//             }
+//         });
+//     };
+
+//     return Playlist;
+// };
