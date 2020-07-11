@@ -2,7 +2,6 @@
 
 const db = require("../models");
 const passport = require("../config/passport");
-// const sequelize = require("sequelize");
 module.exports = function (app) {
     //should this all be async await?
     app.get("/api/playlists", (req, res) => {
@@ -29,14 +28,18 @@ module.exports = function (app) {
     });
     app.get("/api/playlists/include_upvotes", (req, res) => {
         //this finds all playlists and orders by title.
-        //this also includes upvote table
+        //this includes username title, and array of songs and orders those songs by song order
+        //confirmed working in postman
         db.Playlist.findAll({
-            include: [db.Song, db.Vote,],
+            include: [db.Song,
+            ],
             attributes: [
                 // eslint-disable-next-line quotes
                 [db.Sequelize.literal(`(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)`), "upvote_tally"],
                 "title",
-                "UserId",
+                "id",
+                // eslint-disable-next-line quotes
+                [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
             ],
             order: db.sequelize.literal("title, song_order ASC"),
         })
@@ -45,24 +48,7 @@ module.exports = function (app) {
             });
     });
 
-
-    //working old Gene code. creates nested array of upvote objects
-    // app.get("/api/playlists/include_upvotes", (req, res) => {
-    //     //this finds all playlists and orders by title.
-    //     //this also includes upvote table as an array of objects insite the playlist object
-    //     //which is itself inside an array
-    //     //confirmed working in postman
-    //     db.Playlist.findAll({
-    //         include: db.Vote,
-    //         order: ["title"]
-    //     })
-    //         .then(function (dbPlaylist) {
-    //             res.json(dbPlaylist);
-    //         });
-    // });
-
     //PARAM URLS GO LAST
-
     //we want to get all the playlists from a user by userid not by username right?
     //old gene code
     // app.get("/api/playlists/:UserId", (req, res) => {
