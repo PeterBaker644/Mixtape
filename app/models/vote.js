@@ -4,44 +4,16 @@ module.exports = function (sequelize, DataTypes) {
     const Vote = sequelize.define("Vote", {
         upvote: DataTypes.BOOLEAN,
     });
-
-    // // This table may need to be altered to belongsToMany with a dynamic third table, but I'm leaving this up to Gene to figure out.
-    // Vote.associate = function (models) {
-    //     Vote.belongsTo(models.User, {
-    //         foreignKey: {
-    //             allowNull: false
-    //         }
-    //     });
-    //     Vote.belongsTo(models.Playlist, {
-    //         foreignKey: {
-    //             allowNull: false
-    //         }
-    //     });
-    // };
-
+    Vote.associate = function (models) {
+        //the belongs to command is not needed? it only serves to work with the "has many"
+        //in the other tables... this will essentially act like the "has many" has null Not allowed
+        //so each vote belongs to only ONE user and ONE playlist.
+        Vote.belongsTo(models.User, {
+            // onDelete: "cascade"
+        });
+        Vote.belongsTo(models.Playlist, {
+            // onDelete: "cascade"
+        });
+    };
     return Vote;
 };
-
-
-//old peter code, mostly functional
-// module.exports = function (sequelize, DataTypes) {
-//     const Vote = sequelize.define("Vote", {
-//         upvote: DataTypes.BOOLEAN,
-//     });
-
-//     // This table may need to be altered to belongsToMany with a dynamic third table, but I'm leaving this up to Gene to figure out.
-//     Vote.associate = function (models) {
-//         Vote.belongsTo(models.User, {
-//             foreignKey: {
-//                 allowNull: false
-//             }
-//         });
-//         Vote.belongsTo(models.Playlist, {
-//             foreignKey: {
-//                 allowNull: false
-//             }
-//         });
-//     };
-
-//     return Vote;
-// };

@@ -1,13 +1,5 @@
 /* eslint-disable camelcase */
 
-// example for songs table junction implementaion
-// const Movie = sequelize.define('Movie', { name: DataTypes.STRING });
-// const Actor = sequelize.define('Actor', { name: DataTypes.STRING });
-// Movie.belongsToMany(Actor, { through: 'ActorMovies' });
-// Actor.belongsToMany(Movie, { through: 'ActorMovies' });
-
-
-// For now we will only use a string, but we may want to create a songs table later as a website like this would use something like this for data analysis.
 module.exports = function (sequelize, DataTypes) {
     const Playlist = sequelize.define("Playlist", {
         title: {
@@ -17,6 +9,8 @@ module.exports = function (sequelize, DataTypes) {
                 isEmpty: false
             }
         },
+        //this string is a CSV of songs that will be manually input as a MVP
+        //later moving to a table junction of a database table of songs
         string: {
             type: DataTypes.TEXT,
             allowNull: false,
@@ -25,48 +19,19 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     });
-
-
-    // We're saying that a Playlist should belong to a User
-    // A Playlist can't be created without an User due to the foreign key constraint
-
+    //this 'has many' means the playlist can have many upvotes associated with it
+    //will create an FKey in the vote table that references this playlist table.
     Playlist.associate = function (models) {
+        //removed default Null to allow a playlist that has no votes.
+        //maybe we should force not null and somehow automatically have the author
+        //of the playlist upvote their own playlist, like reddit does
         Playlist.hasMany(models.Vote, {
-            foreignKey: {
-                allowNull: false
-            }
+        });
+        //this creates a junction table to associate many songs with many playlists
+        //1 song can be in many playlists and one playlist can have many songs
+        Playlist.belongsToMany(models.Song, {
+            through: "playlist_song_junction_table"
         });
     };
     return Playlist;
 };
-//old peter code, mostly viable
-// module.exports = function (sequelize, DataTypes) {
-//     const Playlist = sequelize.define("Playlist", {
-//         title: {
-//             type: DataTypes.STRING,
-//             allowNull: false,
-//             validate: {
-//                 isEmpty: false
-//             }
-//         },
-//         string: {
-//             type: DataTypes.TEXT,
-//             allowNull: false,
-//             validate: {
-//                 isEmpty: false
-//             }
-//         }
-//     });
-
-//     Playlist.associate = function (models) {
-//         // We're saying that a Playlist should belong to a User
-//         // A Playlist can't be created without an User due to the foreign key constraint
-//         Playlist.belongsTo(models.User, {
-//             foreignKey: {
-//                 allowNull: false
-//             }
-//         });
-//     };
-
-//     return Playlist;
-// };
