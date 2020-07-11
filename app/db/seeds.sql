@@ -1,5 +1,5 @@
-USE MixTape_db;
-
+-- USE MixTape_db;
+USE mixtape_db;
 
 INSERT INTO users (id, first_name, last_name, email, role, username, password, last_login, createdAt, updatedAt)
 VALUES (id, 'first_name', 'last_name', 'email', 'user', 'username', 'password', 
