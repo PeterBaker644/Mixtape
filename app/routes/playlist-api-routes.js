@@ -5,7 +5,7 @@ const passport = require("../config/passport");
 module.exports = function (app) {
 
     app.get("/api/playlists", (req, res) => {
-        db.Playlist.findAll({ include: db.Vote }) // I don't really know how this is supposed to work Gene you'll have to fix this.
+        db.Playlist.findAll() // I don't really know how this is supposed to work Gene you'll have to fix this.
             .then(function (dbPlaylist) {
                 res.json(dbPlaylist);
             });

@@ -1,11 +1,5 @@
 /* eslint-disable camelcase */
 
-// example for songs table junction implementaion
-// const Movie = sequelize.define('Movie', { name: DataTypes.STRING });
-// const Actor = sequelize.define('Actor', { name: DataTypes.STRING });
-// Movie.belongsToMany(Actor, { through: 'ActorMovies' });
-// Actor.belongsToMany(Movie, { through: 'ActorMovies' });
-
 
 // For now we will only use a string, but we may want to create a songs table later as a website like this would use something like this for data analysis.
 module.exports = function (sequelize, DataTypes) {
@@ -29,7 +23,7 @@ module.exports = function (sequelize, DataTypes) {
     Playlist.associate = function (models) {
         // We're saying that a Playlist should belong to a User
         // A Playlist can't be created without an User due to the foreign key constraint
-        Playlist.belongsTo(models.User, {
+        Playlist.hasMany(models.Vote, {
             foreignKey: {
                 allowNull: false
             }
