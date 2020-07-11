@@ -39,9 +39,9 @@ module.exports = function (sequelize, DataTypes) {
         // eslint-disable-next-line camelcase
         last_login: DataTypes.DATE
     });
-
-    // I don't feel confident about this, something I hope Gene will look into.
-
+    //this 'has many' creates Fkeys in the target (playlist and vote)
+    //(not verified) on cascade should mean that when a user is deleted
+    //all of their votes and playlists also get deleted
     User.associate = function (models) {
         User.hasMany(models.Playlist, {
             onDelete: "cascade"
