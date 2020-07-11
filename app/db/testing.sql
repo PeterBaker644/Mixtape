@@ -1,8 +1,5 @@
-USE mixuptape_db;
+USE mixtape_db;
 
--- SELECT * from usertable;
--- SELECT * from playlisttable;
-SELECT * from upvote order by playlisttable_id;
-
-
-
+-- SELECT * from users;
+-- SELECT * from Playlists;
+SELECT * from votes;
