@@ -1,3 +1,11 @@
-<h1>Hi User!</h1>
+<div class="container">
+    <h1>Hi {{user.username}}!</h1>
 
-<script type="text/javascript" src="/assets/js/profile.js"></script>
+    <ul class="list-group">
+        {{#each playlists}}
+            {{> playlist}}
+        {{/each}}
+    </ul>
+
+    <script type="text/javascript" src="/assets/js/profile.js"></script>
+</div>

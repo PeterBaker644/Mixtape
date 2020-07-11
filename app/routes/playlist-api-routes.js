@@ -60,8 +60,6 @@ module.exports = function (app) {
     //         });
     // });
 
-
-
     // I think we need the authenticate line here. We'll double check when testing though.
     app.post("/api/playlists", passport.authenticate("local"), (req, res) => {
         db.Playlist.create({
@@ -77,17 +75,19 @@ module.exports = function (app) {
             });
     });
 
-    app.get("/api/playlists/:username", (req, res) => {
-        db.Playlist.findAll({
-            include: {
-                model: db.User,
-                attributes: ["username","last_login","createdAt"],
-                where: {
-                    username: req.params.username
-                }
-            }
-        }).then(dbPlaylist => {
-            res.json(dbPlaylist);
-        });
-    });
+    // app.get("/api/playlists/:username", (req, res) => {
+    //     db.Playlist.findAll({
+    //         include: [{
+    //             model: db.User,
+    //             attributes: ["username","last_login","createdAt"],
+    //             where: { username: req.params.username }
+    //         },{
+    //             model: db.Vote,
+    //             // eslint-disable-next-line quotes
+    //             attributes: [db.Sequelize.literal(`(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)`), "upvote_tally"]
+    //         }]
+    //     }).then(dbPlaylist => {
+    //         res.json(dbPlaylist);
+    //     });
+    // });
 };

@@ -39,13 +39,24 @@ module.exports = function (app) {
     app.get("/user/:username", async (req, res) => {
         // talk to gene about this tomorrow and how maybe we get rid of it?
         try {
-            const userExists = await db.User.findOne(
-                { where: { username: req.params.username } }
-            );
-            if (userExists) {
+            console.log("Test1");
+            const data = await db.Playlist.findAll({
+                include: [{
+                    model: db.User,
+                    attributes: ["username","last_login","createdAt"],
+                    where: { username: req.params.username },
+                },
+                {
+                    model: db.Vote,
+                }]
+            });
+            console.log("Test2");
+            if (data) {
                 console.log("User Exists!");
-                console.log(userExists.username);
-                res.render("profile");
+                const hbsObject = { playlists:data };
+                console.log(hbsObject.playlists[0].User);
+                // res.json(data);
+                res.render("profile", hbsObject);
             }
         } catch (err) {
             // Maybe throw some kind of 'user not found' alert. This needs to be handled in the html with handlebars. See example for details.
