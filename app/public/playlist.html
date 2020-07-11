@@ -3,22 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Rock+Salt&display=swap" rel="stylesheet">
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
-    <title>Document</title>
+      crossorigin="anonymous"/>
+      <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Playlist</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Mixtape</a>
+  
+  <!--Nav Bar-->
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand text-white" href="#">Mixtape</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -31,114 +32,151 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-md-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="profile.html"
-              >Profile <span class="sr-only">(current)</span></a
-            >
+            <a class="nav-link text-white " href="profile.html">Profile <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Favorites</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"
-              >Disabled</a
-            >
+          <li class="nav-item active">
+            <a class="nav-link text-white " href="createuser.html">Sign Out <span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>
     </nav>
 
+
+<!--Create posts-->
     <div class="container">
-    <div class="jumbotron">
-        <h1 class="display-4">Welcome _________</h1>
-        <p class="lead">Today is a great do to create a playlist</p>
+    <div class="jumbotron text-white">
+        <h1 class="display-4">Hi [username],</h1>
+        <p class="lead">Today is a great day it create a playlist.</p>
         <hr class="my-4">
-        <p>You can create your playlist here!</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Create Playlist</a>
+        <p>You can create your playlist here!</p><br>
+        <!--Post title-->
+        <div class="form-group">
+          <input type="text" class="form-control" id="post-title" placeholder="Playlist Title">
+        </div>
+        <!--text area-->
+        <div class="form-group">
+          <textarea class="form-control" id="text-area" rows="5" placeholder="List your playlist here."></textarea>
+        </div>
+      </form>
+        <a class="btn btn-dark btn-lg pull-right" href="#" role="button">Post Playlist</a>
       </div>
     </div>
 
 
 <!-- This can be where the cards get auto populated with the table information -->
     <div class="container">
-      <div class="row row-cols-3">
+      <div class="row row-cols-3 text-white">
         <div class="col">
           <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Playlist name</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <h5 class="card-title">Playlist Name</h5>
+              <h6 class="card-subtitle mb-2 text-muted">[Date Posted]</h6>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                Artist - Song Title<br>
+                Artist - Song Title<br>
+                Artist - Song Title<br>
+                Artist - Song Title<br>
+                Artist - Song Title<br>
               </p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
+              <a href="#" class="card-link text-white"><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i></a>
+              <a href="#" class="card-link pull-right text-white"><i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Playlist name</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <h5 class="card-title">Playlist Name</h5>
+              <h6 class="card-subtitle mb-2 text-muted">[Date Posted]</h6>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                Artist - Song Title<br>
+                Artist - Song Title<br>
+                Artist - Song Title<br>
+                Artist - Song Title<br>
+                Artist - Song Title<br>
               </p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
+              <a href="#" class="card-link text-white"><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i></a>
+              <a href="#" class="card-link pull-right text-white"><i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
         <div class="col">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                  <h5 class="card-title">Playlist name</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+                  <h5 class="card-title">Playlist Name</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">[Date Posted]</h6>
+                  <p class="card-text">
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>                 
+                   </p>
+                   <a href="#" class="card-link text-white"><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i></a>
+                   <a href="#" class="card-link pull-right text-white"><i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i></a>
                 </div>
               </div>
         </div>
         <div class="col">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                  <h5 class="card-title">Playlist name</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+                  <h5 class="card-title">Playlist Name</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">[Date Posted]</h6>
+                  <p class="card-text">
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                  </p>
+                  <a href="#" class="card-link text-white"><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i></a>
+                  <a href="#" class="card-link pull-right text-white"><i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i></a>
                 </div>
               </div>
         </div>
         <div class="col">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                  <h5 class="card-title">Playlist name</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+                  <h5 class="card-title">Playlist Name</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">[Date Posted]</h6>
+                  <p class="card-text">
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                  </p>
+                  <a href="#" class="card-link text-white"><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i></a>
+                  <a href="#" class="card-link pull-right text-white"><i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i></a>
                 </div>
               </div>
         </div>
         <div class="col">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                  <h5 class="card-title">Playlist name</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+                  <h5 class="card-title">Playlist Name</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">[Date Posted]</h6>
+                  <p class="card-text">
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                    Artist - Song Title<br>
+                  </p>
+                  <a href="#" class="card-link text-white"><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i></a>
+                  <a href="#" class="card-link pull-right text-white"><i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i></a>
                 </div>
               </div>
         </div>
       </div>
     </div>
+
+    <!--Footer-->
+    <footer class="footer">
+      <div>© 2020 Copyright: Mixtape</div>
+    </footer>
+
   </body>
 </html>
