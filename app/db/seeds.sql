@@ -1,30 +1,47 @@
-USE mixuptape_db;
-
--- VALUES (id, username);
-INSERT INTO usertable 
-VALUES (1, 'PeterUsername');
-INSERT INTO usertable 
-VALUES (2, 'Gshaver82');
-INSERT INTO usertable 
-VALUES (3, 'simeonUsername');
+-- if force true is in the server.js for the sequelize function you will need to add dummy data
+-- to test with, run this code in workbench to quickly get something put in
 
 
--- VALUES (id,UserTable_id(who created the post), playlistString);
-INSERT INTO playlisttable 
-VALUES (1, 1,"songOne songTwo");
-INSERT INTO playlisttable 
-VALUES (2, 1,"songOne songThree");
+USE mixtape_db;
 
--- VALUES (PlaylistTable_id,usertable,upvote);
-INSERT INTO upvote 
-VALUES (1,1,true);
-INSERT INTO upvote 
-VALUES (2,1,true);
 
-INSERT INTO upvote 
-VALUES (1,2,true);
-INSERT INTO upvote 
-VALUES (2,2,false);
+INSERT INTO users (id, first_name, last_name, email, role, username, password, last_login, createdAt, updatedAt)
+VALUES (id, 'first_name', 'last_name', 'email@gmail.com', 'user', 'username', 'password', 
+'2020-07-09 23:07:58', '2020-07-09 23:07:58', '2020-07-09 23:07:58');
+INSERT INTO users (id, first_name, last_name, email, role, username, password, last_login, createdAt, updatedAt)
+VALUES (id, 'jim', 'bob', 'jimbobemail@gmail.com', 'user', 'bob', 'asdf', 
+'2020-07-09 23:07:58', '2020-07-09 23:07:58', '2020-07-09 23:07:58');
 
-INSERT INTO upvote 
-VALUES (1,3,true);
+
+INSERT INTO playlists (id, title, string, createdAt, updatedAt, UserId)
+VALUES (1,'title', 'songone, song2', '2020-07-09 23:07:58','2020-07-09 23:07:58',1);
+INSERT INTO playlists (id, title, string, createdAt, updatedAt, UserId)
+VALUES (2,'title', 'songone, song2', '2020-07-09 23:07:58','2020-07-09 23:07:58',2);
+
+
+INSERT INTO votes (id, upvote, createdAt, updatedAt, UserId, PlaylistId)
+VALUES (id,1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',1,1);
+INSERT INTO votes (id, upvote, createdAt, updatedAt, UserId, PlaylistId)
+VALUES (id,1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',1,2);
+INSERT INTO votes (id, upvote, createdAt, updatedAt, UserId, PlaylistId)
+VALUES (id,1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',2,1);
+
+INSERT INTO songs (id, song_title, song_artist,createdAt, updatedAt)
+VALUES (id,'Imperial March','John Williams', '2020-07-09 23:07:58','2020-07-09 23:07:58');
+INSERT INTO songs (id, song_title, song_artist,createdAt, updatedAt)
+VALUES (id,'Olympic Theme','John Williams', '2020-07-09 23:07:58','2020-07-09 23:07:58');
+INSERT INTO songs (id, song_title, song_artist,createdAt, updatedAt)
+VALUES (id,'Procession of the Nobles','some old guy', '2020-07-09 23:07:58','2020-07-09 23:07:58');
+
+INSERT INTO playlist_song_junction_table (createdAt, updatedAt,PlaylistId, SongId)
+VALUES ('2020-07-09 23:07:58','2020-07-09 23:07:58',1,1);
+INSERT INTO playlist_song_junction_table (createdAt, updatedAt,PlaylistId, SongId)
+VALUES ('2020-07-09 23:07:58','2020-07-09 23:07:58',1,2);
+
+INSERT INTO playlist_song_junction_table (createdAt, updatedAt,PlaylistId, SongId)
+VALUES ('2020-07-09 23:07:58','2020-07-09 23:07:58',2,1);
+INSERT INTO playlist_song_junction_table (createdAt, updatedAt,PlaylistId, SongId)
+VALUES ('2020-07-09 23:07:58','2020-07-09 23:07:58',2,2);
+INSERT INTO playlist_song_junction_table (createdAt, updatedAt,PlaylistId, SongId)
+VALUES ('2020-07-09 23:07:58','2020-07-09 23:07:58',2,3);
+
