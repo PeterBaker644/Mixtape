@@ -28,9 +28,12 @@ module.exports = function (app) {
 
     app.get("/api/playlists/:username", (req, res) => {
         db.Playlist.findAll({
-            include: db.User,
-            where: {
-                // username: req.params.username
+            include: {
+                model: db.User,
+                attributes: ["username","last_login","createdAt"],
+                where: {
+                    username: req.params.username
+                }
             }
         }).then(dbPlaylist => {
             res.json(dbPlaylist);

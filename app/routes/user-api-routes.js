@@ -31,6 +31,7 @@ module.exports = function (app) {
             });
     });
 
+    // Might not be necessary any longer.
     app.get("/api/users/:username", (req, res) => {
         db.User.findOne({
             attributes: ["username","last_login","createdAt"],
