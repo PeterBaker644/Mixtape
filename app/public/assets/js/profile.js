@@ -1,5 +1,6 @@
 $(document).ready(() => {
 
+    // DO I really want to be making all of these calls on the frontend?
     async function getUser() {
         try {
             // is there a more elegant way to do this?

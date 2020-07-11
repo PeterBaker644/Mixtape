@@ -1,5 +1,4 @@
 const isAuthenticated = require("../config/middleware/isAuthenticated");
-// I have no idea why I pulled this in, I'm not using it.
 const db = require("../models");
 
 module.exports = function (app) {
@@ -38,6 +37,7 @@ module.exports = function (app) {
     });
 
     app.get("/user/:username", async (req, res) => {
+        // talk to gene about this tomorrow and how maybe we get rid of it?
         try {
             const userExists = await db.User.findOne(
                 { where: { username: req.params.username } }
