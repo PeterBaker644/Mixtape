@@ -1,5 +1,22 @@
-<li class="list-group-item text-truncate">
-    <h3>{{dataValues.title}} <span class="lead">Authored by: {{User.dataValues.username}}</span></h3>
-    <div>{{dataValues.string}}</div>
-    
-</li>
+<div class="card">
+    <div class="card-header" id="heading{{dataValues.id}}">
+        <div class="mb-0 d-flex justify-content-between align-items-center pl-1">
+            <div class="d-flex justify-content-between">
+                <a href="#" class="fa fa-thumbs-up fa-2x pull-right text-bright text-decoration-none" aria-hidden="true"></a>
+                <a href="#" class="fa fa-thumbs-down fa-2x pull-right text-bright text-decoration-none" aria-hidden="true"></a>
+            </div>
+            <button class="btn btn-block text-left text-white type="button" data-toggle="collapse"
+                data-target="#collapse{{dataValues.id}}" aria-expanded="true" aria-controls="collapse{{dataValues.id}}">
+                <h2 class="m-0 font-title">{{dataValues.title}}
+                    <span class="font-subtitle lead">Authored by: {{User.dataValues.username}}</span>
+                </h2>
+            </button>
+        </div>
+    </div>
+    <div id="collapse{{dataValues.id}}" class="collapse" aria-labelledby="heading{{dataValues.id}}"
+        data-parent="#accordionExample">
+        <div class="card-body">
+            <li>{{dataValues.string}}</li>
+        </div>
+    </div>
+</div>

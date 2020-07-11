@@ -3,8 +3,26 @@ const db = require("../models");
 
 module.exports = function (app) {
 
-    app.get("/playlists", (req, res) => {
-        res.render("index");
+    app.get("/playlists", async (req, res) => {
+        try {
+            const data = await db.Playlist.findAll({
+                include: [{
+                    model: db.User,
+                    attributes: ["username", "last_login", "createdAt"],
+                },
+                { model: db.Vote, }]
+            });
+            if (data) {
+                const hbsObject = { playlists: data };
+                // res.json(data);
+                res.render("index", hbsObject);
+            }
+        } catch (err) {
+            // Maybe throw some kind of 'user not found' alert. This needs to be handled in the html with handlebars. See example for details.
+            res.status(404).render("index", {
+                message: "User not found."
+            });
+        }
     });
 
     // Tried using !isAuthenticated, but that totally failed.
@@ -39,30 +57,25 @@ module.exports = function (app) {
     app.get("/user/:username", async (req, res) => {
         // talk to gene about this tomorrow and how maybe we get rid of it?
         try {
-            console.log("Test1");
             const data = await db.Playlist.findAll({
                 include: [{
                     model: db.User,
-                    attributes: ["username","last_login","createdAt"],
+                    attributes: ["username", "last_login", "createdAt"],
                     where: { username: req.params.username },
                 },
                 {
                     model: db.Vote,
                 }]
             });
-            console.log("Test2");
             if (data) {
-                console.log("User Exists!");
-                const hbsObject = { playlists:data };
-                console.log(hbsObject.playlists[0].User);
+                const hbsObject = { playlists: data };
                 // res.json(data);
                 res.render("profile", hbsObject);
             }
         } catch (err) {
             // Maybe throw some kind of 'user not found' alert. This needs to be handled in the html with handlebars. See example for details.
             res.status(404).render("index", {
-                message: "User not found.",
-                messageClass: "alert-danger"
+                message: "User not found."
             });
         }
     });

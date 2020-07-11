@@ -1,23 +1,16 @@
-The Handlebars templating engine, used in Node.js by means of the express-handlebars Node.js module, further facilitates authentication with a session cookie by allowing properties of res.locals to be used directly in views, partials and helpers without relying on res.render to convey their values to views.
 
-<div class="container">
-    {{!-- make sure we don't need to use a sub-expression --}}
-    {{#if isAuthenticated}}
-        {{!-- {{> header-user}} --}}
-        <h2>The user is authenticated.</h2>
-        <a class="navbar-brand" href="/logout">
-            Logout
-        </a>
-    {{else}}
-        {{!-- {{> header-login}} --}}
-        <h2>The user is not authenticated.</h2>
-        <a class="navbar-brand" href="/login">
-            Login
-        </a>
-        <a class="navbar-brand" href="/signup">
-            Sign Up
-        </a>
-    {{/if}}
+{{#if isAuthenticated}}
+    {{> header-user}}
+{{else}}
+    {{> header-login}}
+{{/if}}
+
+<div class="container mb-4">
+    <div class="accordion" id="accordionExample">
+        {{#each playlists}}
+            {{> playlist}}
+        {{/each}}
+    </div>
 </div>
 
-<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/profile.js"></script>

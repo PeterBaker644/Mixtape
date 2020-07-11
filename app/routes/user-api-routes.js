@@ -6,7 +6,7 @@ module.exports = function (app) {
 
     // we are currently automatically pushing the user to login after signup.
     app.post("/api/login", passport.authenticate("local"), (req, res) => {
-        console.log(req.user);
+        console.log("Login API is being triggered");
         res.json({
             username: req.user.username,
             id: req.user.id

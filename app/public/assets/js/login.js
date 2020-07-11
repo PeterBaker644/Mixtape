@@ -6,6 +6,7 @@ $(document).ready(() => {
 
     // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
     function loginUser(username, password) {
+        console.log(username, password);
         $.post("/api/login", {
             username: username,
             password: password
@@ -15,6 +16,7 @@ $(document).ready(() => {
                 // If there's an error, log the error
             })
             .catch(err => {
+                console.log("=============front-end failure===============")
                 console.log(err);
             });
     }
