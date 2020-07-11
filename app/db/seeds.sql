@@ -1,30 +1,14 @@
-USE mixuptape_db;
+-- USE MixTape_db;
+USE mixtape_db;
 
--- VALUES (id, username);
-INSERT INTO usertable 
-VALUES (1, 'PeterUsername');
-INSERT INTO usertable 
-VALUES (2, 'Gshaver82');
-INSERT INTO usertable 
-VALUES (3, 'simeonUsername');
+INSERT INTO users (id, first_name, last_name, email, role, username, password, last_login, createdAt, updatedAt)
+VALUES (id, 'first_name', 'last_name', 'email', 'user', 'username', 'password', 
+'2020-07-09 23:07:58', '2020-07-09 23:07:58', '2020-07-09 23:07:58');
 
 
--- VALUES (id,UserTable_id(who created the post), playlistString);
-INSERT INTO playlisttable 
-VALUES (1, 1,"songOne songTwo");
-INSERT INTO playlisttable 
-VALUES (2, 1,"songOne songThree");
+INSERT INTO playlists (id, title, string, createdAt, updatedAt, UserId)
+VALUES (1,'title', 'songone, song2', '2020-07-09 23:07:58','2020-07-09 23:07:58',1);
 
--- VALUES (PlaylistTable_id,usertable,upvote);
-INSERT INTO upvote 
-VALUES (1,1,true);
-INSERT INTO upvote 
-VALUES (2,1,true);
 
-INSERT INTO upvote 
-VALUES (1,2,true);
-INSERT INTO upvote 
-VALUES (2,2,false);
-
-INSERT INTO upvote 
-VALUES (1,3,true);
+INSERT INTO votes (id, upvote, createdAt, updatedAt, UserId, PlaylistId)
+VALUES (1,1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',1,1);
