@@ -16,6 +16,7 @@ body {
     background-color: #1D2023;
     font-family: 'Open Sans', sans-serif;
     font: #ffffff;
+    height:100%;
 
 }
 
@@ -40,13 +41,13 @@ body {
     padding: 5px;
 }
 
+/*All the cards in the page*/
 .card {
     background-color: #171719;
     padding: 15px;
     margin: 10px;
     border-radius: 10px;
 }
-
 
 .footer {
     background-color: #171719;
