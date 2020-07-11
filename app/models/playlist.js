@@ -18,9 +18,7 @@ module.exports = function (sequelize, DataTypes) {
     //this 'has many' means the playlist can have many upvotes associated with it
     //will create an FKey in the vote table that references this playlist table.
     Playlist.associate = function (models) {
-        Playlist.belongsTo(models.User, {
-            onDelete: "cascade"
-        });
+        Playlist.belongsTo(models.User);
         //removed default Null to allow a playlist that has no votes.
         //maybe we should force not null and somehow automatically have the author
         //of the playlist upvote their own playlist, like reddit does
