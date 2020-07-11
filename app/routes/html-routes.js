@@ -1,13 +1,20 @@
 const isAuthenticated = require("../config/middleware/isAuthenticated");
+// I have no idea why I pulled this in, I'm not using it.
+const db = require("../models");
 
 module.exports = function (app) {
 
-    app.get("/playlists", function (req, res) {
+    app.get("/playlists", (req, res) => {
         res.render("index");
     });
 
-    app.get("/login", function (req, res) {
-        res.render("login");
+    // Tried using !isAuthenticated, but that totally failed.
+    app.get("/login", (req, res) => {
+        if (req.user) {
+            res.redirect("/playlists");
+        } else {
+            res.render("login");
+        }
     });
 
     app.get("/logout", (req, res) => {
@@ -16,20 +23,28 @@ module.exports = function (app) {
         res.redirect("/playlists");
     });
 
-    app.get("/signup", function (req, res) {
-        res.render("signup");
+    // Needs to handle if the user is already authenticed. line 11.
+    app.get("/signup", (req, res) => {
+        if (req.user) {
+            res.redirect("/playlists");
+        } else {
+            res.render("signup");
+        }
     });
 
-    app.get("/settings/profile", isAuthenticated, function (req, res) {
+    // Doesn't work yet.
+    app.get("/settings/profile", isAuthenticated, (req, res) => {
         res.render("settings");
     });
 
-    app.get("/user/:username", async function (req, res) {
+    app.get("/user/:username", async (req, res) => {
         try {
             const userExists = await db.User.findOne(
                 { where: { username: req.params.username } }
             );
             if (userExists) {
+                console.log("User Exists!");
+                console.log(userExists.username);
                 res.render("profile");
             }
         } catch (err) {

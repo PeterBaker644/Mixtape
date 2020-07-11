@@ -28,9 +28,9 @@ module.exports = function (app) {
 
     app.get("/api/playlists/:username", (req, res) => {
         db.Playlist.findAll({
+            include: db.User,
             where: {
-                include: db.User,
-                username: req.params.username
+                // username: req.params.username
             }
         }).then(dbPlaylist => {
             res.json(dbPlaylist);

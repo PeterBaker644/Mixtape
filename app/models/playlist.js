@@ -19,7 +19,6 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
-
     // We're saying that a Playlist should belong to a User
     // A Playlist can't be created without an User due to the foreign key constraint
 
