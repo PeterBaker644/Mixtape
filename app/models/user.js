@@ -6,13 +6,13 @@ module.exports = function (sequelize, DataTypes) {
         first_name: {
             type: DataTypes.STRING,
             allowNull: false,
-            // validate: { notEmpty: false }
+            // validate: { notEmpty: true }
         },
         // eslint-disable-next-line camelcase
         last_name: {
             type: DataTypes.STRING,
             allowNull: false,
-            // validate: { notEmpty: false }
+            // validate: { notEmpty: true }
         },
         email: {
             type: DataTypes.STRING,
@@ -28,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
-            // validate: { notEmpty: false }
+            // validate: { notEmpty: true }
         },
         password: {
             type: DataTypes.STRING,
@@ -50,17 +50,20 @@ module.exports = function (sequelize, DataTypes) {
             onDelete: "cascade"
         });
     };
-    User.prototype.validPassword = async (password) => {
+    User.prototype.validPassword = async (user, password) => {
         try {
-            return await argon2.verify(password, this.password);
-            // P: password and this.password might be backward.
+            console.log("[USER] validPasword triggered");
+            console.log("[USER] sees " + password + " " + user.password);
+            let passwordCheck = await argon2.verify(user.password, password);
+            console.log("[USER] argon2.verify evaluates to: " + passwordCheck);
+            return passwordCheck;
         } catch (err) {
             console.log(err);
         }
     };
     User.addHook("beforeCreate", async (user) => {
         try {
-            return await argon2.hash(user.password);
+            user.password = await argon2.hash(user.password);
         } catch (err) {
             //reevaluate what we might actually want here.
             console.log(err);
@@ -68,72 +71,3 @@ module.exports = function (sequelize, DataTypes) {
     });
     return User;
 };
-
-//old peter code, mostly viable
-// module.exports = function (sequelize, DataTypes) {
-//     const User = sequelize.define("User", {
-//         // eslint-disable-next-line camelcase
-//         first_name: {
-//             type: DataTypes.STRING,
-//             allowNull: false,
-//             // validate: { notEmpty: false }
-//         },
-//         // eslint-disable-next-line camelcase
-//         last_name: {
-//             type: DataTypes.STRING,
-//             allowNull: false,
-//             // validate: { notEmpty: false }
-//         },
-//         email: {
-//             type: DataTypes.STRING,
-//             allowNull: false,
-//             unique: true,
-//             validate: { isEmail: true }
-//         },
-//         role: {
-//             type: DataTypes.STRING,
-//             validate: { isIn: [["user", "admin"]] }
-//         },
-//         username: {
-//             type: DataTypes.STRING,
-//             allowNull: false,
-//             unique: true,
-//             // validate: { notEmpty: false }
-//         },
-//         password: {
-//             type: DataTypes.STRING,
-//             allowNull: false,
-//             // We're validating for a minimum length of 8 characters here. Have to figure out how to send this error down the line. Hopefully it works with the hook.
-//             validate: { len: [8, 128] }
-//         },
-//         // eslint-disable-next-line camelcase
-//         last_login: DataTypes.DATE
-//     });
-
-//     // I don't feel confident about this, something I hope Gene will look into.
-//     User.associate = function (models) {
-//         User.hasMany(models.Playlist, {
-//             onDelete: "cascade"
-//         });
-//         User.hasMany(models.Vote, {
-//             onDelete: "cascade"
-//         });
-//     };
-//     User.prototype.validPassword = async (password) => {
-//         try {
-//             return await argon2.verify(password, this.password);
-//             // P: password and this.password might be backward.
-//         } catch (err) {
-//             console.log(err);
-//         }
-//     };
-//     User.addHook("beforeCreate", async (user) => {
-//         try {
-//             return await argon2.hash(user.password);
-//         } catch (err) {
-//             //reevaluate what we might actually want here.
-//             console.log(err);
-//         }
-//     });
-//     return User;
-// };

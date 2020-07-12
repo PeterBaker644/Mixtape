@@ -5,23 +5,20 @@ module.exports = function (sequelize, DataTypes) {
         title: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                isEmpty: false
-            }
+            validate: { notEmpty: true }
         },
         //this string is a CSV of songs that will be manually input as a MVP
         //later moving to a table junction of a database table of songs
         string: {
             type: DataTypes.TEXT,
             allowNull: false,
-            validate: {
-                isEmpty: false
-            }
+            validate: { notEmpty: true }
         }
     });
     //this 'has many' means the playlist can have many upvotes associated with it
     //will create an FKey in the vote table that references this playlist table.
     Playlist.associate = function (models) {
+        Playlist.belongsTo(models.User);
         //removed default Null to allow a playlist that has no votes.
         //maybe we should force not null and somehow automatically have the author
         //of the playlist upvote their own playlist, like reddit does

@@ -1,12 +1,41 @@
-The Handlebars templating engine, used in Node.js by means of the express-handlebars Node.js module, further facilitates authentication with a session cookie by allowing properties of res.locals to be used directly in views, partials and helpers without relying on res.render to convey their values to views.
 
-<div class="container">
-    {{!-- make sure we don't need to use a sub-expression --}}
-    {{#if user}}
-        {{!-- {{> header-user}} --}}
-        <h2>The user is authenticated.</h2>
-    {{else}}
-        {{!-- {{> header-login}} --}}
-        <h2>The user is not authenticated.</h2>
-    {{/if}}
+{{#if authenticated}}
+    {{> header-user}}
+{{else}}
+    {{> header-login}}
+{{/if}}
+
+<br>
+
+<div class="card">
+    <div class="card-header" id="heading{{dataValues.id}}">
+        <div class="mb-0 d-flex justify-content-between align-items-center pl-1">
+            <div class="d-flex justify-content-between">
+                <a href="#" class="fa fa-thumbs-up fa-2x pull-right text-bright text-decoration-none" aria-hidden="true"></a>
+                <a href="#" class="fa fa-thumbs-down fa-2x pull-right text-bright text-decoration-none" aria-hidden="true"></a>
+            </div>
+            <button class="btn btn-block text-left text-white" type="button" data-toggle="collapse"
+                data-target="#collapse{{dataValues.id}}" aria-expanded="true" aria-controls="collapse{{dataValues.id}}">
+                <h2 class="m-0 font-title">{{dataValues.title}}
+                    <span class="font-subtitle lead">Authored by: {{User.dataValues.username}}</span>
+                </h2>
+            </button>
+        </div>
+    </div>
+    <div id="collapse{{dataValues.id}}" class="collapse" aria-labelledby="heading{{dataValues.id}}"
+        data-parent="#accordionExample">
+        <div class="card-body">
+            <li>{{dataValues.string}}</li>
+        </div>
+    </div>
 </div>
+
+<div class="container mb-4">
+    <div class="accordion" id="accordionExample">
+        {{#each playlists}}
+            {{> playlist}}
+        {{/each}}
+    </div>
+</div>
+
+<script type="text/javascript" src="/assets/js/profile.js"></script>

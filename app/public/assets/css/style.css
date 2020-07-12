@@ -5,32 +5,50 @@ font: Open Sans
 
 */
 
-* {
+/* * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-
-}
+} */
 
 body {
     background-color: #1D2023;
-    font-family: 'Open Sans', sans-serif;
-    font: #ffffff;
-    height:100%;
-
+    color:#E4E7E9;
 }
 
- .navbar-brand {
+hr {
+    background-color: #3D4148 !important;
+    color:#E4E7E9;
+}
+
+.navbar-brand {
     padding: 30px;
     font-family: 'Rock Salt', cursive;
     font-size: 40px;
-    color: #ffffff;
+}
+
+.font-title {
+    font-family: 'Permanent Marker', sans-serif;
+}
+
+.font-subtitle {
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.font-brand {
+    font-family: 'Rock Salt', sans-serif;
+}
+
+.bg-xtradark {
+    background-color: #171719;
+}
+
+.bg-medium {
+    background-color: #3D4148;
 }
 
 .jumbotron {
     margin-top: 20px;
-    background-color: #171719;
-    font-family: 'Open Sans', sans-serif;
     border-radius: 10px;
 }
 
@@ -41,22 +59,57 @@ body {
     padding: 5px;
 }
 
+.text-bright{
+    color:#E4E7E9 !important; 
+}
+
+.text-bright:hover {
+    color:#3772FF !important;
+}
+
+.form-control {
+    background-color: #292C31 !important;
+    border:1px solid #3D4148 !important;
+    border-radius:.12;
+    box-shadow:none;
+    outline:none;
+    color:#E4E7E9 !important;
+}
+
+.form-control:valid {
+    background-color:inherit;
+    border:inherit;
+    color:inherit;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    transition: background-color 5000s;
+    -webkit-text-fill-color: #fff !important;
+  }
+
+
 /*All the cards in the page*/
 .card {
     background-color: #171719;
     padding: 15px;
-    margin: 10px;
     border-radius: 10px;
+}
+
+.card-gap {
+    margin-top: 6rem;
+}
+
+.card-body {
+    color:#A9ABAD !important;
 }
 
 .footer {
     background-color: #171719;
-    color: white;
     font-size: 20px;
     text-align: center;
     vertical-align: bottom;
     margin-top: 120px;
 }
-
-
-

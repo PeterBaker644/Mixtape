@@ -1,0 +1,19 @@
+{{#if authenticated}}
+    {{> header-user}}
+    <br>
+    {{> create-playlist}}
+{{else}}
+    {{> header-login}}
+{{/if}}
+
+
+
+<div class="container mb-4">
+    <div class="accordion" id="accordionExample">
+        {{#each playlists}}
+            {{> playlist}}
+        {{/each}}
+    </div>
+</div>
+
+<script type="text/javascript" src="/assets/js/profile.js"></script>

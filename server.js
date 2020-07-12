@@ -16,12 +16,20 @@ app.use(session({ secret: "change me later", resave: true, saveUninitialized: tr
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use((req, res, next) => {
-//     if (req.isAuthenticated) {
-//         res.locals.isAuthenticated = req.isAuthenticated();
-//     }
-//     next();
-// });
+app.use((req, res, next) => {
+    console.log("[SERVER] Preparing to check for user.");
+    if (req.user) {
+        console.log("[SERVER] Found req.user. Details are all follows:");
+        console.log(req.user);
+        // res.locals.isAuthenticated = req.isAuthenticated();
+        res.locals.authenticated = true;
+        res.locals.user = req.user;
+        // console.log("what even is" + req.locals.isAuthenticated);
+    } else {
+        console.log("[SERVER] Failed to authenticate the user.");
+    }
+    next();
+});
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
@@ -32,7 +40,7 @@ require("./app/routes/html-routes.js")(app);
 require("./app/routes/user-api-routes.js")(app);
 require("./app/routes/playlist-api-routes.js")(app);
 
-db.sequelize.sync({force:true}).then(() => {
+db.sequelize.sync().then(() => {
     app.listen(PORT, () => {
         console.log(
             `Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`,

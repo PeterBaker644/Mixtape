@@ -14,6 +14,7 @@ module.exports = function (app) {
                 res.json(dbPlaylist);
             });
     });
+
     app.get("/api/playlists/orderby_newest", (req, res) => {
         //this finds all playlists and orders by newest.
         //confirmed working in postman
@@ -83,5 +84,19 @@ module.exports = function (app) {
             });
     });
 
-
+    // app.get("/api/playlists/:username", (req, res) => {
+    //     db.Playlist.findAll({
+    //         include: [{
+    //             model: db.User,
+    //             attributes: ["username","last_login","createdAt"],
+    //             where: { username: req.params.username }
+    //         },{
+    //             model: db.Vote,
+    //             // eslint-disable-next-line quotes
+    //             attributes: [db.Sequelize.literal(`(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)`), "upvote_tally"]
+    //         }]
+    //     }).then(dbPlaylist => {
+    //         res.json(dbPlaylist);
+    //     });
+    // });
 };
