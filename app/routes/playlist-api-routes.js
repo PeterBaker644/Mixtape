@@ -5,7 +5,7 @@ const passport = require("../config/passport");
 module.exports = function (app) {
     //should this all be async await?
 
-    app.get("/api/playlists/include_upvotes3", (req, res) => {
+    app.get("/api/playlists/include_all", (req, res) => {
         //this finds all playlists and orders by title.
         //this also includes upvote table as an array of objects insite the playlist object
         //which is itself inside an array
@@ -63,19 +63,19 @@ module.exports = function (app) {
 
 
     // I think we need the authenticate line here. We'll double check when testing though.
-    // app.post("/api/playlists", passport.authenticate("local"), (req, res) => {
-    //     db.Playlist.create({
-    //         title: req.body.playlistTitle,
-    //         string: req.body.playlistString,
-    //     })
-    //         .then(() => {
-    //             // I don't know what we'd want to do here.
-    //             res.status(200);
-    //         })
-    //         .catch(err => {
-    //             res.status(401).json(err);
-    //         });
-    // });
+    app.post("/api/playlists", passport.authenticate("local"), (req, res) => {
+        db.Playlist.create({
+            title: req.body.playlistTitle,
+            string: req.body.playlistString,
+        })
+            .then(() => {
+                // I don't know what we'd want to do here.
+                res.status(200);
+            })
+            .catch(err => {
+                res.status(401).json(err);
+            });
+    });
 
 
 };

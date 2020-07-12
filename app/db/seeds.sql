@@ -1,7 +1,3 @@
--- if force true is in the server.js for the sequelize function you will need to add dummy data
--- to test with, run this code in workbench to quickly get something put in
-
-
 USE mixtape_db;
 
 
@@ -16,13 +12,13 @@ VALUES (id, 'jim', 'bob', 'jimbobemail@gmail.com', 'user', 'bob', 'asdf',
 INSERT INTO playlists (id, title, string, createdAt, updatedAt, UserId)
 VALUES (1,'title', 'songone, song2', '2020-07-09 23:07:58','2020-07-09 23:07:58',1);
 INSERT INTO playlists (id, title, string, createdAt, updatedAt, UserId)
-VALUES (2,'title', 'songone, song2', '2020-07-09 23:07:58','2020-07-09 23:07:58',2);
+VALUES (2,'secondplaylist', 'songone, song2', '2019-07-09 23:07:58','2020-07-09 23:07:58',2);
 
 
 INSERT INTO votes (id, upvote, createdAt, updatedAt, UserId, PlaylistId)
 VALUES (id,1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',1,1);
 INSERT INTO votes (id, upvote, createdAt, updatedAt, UserId, PlaylistId)
-VALUES (id,1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',1,2);
+VALUES (id,-1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',1,2);
 INSERT INTO votes (id, upvote, createdAt, updatedAt, UserId, PlaylistId)
 VALUES (id,1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',2,1);
 
@@ -38,10 +34,13 @@ VALUES ('2020-07-09 23:07:58','2020-07-09 23:07:58',1,1);
 INSERT INTO playlist_song_junction_table (createdAt, updatedAt,PlaylistId, SongId)
 VALUES ('2020-07-09 23:07:58','2020-07-09 23:07:58',1,2);
 
-INSERT INTO playlist_song_junction_table (createdAt, updatedAt,PlaylistId, SongId)
-VALUES ('2020-07-09 23:07:58','2020-07-09 23:07:58',2,1);
-INSERT INTO playlist_song_junction_table (createdAt, updatedAt,PlaylistId, SongId)
-VALUES ('2020-07-09 23:07:58','2020-07-09 23:07:58',2,2);
-INSERT INTO playlist_song_junction_table (createdAt, updatedAt,PlaylistId, SongId)
-VALUES ('2020-07-09 23:07:58','2020-07-09 23:07:58',2,3);
+INSERT INTO playlist_song_junction_table (song_order, createdAt, updatedAt,PlaylistId, SongId)
+VALUES (3,'2020-07-09 23:07:58','2020-07-09 23:07:58',2,1);
+INSERT INTO playlist_song_junction_table (song_order, createdAt, updatedAt,PlaylistId, SongId)
+VALUES (2,'2020-07-09 23:07:58','2020-07-09 23:07:58',2,2);
+INSERT INTO playlist_song_junction_table (song_order, createdAt, updatedAt,PlaylistId, SongId)
+VALUES (1,'2020-07-09 23:07:58','2020-07-09 23:07:58',2,3);
+
+
+
 
