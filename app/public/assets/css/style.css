@@ -35,6 +35,10 @@ hr {
     font-family: 'Bebas Neue', sans-serif;
 }
 
+.font-brand {
+    font-family: 'Rock Salt', sans-serif;
+}
+
 .bg-xtradark {
     background-color: #171719;
 }
@@ -92,6 +96,10 @@ input:-webkit-autofill:active  {
     background-color: #171719;
     padding: 15px;
     border-radius: 10px;
+}
+
+.card-gap {
+    margin-top: 6rem;
 }
 
 .card-body {

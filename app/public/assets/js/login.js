@@ -12,11 +12,10 @@ $(document).ready(() => {
             password: password
         })
             .then(() => {
-                window.location.replace("/playlists");
+                window.location.replace("/playlists/create");
                 // If there's an error, log the error
             })
             .catch(err => {
-                console.log("=============front-end failure===============")
                 console.log(err);
             });
     }

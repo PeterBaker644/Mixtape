@@ -25,6 +25,24 @@ module.exports = function (app) {
         }
     });
 
+    app.get("/playlists/create", async (req, res) => {
+        try {
+            const data = await db.Playlist.findAll({
+                include: [{
+                    model: db.User,
+                    attributes: ["username", "last_login", "createdAt"],
+                },
+                { model: db.Vote, }]
+            });
+            if (data) {
+                const hbsObject = { playlists: data };
+                res.render("create", hbsObject);
+            }
+        } catch (err) {
+            res.status(404).render("index");
+        }
+    });
+
     // Tried using !isAuthenticated, but that totally failed.
     app.get("/login", (req, res) => {
         if (req.user) {
@@ -70,7 +88,7 @@ module.exports = function (app) {
             if (data) {
                 const hbsObject = { playlists: data };
                 // res.json(data);
-                res.render("profile", hbsObject);
+                res.render("index", hbsObject);
             }
         } catch (err) {
             // Maybe throw some kind of 'user not found' alert. This needs to be handled in the html with handlebars. See example for details.

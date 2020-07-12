@@ -1,8 +1,12 @@
-{{#if isAuthenticated}}
+{{#if authenticated}}
     {{> header-user}}
+    <br>
+    {{> create-playlist}}
 {{else}}
-    {{!-- {{> header-login}} --}}
+    {{> header-login}}
 {{/if}}
+
+
 
 <div class="container mb-4">
     <div class="accordion" id="accordionExample">

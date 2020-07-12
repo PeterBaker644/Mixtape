@@ -17,13 +17,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-    console.log("[SERVER] Preparing to check for authentication.");
-    if (req.isAuthenticated === true) {
-        res.locals.isAuthenticated = req.isAuthenticated();
+    console.log("[SERVER] Preparing to check for user.");
+    if (req.user) {
+        console.log("[SERVER] Found req.user. Details are all follows:");
+        console.log(req.user);
+        // res.locals.isAuthenticated = req.isAuthenticated();
+        res.locals.authenticated = true;
         res.locals.user = req.user;
-        console.log("what even is" + req.locals.isAuthenticated);
+        // console.log("what even is" + req.locals.isAuthenticated);
     } else {
-        console.log("[SERVER] Failed to authenticate the user.")
+        console.log("[SERVER] Failed to authenticate the user.");
     }
     next();
 });
