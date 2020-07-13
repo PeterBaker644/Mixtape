@@ -11,8 +11,14 @@ module.exports = function (sequelize, DataTypes) {
         //later moving to a table junction of a database table of songs
         string: {
             type: DataTypes.TEXT,
-            allowNull: false,
+            allowNull: true,
             validate: { notEmpty: true }
+        },
+        description: {
+            type: DataTypes.TEXT,
+            // allowNull: false,
+            // validate: { notEmpty: true },
+            // defaultValue: "description here"
         }
     });
     //this 'has many' means the playlist can have many upvotes associated with it
