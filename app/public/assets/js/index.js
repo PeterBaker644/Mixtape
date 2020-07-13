@@ -91,7 +91,7 @@ $(document).ready(() => {
             playlistTitle: $("#playlist-title").val().trim(),
             playlistDescription: $("#playlist-description").val().trim(),
             playlistContents: songArray
-        }).then(() => {
+        }).then((res) => {
             window.location.replace("/playlists");
             // If there's an error, handle it by throwing up a bootstrap alert
         }).catch(err => {

@@ -37,7 +37,6 @@ module.exports = function (app) {
                     UserId: req.user.id,
                 });
                 console.log("[PLAYLIST-ROUTES] Created playlist");
-                res.json("[PLAYLIST-ROUTES] Created playlist");
                 const NewPlaylistID = PlaylistCreated.dataValues.id;
                 for (i = 0; i < req.body.playlistContents.length; i++) {
                     const findOrCreateResult = await db.Song.findOrCreate({
@@ -46,7 +45,7 @@ module.exports = function (app) {
                             song_artist: req.body.playlistContents[i].songArtist
                         }
                     });
-                    console.log("findOrCreateResult[0].dataValues.id-----------------------");
+                    console.log("[PLAYLIST-ROUTES] findOrCreateResult[0].dataValues.id-----------------------");
                     console.log(findOrCreateResult[0].dataValues.id);
                     let NewSongID = findOrCreateResult[0].dataValues.id;
                     // song ID gets associated with playlist id in the junction Table
@@ -54,9 +53,10 @@ module.exports = function (app) {
                     await db.playlist_song_junction_table.create({
                         PlaylistId: NewPlaylistID,
                         SongId: NewSongID,
-                        song_order: i,
+                        song_order: (i + 1),
                     });
                 }
+                res.json("[PLAYLIST-ROUTES] Created playlist");
             }
         } catch (err) {
             console.log(err);
