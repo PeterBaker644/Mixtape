@@ -23,14 +23,13 @@
                     <span class="font-subtitle lead">Authored by: </span>
                     <span class="font-subtitle lead text-bright author-link">{{User.dataValues.username}}</span>
                 </h2>
-                <div class="font-comment">Great listening for a rainy day, you'll really lve the fun!</div>
+                <div class="font-comment text-muted">{{dataValues.description}}</div>
             </div>
         </div>
     </div>
-    <div id="collapse{{dataValues.id}}" class="collapse" aria-labelledby="heading{{dataValues.id}}"
-        data-parent="#accordionExample">
-        <div class="card-body">
-            <li>{{dataValues.string}}</li>
+    <div id="collapse{{dataValues.id}}" class="collapse" aria-labelledby="heading{{dataValues.id}}" data-parent="#accordionExample">
+        <div class="card-body p-0 mt-3">
+            {{> songlist}}
         </div>
     </div>
 </div>

@@ -63,19 +63,26 @@ module.exports = function (app) {
 
 
     // I think we need the authenticate line here. We'll double check when testing though.
-    app.post("/api/playlists", passport.authenticate("local"), (req, res) => {
-        db.Playlist.create({
-            title: req.body.playlistTitle,
-            string: req.body.playlistString,
-        })
-            .then(() => {
-                // I don't know what we'd want to do here.
-                res.status(200);
-            })
-            .catch(err => {
-                res.status(401).json(err);
-            });
-    });
+    // app.post("/api/playlists", passport.authenticate("local"), (req, res) => {
+    //     db.Playlist.create({
+    //         req.body.playlistTitle,
+    //         req.body.playlistDescription,
+    //         req.body.playlistContents,
+    //         req.body.playlistAuthorId
+
+    //         playlistContents = [
+    //             {songName:"Name of the song", songArtist:"Artist of the song"},
+    //             {songName:"Name of the song", songArtist:"Artist of the song"}
+    //         ]
+    //     })
+    //         .then(() => {
+    //             // I don't know what we'd want to do here.
+    //             res.status(200);
+    //         })
+    //         .catch(err => {
+    //             res.status(401).json(err);
+    //         });
+    // });
 
 
 };

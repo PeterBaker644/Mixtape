@@ -20,6 +20,35 @@ $(document).ready(() => {
         event.stopPropagation();
         author = $(this).text();
         window.location.replace("/user/" + author);
+
+    });
+
+    $("#add-song").on("click", function(event){
+        // Figure out a solution for this id thing
+        // Save all to local storage?
+        let idNumber = 1;
+        console.log("add song to playlist");
+        event.preventDefault();
+        event.stopPropagation();
+        let songName = $("#song-name").val();
+        let songArtist = $("#song-artist").val();
+        console.log(songName);
+        console.log(songArtist);
+        let idCell = $("<td>").addClass("no-border");
+        let nameCell = $("<td>").addClass("no-border");
+        let artistCell = $("<td>").addClass("no-border");
+        let buttonCell = $("<td>").addClass("no-border");
+        let icon = $("<i>").addClass("fas").addClass("fa-times");
+        idCell.text(idNumber).attr("scope", "row");
+        idNumber ++;
+        nameCell.text(songName);
+        artistCell.text(songArtist);
+        buttonCell.append(icon);
+        let row = $("<tr>").append(idCell, nameCell,artistCell, buttonCell);
+        $(".song-table").append(row);
+        // Clear local storage when you hit submit?
+        $("#song-name").val("");
+        $("#song-artist").val("");
     });
 
     // Toggle plus minus icon on show hide of collapse element

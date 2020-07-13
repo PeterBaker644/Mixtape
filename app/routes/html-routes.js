@@ -10,20 +10,23 @@ module.exports = function (app) {
     app.get("/playlists", async (req, res) => {
         try {
             const data = await db.Playlist.findAll({
+                order: ["title"],
                 include: [{
                     model: db.User,
                     attributes: ["username", "createdAt"]
-                }
-                    // { model: db.Song },
+                },
+                { model: db.Song, attributes: ["song_title", "song_artist"] }
                 ],
                 attributes: {
                     include: [
                         [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"]
                     ]
-                }
+                },
+                order: db.sequelize.literal("title, song_order ASC"),
             });
             if (data) {
                 const hbsObject = { playlists: data };
+                // console.log(hbsObject.playlists[0].dataValues.Songs[0].playlist_song_junction_table.dataValues.song_order);
                 // res.json(hbsObject);
                 res.render("index", hbsObject);
             }
@@ -67,18 +70,25 @@ module.exports = function (app) {
         // talk to gene about this tomorrow and how maybe we get rid of it?
         try {
             const data = await db.Playlist.findAll({
+                order: ["title"],
                 include: [{
                     model: db.User,
                     attributes: ["username", "last_login", "createdAt"],
                     where: { username: req.params.username },
                 },
-                {
-                    model: db.Vote,
-                }]
+                { model: db.Song, attributes: ["song_title", "song_artist"] }
+                ],
+                attributes: {
+                    include: [
+                        [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"]
+                    ]
+                },
+                order: db.sequelize.literal("title, song_order ASC"),
             });
             if (data) {
                 const hbsObject = { playlists: data };
-                // res.json(data);
+                // console.log(hbsObject.playlists[0].dataValues.Songs[0].playlist_song_junction_table.dataValues.song_order);
+                // res.json(hbsObject);
                 res.render("index", hbsObject);
             }
         } catch (err) {

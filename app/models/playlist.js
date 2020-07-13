@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         //this string is a CSV of songs that will be manually input as a MVP
         //later moving to a table junction of a database table of songs
-        string: {
+        description: {
             type: DataTypes.TEXT,
             allowNull: false,
             validate: { notEmpty: true }
