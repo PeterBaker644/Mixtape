@@ -32,7 +32,10 @@ module.exports = function (app) {
         //this includes username title, and array of songs and orders those songs by song order
         //confirmed working in postman
         db.Playlist.findAll({
-            include: [db.Song,
+            include: db.Vote,
+            order: ["title"],
+            include: [
+                { model: db.Song, attributes: ["song_title", "song_artist"] }
             ],
             attributes: [
                 // eslint-disable-next-line quotes

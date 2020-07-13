@@ -13,5 +13,9 @@ module.exports = function (sequelize, DataTypes) {
     {
         freezeTableName: true
     });
+    playlist_song_junction_table.associate = function (models) {
+        playlist_song_junction_table.belongsTo(models.Playlist);
+        playlist_song_junction_table.belongsTo(models.Song);
+    };
     return playlist_song_junction_table;
 };
