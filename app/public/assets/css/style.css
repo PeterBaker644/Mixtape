@@ -21,6 +21,58 @@ hr {
     color:#E4E7E9;
 }
 
+.table {
+    color:#A9ABAD !important;
+}
+
+tr {
+    background-color: #1D2023 !important;
+}
+
+tr:hover  {
+    background-color: #25292D !important;
+    color:#E4E7E9;
+}
+
+th {
+    background-color: #1D2023 !important;
+    color:#3D4148;
+    border: none !important;
+}
+
+td {
+    border-top: 3px solid #171719 !important;
+    font-size: larger;
+}
+
+th:first-of-type {
+    border-top-left-radius: 10px;
+}
+th:last-of-type {
+    border-top-right-radius: 10px;
+}
+tr:last-of-type td:first-of-type {
+    border-bottom-left-radius: 10px;
+}
+tr:last-of-type td:last-of-type {
+    border-bottom-left-radius: 10px;
+}
+
+.no-border {
+    border-radius: 0px !important;
+}
+
+.song-div {
+    border-top: 3px solid #171719 !important;
+    background-color: #1D2023 !important;
+    padding:0.75rem;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.song-button {
+    cursor: pointer;
+}
+
 .navbar-brand {
     padding: 30px;
     font-family: 'Rock Salt', cursive;
@@ -52,6 +104,15 @@ hr {
     background-color: #3D4148;
 }
 
+.btn-xlg {
+    font-size: 2rem !important;
+}
+
+/* .stripe-inner {
+    height:5px;
+    background: linear-gradient(90deg, rgba(23,23,25,1) 0%, rgba(255,255,255,1) 0%, rgba(8,0,158,1) 14%, rgba(249,14,62,1) 17%, rgba(255,180,0,1) 20%, rgba(235,86,0,1) 22%, rgba(23,23,25,1) 42%) !important;
+} */
+
 .signin, .create {
     background-color: #171719;
     border-radius: 10px;
@@ -61,6 +122,10 @@ hr {
 
 .text-white{
     color:#E4E7E9 !important;
+}
+
+.text-muted{
+    color:#A9ABAD !important;
 }
 
 .text-bright{
@@ -86,7 +151,7 @@ hr {
 }
 
 .form-control {
-    background-color: #292C31 !important;
+    background-color: #1d2023 !important;
     border:1px solid #3D4148 !important;
     border-radius:.12;
     box-shadow:none;
@@ -98,6 +163,17 @@ hr {
     background-color:inherit;
     border:inherit;
     color:inherit;
+}
+
+::placeholder {
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 1.3rem;
+}
+
+.input-group-text {
+    background-color: #3D4148 !important;
+    border:inherit;
+    color:#E4E7E9;
 }
 
 input:-webkit-autofill,
@@ -124,9 +200,6 @@ input:-webkit-autofill:active  {
     margin-top: 6rem;
 }
 
-.card-body {
-    color:#A9ABAD !important;
-}
 
 .footer {
     background-color: #171719;

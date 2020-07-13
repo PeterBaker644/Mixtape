@@ -1,13 +1,13 @@
 <div class="container mb-4">
     <div class="card">
         {{!-- HOW DO YOU KEEP THE PLAYLIST CARD OPEN? --}}
-        <div class="card-header" id="heading-create">
+        <div class="card-header px-0" id="heading-create">
             <div class="mb-0 d-flex justify-content-between align-items-center pl-1">
                 <button class="btn btn-block text-left text-bright" type="button" data-toggle="collapse"
                     data-target="#collapse-create" aria-expanded="true" aria-controls="collapse-create">
                     <h2 class="m-0 font-title d-flex align-items-center">
-                        <div><i class="fa fa-plus-circle fa-inverse" aria-hidden="true"></i>
-                        Create Playlist</div>
+                        <div><i class="fa fa-plus-circle fa-inverse mr-3" aria-hidden="true"></i>
+                            Create Playlist</div>
                     </h2>
                 </button>
             </div>
@@ -16,23 +16,69 @@
             <div class="card-body">
                 <form>
                     <div class="form-group row">
-                        <label for="playlist-title" class="col-fluid col-form-label">Title</label>
+                        <label for="playlist-title" class="col-fluid col-form-label pl-3 font-subtitle">Title</label>
                         <div class="col">
-                        <input type="text" class="form-control" id="playlist-title" placeholder="Playlist Title">
+                            <input type="text" class="form-control" id="playlist-title"
+                                placeholder="time to think of something catchy...">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="playlist-description"
+                            class="col-fluid col-form-label pl-3 font-subtitle">Description</label>
+                        <div class="col">
+                            <input type="text" class="form-control" id="playlist-description"
+                                placeholder="tell us all about it...">
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="playlist-description" placeholder="Description">
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" id="playlist-string" rows="5"
-                            placeholder="List your playlist here."></textarea>
+                        {{!--  <textarea class="form-control" id="playlist-string" rows="5"
+                            placeholder="List your playlist here."></textarea>--}}
+                        <table class="table m-0" id="table-songs">
+                            <thead class="font-subtitle">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Artist</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="song-table font-comment">
+                                {{!-- <tr>
+                                    <td class="no-border" scope="row">1</td>
+                                    <td class="no-border">So High (Kodak to Graph Remix)</td>
+                                    <td class="no-border">Doja Cat</td>
+                                    <td class="no-border text-center pt-3 song-button text-bright"><i class="fa fa-times"></i></td>
+                                </tr> --}}
+                            </tbody>
+                        </table>
+
+                        <div class="song-div row m-0">
+                            <div class="input-group p-0 pr-3 col">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text pt-2 font-subtitle">Song</span>
+                                </div>
+                                <input type="text" class="form-control" id="song-name" aria-label="Song Name" aria-describedby="song-name">
+                            </div>
+                            <div class="input-group p-0 pr-2 col">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text pt-2 font-subtitle">Artist</span>
+                                </div>
+                                <input type="text" class="form-control" id="song-artist" aria-label="Song Name" aria-describedby="song-artist">
+                            </div>
+                            <div class="text-bright song-button col-fluid d-flex align-items-center mx-2" id="add-song">
+                                <i class="fa fa-plus-circle mr-1" aria-hidden="true"></i>
+                                <span class="pt-1 m-0 h5 font-subtitle">Add to playlist</span>
+                            </div>
+                        </div>
                     </div>
                 </form>
-                <div class="d-flex justify-content-end align-items-center">
-                    <div class="font-comment mr-3">express yourself -</div>
-                    <a class="btn btn-dark btn-lg font-subtitle" href="#" role="button">Post Playlist</a>
-                </div>                
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="font-comment mr-3">Drag around your songs to reorder them!</div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="font-comment mr-3">express yourself -</div>
+                        <button class="btn btn-dark btn-lg font-subtitle" id="submit-playlist">Post Playlist</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

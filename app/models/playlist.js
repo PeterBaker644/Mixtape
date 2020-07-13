@@ -9,16 +9,10 @@ module.exports = function (sequelize, DataTypes) {
         },
         //this string is a CSV of songs that will be manually input as a MVP
         //later moving to a table junction of a database table of songs
-        string: {
+        description: {
             type: DataTypes.TEXT,
             allowNull: true,
             validate: { notEmpty: true }
-        },
-        description: {
-            type: DataTypes.TEXT,
-            // allowNull: false,
-            // validate: { notEmpty: true },
-            // defaultValue: "description here"
         }
     });
     //this 'has many' means the playlist can have many upvotes associated with it
