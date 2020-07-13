@@ -5,17 +5,13 @@ module.exports = function (sequelize, DataTypes) {
         song_title: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                isEmpty: false
-            },
+            validate: { notEmpty: true },
             unique: true
         },
         song_artist: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                isEmpty: false
-            }
+            validate: { notEmpty: true }
         }
     });
     //this creates a junction table to associate many songs with many playlists
