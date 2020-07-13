@@ -91,6 +91,7 @@ $(document).ready(() => {
             playlistTitle: $("#playlist-title").val().trim(),
             playlistDescription: $("#playlist-description").val().trim(),
             playlistContents: songArray
+        // eslint-disable-next-line no-unused-vars
         }).then((res) => {
             window.location.replace("/playlists");
             // If there's an error, handle it by throwing up a bootstrap alert
