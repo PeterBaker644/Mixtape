@@ -41,9 +41,10 @@ module.exports = function (app) {
         }
     });
 
-    app.get("/logout", (req, res) => {
+    app.get("/logout", isAuthenticated, (req, res) => {
         // console.log(`[HTML-ROUTES] User ${req.user.username}`)
-        console.log("[HTML-ROUTES] User " + req.user.username + " logged out.");
+        let name = req.user.username;
+        console.log("[HTML-ROUTES] User " + name + " logged out.");
         req.logout();
         res.redirect("/playlists");
     });
