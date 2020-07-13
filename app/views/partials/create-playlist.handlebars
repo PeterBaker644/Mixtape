@@ -1,17 +1,39 @@
-<div class="container">
-    <div class="jumbotron text-white bg-xtradark">
-        <h1 class="display-4 font-brand">Hi {{user.username}},</h1>
-        <p class="lead">Today is a great day it create a playlist.</p>
-        <hr class="my-4">
-        <!--Post title-->
-        <div class="form-group">
-            <input type="text" class="form-control" id="post-title" placeholder="Playlist Title">
+<div class="container mb-4">
+    <div class="card">
+        {{!-- HOW DO YOU KEEP THE PLAYLIST CARD OPEN? --}}
+        <div class="card-header" id="heading-create">
+            <div class="mb-0 d-flex justify-content-between align-items-center pl-1">
+                <button class="btn btn-block text-left text-bright" type="button" data-toggle="collapse"
+                    data-target="#collapse-create" aria-expanded="true" aria-controls="collapse-create">
+                    <h2 class="m-0 font-title d-flex align-items-center">
+                        <div><i class="fa fa-plus-circle fa-inverse" aria-hidden="true"></i>
+                        Create Playlist</div>
+                    </h2>
+                </button>
+            </div>
         </div>
-        <!--text area-->
-        <div class="form-group">
-            <textarea class="form-control" id="text-area" rows="5" placeholder="List your playlist here."></textarea>
+        <div id="collapse-create" class="collapse" aria-labelledby="heading-create" data-parent="#accordionExample">
+            <div class="card-body">
+                <form>
+                    <div class="form-group row">
+                        <label for="playlist-title" class="col-fluid col-form-label">Title</label>
+                        <div class="col">
+                        <input type="text" class="form-control" id="playlist-title" placeholder="Playlist Title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="playlist-description" placeholder="Description">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="playlist-string" rows="5"
+                            placeholder="List your playlist here."></textarea>
+                    </div>
+                </form>
+                <div class="d-flex justify-content-end align-items-center">
+                    <div class="font-comment mr-3">express yourself -</div>
+                    <a class="btn btn-dark btn-lg font-subtitle" href="#" role="button">Post Playlist</a>
+                </div>                
+            </div>
         </div>
-        </form>
-        <a class="btn btn-dark btn-lg pull-right font-subtitle" href="#" role="button">Post Playlist</a>
     </div>
 </div>

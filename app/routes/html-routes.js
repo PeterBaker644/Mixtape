@@ -3,47 +3,36 @@ const db = require("../models");
 
 module.exports = function (app) {
 
+    app.get("/", (req, res) => {
+        res.redirect("/playlists");
+    });
+
     app.get("/playlists", async (req, res) => {
         try {
             const data = await db.Playlist.findAll({
                 include: [{
                     model: db.User,
-                    attributes: ["username", "last_login", "createdAt"],
-                },
-                { model: db.Vote, }]
+                    attributes: ["username", "createdAt"]
+                }
+                    // { model: db.Song },
+                ],
+                attributes: {
+                    include: [
+                        [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"]
+                    ]
+                }
             });
             if (data) {
                 const hbsObject = { playlists: data };
-                // res.json(data);
+                // res.json(hbsObject);
                 res.render("index", hbsObject);
             }
         } catch (err) {
-            // Maybe throw some kind of 'user not found' alert. This needs to be handled in the html with handlebars. See example for details.
-            res.status(404).render("index", {
-                message: "User not found."
-            });
-        }
-    });
-
-    app.get("/playlists/create", async (req, res) => {
-        try {
-            const data = await db.Playlist.findAll({
-                include: [{
-                    model: db.User,
-                    attributes: ["username", "last_login", "createdAt"],
-                },
-                { model: db.Vote, }]
-            });
-            if (data) {
-                const hbsObject = { playlists: data };
-                res.render("create", hbsObject);
-            }
-        } catch (err) {
+            // maybe address this
             res.status(404).render("index");
         }
     });
 
-    // Tried using !isAuthenticated, but that totally failed.
     app.get("/login", (req, res) => {
         if (req.user) {
             res.redirect("/playlists");
@@ -52,8 +41,10 @@ module.exports = function (app) {
         }
     });
 
-    app.get("/logout", (req, res) => {
-        console.log(req.user.username);
+    app.get("/logout", isAuthenticated, (req, res) => {
+        // console.log(`[HTML-ROUTES] User ${req.user.username}`)
+        let name = req.user.username;
+        console.log("[HTML-ROUTES] User " + name + " logged out.");
         req.logout();
         res.redirect("/playlists");
     });
@@ -68,7 +59,7 @@ module.exports = function (app) {
     });
 
     // Doesn't work yet.
-    app.get("/settings/profile", isAuthenticated, (req, res) => {
+    app.get("/profile/settings", isAuthenticated, (req, res) => {
         res.render("settings");
     });
 

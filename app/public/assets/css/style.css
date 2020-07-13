@@ -39,17 +39,17 @@ hr {
     font-family: 'Rock Salt', sans-serif;
 }
 
+.font-comment {
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 1.3rem;
+}
+
 .bg-xtradark {
     background-color: #171719;
 }
 
 .bg-medium {
     background-color: #3D4148;
-}
-
-.jumbotron {
-    margin-top: 20px;
-    border-radius: 10px;
 }
 
 .signin, .create {
@@ -59,12 +59,30 @@ hr {
     padding: 5px;
 }
 
+.text-white{
+    color:#E4E7E9 !important;
+}
+
 .text-bright{
     color:#E4E7E9 !important; 
 }
 
 .text-bright:hover {
     color:#3772FF !important;
+}
+
+.icon-vote {
+    line-height: 0.8rem;
+}
+
+.upvotes {
+    padding-top: 0.4rem;
+    font-size: larger;
+}
+
+.vote-div {
+    margin: auto;
+    width: 50px;
 }
 
 .form-control {
@@ -96,6 +114,10 @@ input:-webkit-autofill:active  {
     background-color: #171719;
     padding: 15px;
     border-radius: 10px;
+}
+
+.card-header {
+    border-radius: 5px !important;
 }
 
 .card-gap {
