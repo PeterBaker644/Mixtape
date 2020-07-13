@@ -110,7 +110,7 @@ input:-webkit-autofill:active  {
 
 
 /*All the cards in the page*/
-.card {
+.card, .jumbotron {
     background-color: #171719;
     padding: 15px;
     border-radius: 10px;
@@ -126,6 +126,10 @@ input:-webkit-autofill:active  {
 
 .card-body {
     color:#A9ABAD !important;
+}
+
+.icon:hover {
+    transform: scale(1.5);
 }
 
 .footer {
