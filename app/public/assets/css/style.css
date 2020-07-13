@@ -2,7 +2,6 @@
 background color: #1D2023
 background color inside boxes: #171719
 font: Open Sans
-
 */
 
 * {
@@ -47,6 +46,10 @@ body {
     padding: 15px;
     margin: 10px;
     border-radius: 10px;
+}
+
+.fa-thumbs-up:hover, .fa-thumbs-down:hover {
+    transform: scale(1.5);
 }
 
 .footer {
