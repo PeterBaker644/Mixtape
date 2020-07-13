@@ -81,6 +81,24 @@ $(document).ready(() => {
         populateTable();
     });
 
+    $("#submit-playlist").on("click", function (event) {
+        event.preventDefault();
+        // console.log("submit playlist!");
+        // console.log(playlistTitle);
+        // console.log(playlistDescription);
+        // console.log(playlistContents);
+        $.post("/api/playlists_create", {
+            playlistTitle: $("#playlist-title").val().trim(),
+            playlistDescription: $("#playlist-description").val().trim(),
+            playlistContents: songArray
+        }).then(() => {
+            window.location.replace("/playlists");
+            // If there's an error, handle it by throwing up a bootstrap alert
+        }).catch(err => {
+            console.log(err);
+        });
+    });
+
     // Toggle plus minus icon on show hide of collapse element
     $(".collapse").on("show.bs.collapse", function () {
         console.log("collapse hide");
