@@ -5,9 +5,7 @@ module.exports = function (sequelize, DataTypes) {
         song_order: {
             type: DataTypes.STRING,
             allowNull: true,
-            validate: {
-                isEmpty: false
-            }
+            validate: { notEmpty: true }
         },
     },
     {
