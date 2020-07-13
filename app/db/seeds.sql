@@ -19,7 +19,7 @@ VALUES
 INSERT INTO votes (id, upvote, createdAt, updatedAt, UserId, PlaylistId)
 VALUES 
 	(id,1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',1,1), 
-    (id,1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',1,2), 
+    (id,-1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',1,2), 
     (id,1, '2020-07-09 23:07:58', '2020-07-09 23:07:58',2,1);
 
 INSERT INTO songs (id, song_title, song_artist,createdAt, updatedAt)

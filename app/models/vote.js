@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
     const Vote = sequelize.define("Vote", {
-        upvote: DataTypes.BOOLEAN,
+        upvote: DataTypes.INTEGER,
     });
     Vote.associate = function (models) {
         //the belongs to command is not needed? it only serves to work with the "has many"
