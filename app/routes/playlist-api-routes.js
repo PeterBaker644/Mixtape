@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 const db = require("../models");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 // const passport = require("../config/passport");
 
 module.exports = function (app) {
@@ -7,43 +8,42 @@ module.exports = function (app) {
     //change .get to post
     //change req to reqtest and delete 10 lines of code immediately after app.post
     //this will take out the dummy testing object and use the incoming object instead
-    app.get("/api/playlists_create", async (req, res) => {
-        reqtest = {};
-        reqtest.body = {
-            playlistTitle: "incomingPlaylistTitle",
-            playlistAuthorId: 1,
-            playlistDescription: "incomingPlaylistDescription",
-            playlistContents: [
-                { songName: "incoming song 1", songArtist: "incoming artist 1" },
-                { songName: "incoming song 2", songArtist: "incoming artist 2" }
-            ]
-        };
+    app.post("/api/playlists", isAuthenticated, async (req, res) => {
+        // req.body = {
+        //     playlistTitle: "incomingPlaylistTitle",
+        //     playlistAuthorId: res.locals.user.id,
+        //     playlistDescription: "incomingPlaylistDescription",
+        //     playlistContents: [
+        //         { songName: "incoming song 1", songArtist: "incoming artist 1" },
+        //         { songName: "incoming song 2", songArtist: "incoming artist 2" }
+        //     ]
+        // };
         try {
             //this will search for the incoming playlist and...
             const playlistduplicatesearch = await db.Playlist.findOne({
                 where: {
-                    title: reqtest.body.playlistTitle
+                    title: req.body.playlistTitle
                 }
             });
             //...log out duplicate found if playlist already exists.
             if (playlistduplicatesearch) {
-                console.log("duplicate found");
-                res.json("duplicate found");
+                console.log("[PLAYLIST-ROUTES] Duplicate found");
+                res.json("[PLAYLIST-ROUTES] Duplicate found");
             } else {
                 //creates the playlist title author and description
                 const PlaylistCreated = await db.Playlist.create({
-                    title: reqtest.body.playlistTitle,
-                    UserId: reqtest.body.playlistAuthorId,
-                    description: reqtest.body.playlistDescription
+                    title: req.body.playlistTitle,
+                    description: req.body.playlistDescription,
+                    UserId: req.user.id,
                 });
-                console.log("created playlist");
-                res.json("created playlist");
+                console.log("[PLAYLIST-ROUTES] Created playlist");
+                res.json("[PLAYLIST-ROUTES] Created playlist");
                 const NewPlaylistID = PlaylistCreated.dataValues.id;
-                for (i = 0; i < reqtest.body.playlistContents.length; i++) {
+                for (i = 0; i < req.body.playlistContents.length; i++) {
                     const findOrCreateResult = await db.Song.findOrCreate({
                         where: {
-                            song_title: reqtest.body.playlistContents[i].songName,
-                            song_artist: reqtest.body.playlistContents[i].songArtist
+                            song_title: req.body.playlistContents[i].songName,
+                            song_artist: req.body.playlistContents[i].songArtist
                         }
                     });
                     console.log("findOrCreateResult[0].dataValues.id-----------------------");

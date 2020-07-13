@@ -13,12 +13,6 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT,
             allowNull: true,
             validate: { notEmpty: true }
-        },
-        description: {
-            type: DataTypes.TEXT,
-            // allowNull: false,
-            // validate: { notEmpty: true },
-            // defaultValue: "description here"
         }
     });
     //this 'has many' means the playlist can have many upvotes associated with it

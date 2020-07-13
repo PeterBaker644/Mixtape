@@ -87,7 +87,7 @@ $(document).ready(() => {
         // console.log(playlistTitle);
         // console.log(playlistDescription);
         // console.log(playlistContents);
-        $.post("/api/playlists_create", {
+        $.post("/api/playlists", {
             playlistTitle: $("#playlist-title").val().trim(),
             playlistDescription: $("#playlist-description").val().trim(),
             playlistContents: songArray
