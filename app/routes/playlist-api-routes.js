@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 const db = require("../models");
-const passport = require("../config/passport");
+// const passport = require("../config/passport");
 
 module.exports = function (app) {
     //should this all be async await?

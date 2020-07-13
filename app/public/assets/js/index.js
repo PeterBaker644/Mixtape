@@ -1,21 +1,58 @@
 $(document).ready(() => {
+    let songArray = [];
 
-    // async function getPlaylists() {
-    //     try {
-    //         let playlists = await $.get("/api/playlists");
-    //         console.log(playlists);
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }
+    function populateTable() {
+        $(".song-table").empty();
+        for ([i, song] of songArray.entries()) {
+            let idCell = $("<td>").addClass("no-border");
+            let nameCell = $("<td>").addClass("no-border");
+            let artistCell = $("<td>").addClass("no-border");
+            let buttonCell = $("<td class='no-border text-center pt-3 song-button text-bright delete'><i class='fa fa-times'></i></td>");
+            idCell.text(i + 1).attr("scope", "row");
+            nameCell.text(song.songName);
+            artistCell.text(song.songArtist);
+            let row = $("<tr>").append(idCell, nameCell, artistCell, buttonCell).attr("id", (i));
+            $(".song-table").append(row);
+        }
+        $("#table-songs").tableDnDUpdate();
+        // console.log("=========Repopulated=========");
+        // console.log(songArray);
+    }
 
-    // Add minus icon for collapse element which is open by default
-    // $(".collapse.show").each(function () {
-    //     console.log("collapse show");
-    //     $(this).prev(".card-header").find(".fa").addClass("fa-minus-circle").removeClass("fa-plus-circle");
-    // });
+    function refreshIndex() {
+        for (let i = 0; i < songArray.length; i++) {
+            songArray[i].songPosition = i;
+        }
+        // console.log("=========Refreshed=========");
+        // console.log(songArray);
+    }
 
-    $(".author-link").on("click", function(event){
+    $("#table-songs").tableDnD({
+        onDrop: (table) => {
+            let rows = table.tBodies[0].rows;
+            let sortingArray = [];
+            for (let i = 0; i < rows.length; i++) {
+                sortingArray.push(Number(rows[i].id));
+            }
+            // console.log("=========Sort-By=========");
+            // console.log(sortingArray);
+            // console.log("=========To-be-sorted=========");
+            // console.log(songArray);
+            songArray.sort(function (a, b) {
+                return sortingArray.indexOf(a.songPosition) - sortingArray.indexOf(b.songPosition);
+            });
+            for (let i = 0; i < songArray.length; i++) {
+                songArray[i].songPosition = i;
+            }
+            // console.log("=========Sorted=========");
+            // console.log(songArray);
+            // console.log("=========Post-Sorting-Array=========");
+            // console.log(sortingArray);
+            populateTable();
+        }
+    });
+
+    $(".author-link").on("click", function (event) {
         console.log("you clicked the author");
         event.stopPropagation();
         author = $(this).text();
@@ -23,32 +60,25 @@ $(document).ready(() => {
 
     });
 
-    $("#add-song").on("click", function(event){
-        // Figure out a solution for this id thing
-        // Save all to local storage?
-        let idNumber = 1;
-        console.log("add song to playlist");
+    $("#add-song").on("click", function (event) {
+        console.log(songArray);
         event.preventDefault();
         event.stopPropagation();
-        let songName = $("#song-name").val();
-        let songArtist = $("#song-artist").val();
-        console.log(songName);
-        console.log(songArtist);
-        let idCell = $("<td>").addClass("no-border");
-        let nameCell = $("<td>").addClass("no-border");
-        let artistCell = $("<td>").addClass("no-border");
-        let buttonCell = $("<td>").addClass("no-border");
-        let icon = $("<i>").addClass("fas").addClass("fa-times");
-        idCell.text(idNumber).attr("scope", "row");
-        idNumber ++;
-        nameCell.text(songName);
-        artistCell.text(songArtist);
-        buttonCell.append(icon);
-        let row = $("<tr>").append(idCell, nameCell,artistCell, buttonCell);
-        $(".song-table").append(row);
-        // Clear local storage when you hit submit?
+        let songName = $("#song-name").val().trim();
+        let songArtist = $("#song-artist").val().trim();
+        songArray.push({ "songName": songName, "songArtist": songArtist, "songPosition": songArray.length });
+        populateTable();
+        console.log(songArray);
         $("#song-name").val("");
         $("#song-artist").val("");
+    });
+
+    $(".song-table").on("click", ".delete", function (event) {
+        event.preventDefault();
+        songArray.splice($(this).parent().attr("id"), 1);
+        $(this).parent().remove();
+        refreshIndex();
+        populateTable();
     });
 
     // Toggle plus minus icon on show hide of collapse element
@@ -58,6 +88,4 @@ $(document).ready(() => {
     }).on("hide.bs.collapse", function () {
         $(this).prev(".card-header").find(".fa").removeClass("fa-minus-circle").addClass("fa-plus-circle");
     });
-
-    // getPlaylists();
 });

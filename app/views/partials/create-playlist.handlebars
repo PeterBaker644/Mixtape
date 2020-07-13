@@ -33,7 +33,7 @@
                     <div class="form-group">
                         {{!--  <textarea class="form-control" id="playlist-string" rows="5"
                             placeholder="List your playlist here."></textarea>--}}
-                        <table class="table m-0">
+                        <table class="table m-0" id="table-songs">
                             <thead class="font-subtitle">
                                 <tr>
                                     <th scope="col">#</th>
@@ -42,18 +42,15 @@
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
-                            {{!-- <tbody class="song-table">
-                                <tr>
-                                    <td class="no-border" scope="row"></td>
-                                    <td class="no-border"></td>
-                                    <td class="no-border"></td>
-                                    <td class="no-border"></td>
-                                </tr>
-                            </tbody> --}}
+                            <tbody class="song-table font-comment">
+                                {{!-- <tr>
+                                    <td class="no-border" scope="row">1</td>
+                                    <td class="no-border">So High (Kodak to Graph Remix)</td>
+                                    <td class="no-border">Doja Cat</td>
+                                    <td class="no-border text-center pt-3 song-button text-bright"><i class="fa fa-times"></i></td>
+                                </tr> --}}
+                            </tbody>
                         </table>
-                        <div class="song-table row m-0">
-
-                        </div>
 
                         <div class="song-div row m-0">
                             <div class="input-group p-0 pr-3 col">
@@ -75,9 +72,12 @@
                         </div>
                     </div>
                 </form>
-                <div class="d-flex justify-content-end align-items-center">
-                    <div class="font-comment mr-3">express yourself -</div>
-                    <a class="btn btn-dark btn-lg font-subtitle" href="#" role="button">Post Playlist</a>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="font-comment mr-3">Drag around your songs to reorder them!</div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="font-comment mr-3">express yourself -</div>
+                        <a class="btn btn-dark btn-lg font-subtitle" href="#" role="button">Post Playlist</a>
+                    </div>
                 </div>
             </div>
         </div>
