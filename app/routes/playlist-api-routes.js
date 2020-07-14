@@ -4,6 +4,39 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 // const passport = require("../config/passport");
 
 module.exports = function (app) {
+
+    // when frontend sends data
+    // change .get to post
+    // change req to reqtest and delete 10 lines of code immediately after app.post
+    // this will take out the dummy testing object and use the incoming object instead
+    app.post("/api/playlists_destroy", isAuthenticated, async (req, res) => {
+        // this queries the DB to find the user id of the requested playlist title. stores it to useridQuery
+        useridQuery = await db.Playlist.findOne({
+            where: {
+                title: req.body.playlistTitle
+            },
+            attributes: [
+                "id",
+            ],
+        });
+        //if the id from the query above matches the isAuthenticated ID, then allow the playlist to be deleted
+        if (useridQuery.dataValues.id === req.user.id) {
+            try {
+                await db.Playlist.destroy({
+                    where: {
+                        title: req.body.playlistTitle
+                    }
+                });
+                res.json("deleted playlist");
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            console.log("not authorised");
+            res.json("not authorised");
+        }
+    });
+
     //when frontend sends data
     //change .get to post
     //change req to reqtest and delete 10 lines of code immediately after app.post
@@ -97,7 +130,7 @@ module.exports = function (app) {
         db.Playlist.findAll({
             include: [
                 { model: db.Song, attributes: ["song_title", "song_artist"] },
-                { model: db.User, attributes: ["username", "id"], where: { username: req.params.username } }
+                { model: db.User, attributes: ["username", "id"], where: { username: req.params.username } },
             ],
             attributes: [
                 // eslint-disable-next-line quotes
@@ -106,6 +139,10 @@ module.exports = function (app) {
                 "id",
                 // eslint-disable-next-line quotes
                 [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
+                // eslint-disable-next-line quotes
+                [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = 1)`), "user_total_upvotes"],
+                // eslint-disable-next-line quotes
+                [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = -1)`), "user_total_downvotes"],
             ],
             // eslint-disable-next-line quotes
             // where: db.sequelize.literal(`(users.username) = ${req.params.username}`),
