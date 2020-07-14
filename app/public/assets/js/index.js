@@ -27,6 +27,27 @@ $(document).ready(() => {
         // console.log(songArray);
     }
 
+    function parseDates() {
+        let lastLogin = $("#last-login").attr("data-date");
+        let dateCreated = $("#date-created").attr("data-date");
+        $("#last-login").text(moment(lastLogin).format("MMMM Do"));
+        $("#date-created").text(moment(dateCreated).format("MMMM Do"));
+    }
+
+    $(".random-color").each(function () {
+        $(this).css("color", randomColor({
+            // luminosity: "bright",
+        }));
+    });
+
+    $(".random-light").each(function () {
+        $(this).css("color", randomColor({
+            luminosity: "light",
+        }));
+    });
+
+    parseDates();
+
     $("#table-songs").tableDnD({
         onDrop: (table) => {
             let rows = table.tBodies[0].rows;
@@ -91,7 +112,7 @@ $(document).ready(() => {
             playlistTitle: $("#playlist-title").val().trim(),
             playlistDescription: $("#playlist-description").val().trim(),
             playlistContents: songArray
-        // eslint-disable-next-line no-unused-vars
+            // eslint-disable-next-line no-unused-vars
         }).then((res) => {
             window.location.replace("/playlists");
             // If there's an error, handle it by throwing up a bootstrap alert

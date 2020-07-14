@@ -9,8 +9,8 @@ module.exports = function (app) {
     // if AUTH then return upvote info for that AUThed user and ALSO show below
     // if not authed, show below and upvote buttons greyed out anyways.
 
-    app.get("/api/playlists/include_all_orderby_title", isAuthenticated, async (req, res) => {
-        output = {};
+    app.get("/api/playlists/include_all_orderby_title", async (req, res) => {
+        let output = {};
         if (req.user.id) {
             try {
                 output = await db.Playlist.findAll({

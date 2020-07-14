@@ -1,5 +1,6 @@
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 const db = require("../models");
+// const user = require("../models/user");
 
 module.exports = function (app) {
 
@@ -8,8 +9,18 @@ module.exports = function (app) {
     });
 
     app.get("/playlists", async (req, res) => {
+        let attributeCall = {};
+        if (req.user) {
+            attributeCall = {
+                include: [[db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"],[db.Sequelize.literal(`(SELECT votes.upvote FROM votes WHERE PlaylistId = playlist.id AND UserId = ${req.user.id})`), "upvoted"]]
+            };
+        } else {
+            attributeCall = {
+                include: [[db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"]]
+            };
+        }
         try {
-            const data = await db.Playlist.findAll({
+            let data = await db.Playlist.findAll({
                 order: ["title"],
                 include: [{
                     model: db.User,
@@ -17,11 +28,7 @@ module.exports = function (app) {
                 },
                 { model: db.Song, attributes: ["song_title", "song_artist"] }
                 ],
-                attributes: {
-                    include: [
-                        [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"]
-                    ]
-                },
+                attributes: attributeCall,
                 order: db.sequelize.literal("title, song_order ASC"),
             });
             if (data) {
@@ -80,16 +87,23 @@ module.exports = function (app) {
                 ],
                 attributes: {
                     include: [
-                        [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"]
+                        [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"],
+                        // eslint-disable-next-line quotes
+                        [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
+                        // eslint-disable-next-line quotes
+                        [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = 1)`), "user_total_upvotes"],
+                        // eslint-disable-next-line quotes
+                        [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = -1)`), "user_total_downvotes"]
                     ]
                 },
                 order: db.sequelize.literal("title, song_order ASC"),
             });
             if (data) {
                 const hbsObject = { playlists: data };
+                console.log(hbsObject.playlists);
                 // console.log(hbsObject.playlists[0].dataValues.Songs[0].playlist_song_junction_table.dataValues.song_order);
                 // res.json(hbsObject);
-                res.render("index", hbsObject);
+                res.render("user", hbsObject);
             }
         } catch (err) {
             // Maybe throw some kind of 'user not found' alert. This needs to be handled in the html with handlebars. See example for details.

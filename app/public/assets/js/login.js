@@ -4,6 +4,18 @@ $(document).ready(() => {
     const usernameInput = $("input#username-input");
     const passwordInput = $("input#password-input");
 
+    $(".random-color").each(function () {
+        $(this).css("color", randomColor({
+            // luminosity: "bright",
+        }));
+    });
+
+    $(".random-light").each(function () {
+        $(this).css("color", randomColor({
+            luminosity: "light",
+        }));
+    });
+
     // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
     function loginUser(username, password) {
         console.log(username, password);

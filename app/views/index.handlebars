@@ -1,8 +1,10 @@
 {{#if authenticated}}
     {{> header-user}}
-    {{> create-playlist}}  
+    {{> create-playlist}}
+    <script type="text/javascript" src="/assets/js/vote.js"></script>  
 {{else}}
     {{> header-login}}
+    <script type="text/javascript" src="/assets/js/vote-guest.js"></script>
 {{/if}}
 
 <div class="container mb-4">
