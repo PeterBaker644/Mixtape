@@ -130,7 +130,7 @@ module.exports = function (app) {
         db.Playlist.findAll({
             include: [
                 { model: db.Song, attributes: ["song_title", "song_artist"] },
-                { model: db.User, attributes: ["username", "id"], where: { username: req.params.username } }
+                { model: db.User, attributes: ["username", "id"], where: { username: req.params.username } },
             ],
             attributes: [
                 // eslint-disable-next-line quotes
@@ -139,6 +139,10 @@ module.exports = function (app) {
                 "id",
                 // eslint-disable-next-line quotes
                 [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
+                // eslint-disable-next-line quotes
+                [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = 1)`), "user_total_upvotes"],
+                // eslint-disable-next-line quotes
+                [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = -1)`), "user_total_downvotes"],
             ],
             // eslint-disable-next-line quotes
             // where: db.sequelize.literal(`(users.username) = ${req.params.username}`),
