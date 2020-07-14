@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
     function deletePlaylist(playlistId) {
-        console.log("Destroying Playlist")
+        console.log("Destroying Playlist");
         $.post("/api/playlists_destroy", {
             playlistId: playlistId,
         }).then(() => {

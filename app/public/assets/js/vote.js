@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    console.log("Deployed Vote JS")
+    console.log("Deployed Vote JS");
 
     $(".vote-div").each(function() {
         let vote = $(this).data("vote");
