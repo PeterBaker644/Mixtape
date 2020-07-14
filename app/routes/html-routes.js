@@ -80,14 +80,20 @@ module.exports = function (app) {
                 ],
                 attributes: {
                     include: [
-                        [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"]
+                        [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"],
+                        // eslint-disable-next-line quotes
+                        [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
+                        // eslint-disable-next-line quotes
+                        [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = 1)`), "user_total_upvotes"],
+                        // eslint-disable-next-line quotes
+                        [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = -1)`), "user_total_downvotes"]
                     ]
                 },
                 order: db.sequelize.literal("title, song_order ASC"),
             });
             if (data) {
                 const hbsObject = { playlists: data };
-                console.log(hbsObject.playlists[0].User.dataValues);
+                console.log(hbsObject.playlists);
                 // console.log(hbsObject.playlists[0].dataValues.Songs[0].playlist_song_junction_table.dataValues.song_order);
                 // res.json(hbsObject);
                 res.render("user", hbsObject);

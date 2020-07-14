@@ -4,7 +4,7 @@
             <div class="font-comment h2 d-flex align-items-end">
                 <span class="font-subtitle display-1">User Info</span>
                 <span class="mx-4 align-self-center"> for </span>
-                <span class="font-subtitle display-3 pb-1">{{User.dataValues.username}}</span>
+                <span class="font-subtitle display-3 pb-1 random-color">{{User.dataValues.username}}</span>
             </div>
             <div class="card-body py-0 row font-title">
                     <div class="col card-text">
@@ -17,11 +17,11 @@
                     </div>
                     <div class="col card-text">
                         <div class="text-muted mb-1">Total upvotes :</div>
-                        <div class="font-subtitle h2 m-0">215</div>
+                        <div class="font-subtitle h2 m-0">{{dataValues.user_total_upvotes}}</div>
                     </div>
                     <div class="col card-text">
                         <div class="text-muted mb-1">Total downvotes :</div>
-                        <div class="font-subtitle h2 m-0">62</div>
+                        <div class="font-subtitle h2 m-0">{{dataValues.user_total_downvotes}}</div>
                     </div>
                 </div>
             </div>

@@ -55,7 +55,7 @@ tr:last-of-type td:first-of-type {
     border-bottom-left-radius: 10px;
 }
 tr:last-of-type td:last-of-type {
-    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .no-border {
@@ -136,8 +136,29 @@ tr:last-of-type td:last-of-type {
     color:#3772FF !important;
 }
 
+.text-activated {
+    color:#FE3326 !important;
+}
+
 .icon-vote {
+    background-color: inherit !important;
+    border:none !important;
+    box-shadow:none;
+    outline:none;
+    color:#E4E7E9 !important;
     line-height: 0.8rem;
+    cursor: pointer;
+}
+
+.icon-vote:active, .icon-vote:focus {
+    border:none !important;
+    box-shadow:none;
+    outline:none;
+}
+
+:disabled, :disabled:hover {
+    color:#3D4148 !important;
+    pointer-events: none;
 }
 
 .upvotes {

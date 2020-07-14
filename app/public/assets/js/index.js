@@ -34,6 +34,18 @@ $(document).ready(() => {
         $("#date-created").text(moment(dateCreated).format("MMMM Do"));
     }
 
+    $(".random-color").each(function () {
+        $(this).css("color", randomColor({
+            // luminosity: "bright",
+        }));
+    });
+
+    $(".random-light").each(function () {
+        $(this).css("color", randomColor({
+            luminosity: "light",
+        }));
+    });
+
     parseDates();
 
     $("#table-songs").tableDnD({
@@ -100,7 +112,7 @@ $(document).ready(() => {
             playlistTitle: $("#playlist-title").val().trim(),
             playlistDescription: $("#playlist-description").val().trim(),
             playlistContents: songArray
-        // eslint-disable-next-line no-unused-vars
+            // eslint-disable-next-line no-unused-vars
         }).then((res) => {
             window.location.replace("/playlists");
             // If there's an error, handle it by throwing up a bootstrap alert
