@@ -27,6 +27,15 @@ $(document).ready(() => {
         // console.log(songArray);
     }
 
+    function parseDates() {
+        let lastLogin = $("#last-login").attr("data-date");
+        let dateCreated = $("#date-created").attr("data-date");
+        $("#last-login").text(moment(lastLogin).format("MMMM Do"));
+        $("#date-created").text(moment(dateCreated).format("MMMM Do"));
+    }
+
+    parseDates();
+
     $("#table-songs").tableDnD({
         onDrop: (table) => {
             let rows = table.tBodies[0].rows;

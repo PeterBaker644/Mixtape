@@ -87,9 +87,10 @@ module.exports = function (app) {
             });
             if (data) {
                 const hbsObject = { playlists: data };
+                console.log(hbsObject.playlists[0].User.dataValues);
                 // console.log(hbsObject.playlists[0].dataValues.Songs[0].playlist_song_junction_table.dataValues.song_order);
                 // res.json(hbsObject);
-                res.render("index", hbsObject);
+                res.render("user", hbsObject);
             }
         } catch (err) {
             // Maybe throw some kind of 'user not found' alert. This needs to be handled in the html with handlebars. See example for details.
