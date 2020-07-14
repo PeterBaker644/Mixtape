@@ -33,7 +33,6 @@ module.exports = function (app) {
             });
             if (data) {
                 const hbsObject = { playlists: data };
-                // console.log(hbsObject.playlists[0].dataValues.Songs[0].playlist_song_junction_table.dataValues.song_order);
                 // res.json(hbsObject);
                 res.render("index", hbsObject);
             }
@@ -69,8 +68,31 @@ module.exports = function (app) {
     });
 
     // Doesn't work yet.
-    app.get("/profile/settings", isAuthenticated, (req, res) => {
-        res.render("settings");
+    app.get("/profile/settings", isAuthenticated, async (req, res) => {
+        try {
+            let data = await db.Playlist.findAll({
+                order: ["title"],
+                include: [{
+                    model: db.User,
+                    attributes: ["first_name","last_name","email","username", "createdAt","last_login"],
+                    where: { username: req.user.username }
+                },
+                { model: db.Song, attributes: ["song_title", "song_artist"] }
+                ],
+                attributes: {
+                    include: [[db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"], [db.Sequelize.literal("(SELECT users.username FROM users WHERE id=playlist.Userid)"), "username"], [db.Sequelize.literal("(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = 1)"), "user_total_upvotes"], [db.Sequelize.literal("(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = -1)"), "user_total_downvotes"],[db.Sequelize.literal(`(SELECT votes.upvote FROM votes WHERE PlaylistId = playlist.id AND UserId = ${req.user.id})`), "upvoted"]]
+                },
+                order: db.sequelize.literal("title, song_order ASC"),
+            });
+            if (data) {
+                const hbsObject = { playlists: data };
+                console.log(hbsObject.playlists[0].User);
+                res.render("settings", hbsObject);
+            }
+        } catch (err) {
+            // maybe address this
+            res.status(404).render("index");
+        }
     });
 
     app.get("/user/:username", async (req, res) => {
@@ -87,13 +109,7 @@ module.exports = function (app) {
                 ],
                 attributes: {
                     include: [
-                        [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"],
-                        // eslint-disable-next-line quotes
-                        [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
-                        // eslint-disable-next-line quotes
-                        [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = 1)`), "user_total_upvotes"],
-                        // eslint-disable-next-line quotes
-                        [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = -1)`), "user_total_downvotes"]
+                        [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"],[db.Sequelize.literal("(SELECT users.username FROM users WHERE id=playlist.Userid)"), "username"],[db.Sequelize.literal("(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = 1)"), "user_total_upvotes"],[db.Sequelize.literal("(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = -1)"), "user_total_downvotes"],[db.Sequelize.literal(`(SELECT votes.upvote FROM votes WHERE PlaylistId = playlist.id AND UserId = ${req.user.id})`), "upvoted"]
                     ]
                 },
                 order: db.sequelize.literal("title, song_order ASC"),

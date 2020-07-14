@@ -34,18 +34,17 @@ $(document).ready(() => {
         $("#date-created").text(moment(dateCreated).format("MMMM Do"));
     }
 
+    //=================COLOR=STUFF==================
     $(".random-color").each(function () {
         $(this).css("color", randomColor({
-            // luminosity: "bright",
+            luminosity: "bright",
         }));
     });
-
     $(".random-light").each(function () {
         $(this).css("color", randomColor({
             luminosity: "light",
         }));
     });
-
     $(".text-random").mouseleave(() => {
         $("*").css("--random-color", randomColor());
     });
@@ -128,8 +127,8 @@ $(document).ready(() => {
     // Toggle plus minus icon on show hide of collapse element
     $(".collapse").on("show.bs.collapse", function () {
         console.log("collapse hide");
-        $(this).prev(".card-header").find(".fa").removeClass("fa-plus-circle").addClass("fa-minus-circle");
+        $(this).prev(".card-header").find(".fa-plus-circle").removeClass("fa-plus-circle").addClass("fa-minus-circle");
     }).on("hide.bs.collapse", function () {
-        $(this).prev(".card-header").find(".fa").removeClass("fa-minus-circle").addClass("fa-plus-circle");
+        $(this).prev(".card-header").find(".fa-minus-circle").removeClass("fa-minus-circle").addClass("fa-plus-circle");
     });
 });

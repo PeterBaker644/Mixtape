@@ -7,14 +7,30 @@ $(document).ready(() => {
     const username = $("input#user-name-input");
     const passwordInput = $("input#password-input");
 
+    //This does nothing, please fix.
     function handleLoginErr(err) {
         $("#alert .msg").text(err.responseJSON);
         $("#alert").fadeIn(500);
     }
 
+    //=================COLOR=STUFF==================
+    $(".random-color").each(function () {
+        $(this).css("color", randomColor({
+            luminosity: "bright",
+        }));
+    });
+    $(".random-light").each(function () {
+        $(this).css("color", randomColor({
+            luminosity: "light",
+        }));
+    });
+    $(".text-random").mouseleave(() => {
+        $("*").css("--random-color", randomColor());
+    });
+
     // Does a post to the signup route. If successful, we are redirected to the members page
     // Otherwise we log any errors
-    function signUpUser({firstName, lastName, email, username, password}) {
+    function signUpUser({ firstName, lastName, email, username, password }) {
         $.post("/api/signup", {
             firstName: firstName,
             lastName: lastName,

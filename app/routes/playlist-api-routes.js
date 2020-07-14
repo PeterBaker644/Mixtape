@@ -67,18 +67,19 @@ module.exports = function (app) {
         // this queries the DB to find the user id of the requested playlist title. stores it to useridQuery
         useridQuery = await db.Playlist.findOne({
             where: {
-                title: req.body.playlistTitle
+                id: req.body.playlistId
             },
             attributes: [
-                "id",
+                "UserId",
             ],
         });
+        console.log("[PLAYLIST-ROUTES] User ID Query");
         //if the id from the query above matches the isAuthenticated ID, then allow the playlist to be deleted
-        if (useridQuery.dataValues.id === req.user.id) {
+        if (useridQuery.dataValues.UserId === req.user.id) {
             try {
                 await db.Playlist.destroy({
                     where: {
-                        title: req.body.playlistTitle
+                        id: req.body.playlistId
                     }
                 });
                 res.json("deleted playlist");
@@ -86,8 +87,8 @@ module.exports = function (app) {
                 console.log(err);
             }
         } else {
-            console.log("not authorised");
-            res.json("not authorised");
+            console.log("[PLAYLIST-ROUTES] Unauthorized Playlist Deletion");
+            res.json("[PLAYLIST-ROUTES] Unauthorized Playlist Deletion");
         }
     });
 

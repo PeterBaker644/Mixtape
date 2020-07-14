@@ -57,6 +57,10 @@ tr:last-of-type td:last-of-type {
     border-bottom-right-radius: 10px;
 }
 
+.hidden {
+    display: none;
+}
+
 .no-border {
     border-radius: 0px !important;
 }
@@ -76,23 +80,6 @@ tr:last-of-type td:last-of-type {
     padding: 30px;
     font-family: 'Rock Salt', cursive;
     font-size: 40px;
-}
-
-.font-marker {
-    font-family: 'Permanent Marker', sans-serif;
-}
-
-.font-block {
-    font-family: 'Bebas Neue', sans-serif;
-}
-
-.font-brand {
-    font-family: 'Rock Salt', sans-serif;
-}
-
-.font-comment {
-    font-family: 'Reenie Beanie', cursive;
-    font-size: 1.3rem;
 }
 
 .bg-xtradark {
@@ -119,6 +106,23 @@ tr:last-of-type td:last-of-type {
     padding: 5px;
 }
 
+.font-marker {
+    font-family: 'Permanent Marker', sans-serif;
+}
+
+.font-block {
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.font-brand {
+    font-family: 'Rock Salt', sans-serif;
+}
+
+.font-comment {
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 1.3rem;
+}
+
 .text-white{
     color:#E4E7E9 !important;
 }
@@ -133,6 +137,14 @@ tr:last-of-type td:last-of-type {
 
 .text-random:hover {
     color: var(--random-color) !important;
+}
+
+.text-bright{
+    color:#E4E7E9 !important; 
+}
+
+.text-bright:hover{
+    color:#3772FF !important; 
 }
 
 .text-activated {
@@ -160,6 +172,27 @@ tr:last-of-type td:last-of-type {
     pointer-events: none;
 }
 
+.delete-playlist {
+    background-color: inherit !important;
+    border:none !important;
+    box-shadow:none;
+    outline:none;
+    color:#E4E7E9 !important;
+    /* line-height: 0.8rem; */
+    cursor: pointer;
+}
+
+.delete-playlist:hover {
+    cursor: pointer;
+    color:#dc3545 !important;
+}
+
+.delete-playlist:active, .delete-playlist:focus {
+    border:none !important;
+    box-shadow:none;
+    outline:none;
+}
+
 .upvotes {
     padding-top: 0.4rem;
     font-size: larger;
@@ -168,6 +201,18 @@ tr:last-of-type td:last-of-type {
 .vote-div {
     margin: auto;
     width: 50px;
+}
+
+/* ====================== Bootstrap Tweaks Below ====================== */
+
+.modal-content {
+    background-color: #1d2023 !important;
+    border-color: #3D4148 !important; 
+    border-radius:.12;
+}
+
+.modal-header, .modal-footer {
+    border-color: #3D4148 !important; 
 }
 
 .form-control {
