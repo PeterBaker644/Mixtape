@@ -7,7 +7,7 @@ $(document).ready(() => {
             let idCell = $("<td>").addClass("no-border");
             let nameCell = $("<td>").addClass("no-border");
             let artistCell = $("<td>").addClass("no-border");
-            let buttonCell = $("<td class='no-border text-center pt-3 song-button text-bright delete'><i class='fa fa-times'></i></td>");
+            let buttonCell = $("<td class='no-border text-center pt-3 song-button text-random delete'><i class='fa fa-times'></i></td>");
             idCell.text(i + 1).attr("scope", "row");
             nameCell.text(song.songName);
             artistCell.text(song.songArtist);
@@ -44,6 +44,10 @@ $(document).ready(() => {
         $(this).css("color", randomColor({
             luminosity: "light",
         }));
+    });
+
+    $(".text-random").mouseleave(() => {
+        $("*").css("--random-color", randomColor());
     });
 
     parseDates();

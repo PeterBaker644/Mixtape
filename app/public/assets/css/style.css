@@ -2,14 +2,13 @@
 background color: #1D2023
 background color inside boxes: #171719
 font: Open Sans
-
+blue = #3772FF
+orange = FE3326
 */
 
-/* * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-} */
+* {
+    --random-color: #3772FF; 
+}
 
 body {
     background-color: #1D2023;
@@ -79,11 +78,11 @@ tr:last-of-type td:last-of-type {
     font-size: 40px;
 }
 
-.font-title {
+.font-marker {
     font-family: 'Permanent Marker', sans-serif;
 }
 
-.font-subtitle {
+.font-block {
     font-family: 'Bebas Neue', sans-serif;
 }
 
@@ -128,12 +127,12 @@ tr:last-of-type td:last-of-type {
     color:#A9ABAD !important;
 }
 
-.text-bright{
+.text-random{
     color:#E4E7E9 !important; 
 }
 
-.text-bright:hover {
-    color:#3772FF !important;
+.text-random:hover {
+    color: var(--random-color) !important;
 }
 
 .text-activated {
