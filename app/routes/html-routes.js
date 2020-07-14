@@ -1,5 +1,6 @@
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 const db = require("../models");
+// const user = require("../models/user");
 
 module.exports = function (app) {
 
@@ -8,8 +9,18 @@ module.exports = function (app) {
     });
 
     app.get("/playlists", async (req, res) => {
+        let attributeCall = {};
+        if (req.user) {
+            attributeCall = {
+                include: [[db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"],[db.Sequelize.literal(`(SELECT votes.upvote FROM votes WHERE PlaylistId = playlist.id AND UserId = ${req.user.id})`), "upvoted"]]
+            };
+        } else {
+            attributeCall = {
+                include: [[db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"]]
+            };
+        }
         try {
-            const data = await db.Playlist.findAll({
+            let data = await db.Playlist.findAll({
                 order: ["title"],
                 include: [{
                     model: db.User,
@@ -17,11 +28,7 @@ module.exports = function (app) {
                 },
                 { model: db.Song, attributes: ["song_title", "song_artist"] }
                 ],
-                attributes: {
-                    include: [
-                        [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"]
-                    ]
-                },
+                attributes: attributeCall,
                 order: db.sequelize.literal("title, song_order ASC"),
             });
             if (data) {

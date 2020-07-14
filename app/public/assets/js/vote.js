@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    $(".vote-div").each(function(index) {
+    $(".vote-div").each(function() {
         let vote = $(this).data("vote");
         if (vote) {
             if (vote === 1){
@@ -17,8 +17,19 @@ $(document).ready(() => {
         let playlistId = voteDiv.data("playlist");
         if (voteDiv.find(".downvote:disabled").get(0) === undefined) {
             console.log("Make an create call");
+            $.post("/api/upvote", {
+                playlistId: playlistId,
+            }).then(() => {
+                location.reload();
+            });
         } else {
             console.log("Make an update call");
+            $.post("/api/revote", {
+                playlistId: playlistId,
+                value: 1
+            }).then(() => {
+                location.reload();
+            });
         }
     });
 
@@ -28,8 +39,19 @@ $(document).ready(() => {
         let playlistId = voteDiv.data("playlist");
         if (voteDiv.find(".upvote:disabled").get(0) === undefined) {
             console.log("Make a create call");
+            $.post("/api/downvote", {
+                playlistId: playlistId,
+            }).then(() => {
+                location.reload();
+            });
         } else {
             console.log("Make an update call");
+            $.post("/api/revote", {
+                playlistId: playlistId,
+                value: -1
+            }).then(() => {
+                location.reload();
+            });
         }
     });
 });
