@@ -39,9 +39,9 @@ app.set("views", "./app/views");
 require("./app/routes/html-routes.js")(app);
 require("./app/routes/user-api-routes.js")(app);
 require("./app/routes/playlist-api-routes.js")(app);
-// require("./app/routes/gene_routes.js")(app);
+require("./app/routes/gene_routes.js")(app);
 // {force:true}
-db.sequelize.sync().then(() => {
+db.sequelize.sync({force:true}).then(() => {
     app.listen(PORT, () => {
         console.log(
             `Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`,
