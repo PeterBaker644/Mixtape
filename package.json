@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PeterBaker644/Project-2.git"
+    "url": "git+https://github.com/PeterBaker644/Mixtape.git"
   },
   "author": "",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/PeterBaker644/Project-2/issues"
+    "url": "https://github.com/PeterBaker644/Mixtape/issues"
   },
-  "homepage": "https://github.com/PeterBaker644/Project-2#readme",
+  "homepage": "https://github.com/PeterBaker644/Mixtape#readme",
   "dependencies": {
     "argon2": "^0.26.2",
     "express": "^4.17.1",
