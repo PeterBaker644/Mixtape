@@ -3,9 +3,9 @@
         <div class="mb-0 pr-1 row">
             <div class="col-fluid vote-div" data-playlist="{{dataValues.id}}" data-vote="{{dataValues.upvoted}}">
                 <div class="d-flex justify-content-around">
-                    <button class="fa fa-angle-up fa-2x text-bright text-decoration-none icon-vote upvote" aria-hidden="true"></button>
+                    <button class="fa fa-angle-up fa-2x text-random text-decoration-none icon-vote upvote" aria-hidden="true"></button>
                 </div>
-                <div class="upvotes text-center font-subtitle random-light">
+                <div class="upvotes text-center font-block random-light">
                     {{#if dataValues.upvotes}}
                         {{dataValues.upvotes}}
                     {{else}}
@@ -13,15 +13,15 @@
                     {{/if}}
                 </div>
                 <div class="d-flex justify-content-around">
-                    <button class="fa fa-angle-down fa-2x text-bright text-decoration-none icon-vote downvote" aria-hidden="true"></button>
+                    <button class="fa fa-angle-down fa-2x text-random text-decoration-none icon-vote downvote" aria-hidden="true"></button>
                 </div>
             </div>
             <div class="col btn text-left text-white ml-2" type="button" data-toggle="collapse"
                 data-target="#collapse{{dataValues.id}}" aria-expanded="true" aria-controls="collapse{{dataValues.id}}">
                 {{!-- THIS WILL FAIL GIVEN A LONG ENOUGH NAME, FIX --}}
-                <h2 class="m-0 font-title text-truncate">{{dataValues.title}}
-                    <span class="font-subtitle lead random-color">Authored by: </span>
-                    <span class="font-subtitle lead text-bright author-link">{{User.dataValues.username}}</span>
+                <h2 class="m-0 font-marker text-truncate">{{dataValues.title}}
+                    <span class="font-block lead random-color">Authored by: </span>
+                    <span class="font-block lead text-random author-link">{{User.dataValues.username}}</span>
                 </h2>
                 <div class="font-comment text-muted">{{dataValues.description}}</div>
             </div>
