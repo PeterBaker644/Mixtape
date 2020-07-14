@@ -5,6 +5,60 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function (app) {
 
+
+    // if AUTH then return upvote info for that AUThed user and ALSO show below
+    // if not authed, show below and upvote buttons greyed out anyways.
+
+    app.get("/api/playlists/include_all_orderby_title", isAuthenticated, async (req, res) => {
+        output = {};
+        if (req.user.id) {
+            try {
+                output = await db.Playlist.findAll({
+                    include: db.Vote,
+                    order: ["title"],
+                    include: [
+                        { model: db.Song, attributes: ["song_title", "song_artist"] }
+                    ],
+                    attributes: [
+                        // eslint-disable-next-line quotes
+                        [db.Sequelize.literal(`(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)`), "upvote_tally"],
+                        "title",
+                        "id",
+                        // eslint-disable-next-line quotes
+                        [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
+                        // eslint-disable-next-line quotes
+                        [db.Sequelize.literal(`(SELECT votes.upvote FROM votes WHERE PlaylistId = playlist.id  AND UserId = ${req.user.id})`), "upvoted"],
+                    ],
+                    order: db.sequelize.literal("title, song_order ASC"),
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            try {
+                output = await db.Playlist.findAll({
+                    include: db.Vote,
+                    order: ["title"],
+                    include: [
+                        { model: db.Song, attributes: ["song_title", "song_artist"] }
+                    ],
+                    attributes: [
+                        // eslint-disable-next-line quotes
+                        [db.Sequelize.literal(`(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)`), "upvote_tally"],
+                        "title",
+                        "id",
+                        // eslint-disable-next-line quotes
+                        [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
+                    ],
+                    order: db.sequelize.literal("title, song_order ASC"),
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        res.json(output);
+    });
+
     // when frontend sends data
     // change .get to post
     // change req to reqtest and delete 10 lines of code immediately after app.post
@@ -42,15 +96,6 @@ module.exports = function (app) {
     //change req to reqtest and delete 10 lines of code immediately after app.post
     //this will take out the dummy testing object and use the incoming object instead
     app.post("/api/playlists", isAuthenticated, async (req, res) => {
-        // req.body = {
-        //     playlistTitle: "incomingPlaylistTitle",
-        //     playlistAuthorId: res.locals.user.id,
-        //     playlistDescription: "incomingPlaylistDescription",
-        //     playlistContents: [
-        //         { songName: "incoming song 1", songArtist: "incoming artist 1" },
-        //         { songName: "incoming song 2", songArtist: "incoming artist 2" }
-        //     ]
-        // };
         try {
             //this will search for the incoming playlist and...
             const playlistduplicatesearch = await db.Playlist.findOne({
@@ -96,31 +141,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get("/api/playlists/include_all_orderby_title", (req, res) => {
-        //this finds all playlists and orders by title.
-        //this also includes upvote table as an array of objects insite the playlist object
-        //which is itself inside an array
-        //confirmed working in postman
-        db.Playlist.findAll({
-            include: db.Vote,
-            order: ["title"],
-            include: [
-                { model: db.Song, attributes: ["song_title", "song_artist"] }
-            ],
-            attributes: [
-                // eslint-disable-next-line quotes
-                [db.Sequelize.literal(`(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)`), "upvote_tally"],
-                "title",
-                "id",
-                // eslint-disable-next-line quotes
-                [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
-            ],
-            order: db.sequelize.literal("title, song_order ASC"),
-        })
-            .then(function (dbPlaylist) {
-                res.json(dbPlaylist);
-            });
-    });
+
 
     //PARAM URLS GO LAST
     app.get("/api/playlists/user/:username", (req, res) => {
