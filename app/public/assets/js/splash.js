@@ -1,5 +1,4 @@
-//expiration.. how to make sure user only sees splash the first time they 
-//visit the page?
+
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -7,7 +6,7 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-//this is when the user enters the page for the first time.
+
 function getCookie(cname) {
     const name = cname + "=";
     const decodedCookie = decodeURIComponent(document.cookie);
@@ -23,16 +22,14 @@ function getCookie(cname) {
     }
     return "";
 }
-//if the user comes back to mixtape, they will be directed to index.
-// eslint-disable-next-line no-unused-vars
+
 function checkCookie() {
     const user = getCookie("username");
     if (user !== "") {
-        //how to redirect to main page?
         alert("Welcome again " + user);
     } else {
         user = prompt("Please enter your name:", "");
-        if (user != "" && user !== null) {
+        if (user !== "" && user !== null) {
             setCookie("username", user, 30);
         }
     }
