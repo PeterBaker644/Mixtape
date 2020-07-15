@@ -8,18 +8,18 @@ const { Op } = require("sequelize");
 module.exports = function (app) {
 
     // we are currently automatically pushing the user to login after signup.
-    app.post("/api/login", passport.authenticate("local"), (req, res) => {
-        console.log("Login API is being triggered");
-        // eslint-disable-next-line camelcase
-        db.User.update({ last_login: (moment().format()) }, {
-            where: {
-                id: req.user.id
-            }
-        });
-        res.json({
-            username: req.user.username,
-            id: req.user.id
-        });
+    app.post("/api/login", passport.authenticate("local"), async (req, res) => {
+        console.log("[USER-ROUTES] Login API is being triggered");
+        try {// eslint-disable-next-line camelcase
+            db.User.update({ last_login: (moment().format()) }, {
+                where: {
+                    id: req.user.id
+                }
+            });
+        } catch (err) {
+            res.status(401).json(err);
+            console.log(err);
+        }
     });
 
     app.post("/api/signup", (req, res) => {
@@ -84,7 +84,8 @@ module.exports = function (app) {
             console.log("[USER-API Server Error]");
             console.log(err);
             // maybe address this
-            res.status(500).render("index");
+            res.status(401).render("index");
+            // OR res.status(500).render("index");
         }
     });
 
