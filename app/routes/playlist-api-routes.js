@@ -21,13 +21,13 @@ module.exports = function (app) {
                     ],
                     attributes: [
                         // eslint-disable-next-line quotes
-                        [db.Sequelize.literal(`(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)`), "upvote_tally"],
+                        [db.Sequelize.literal(`(SELECT SUM(Votes.upvote) FROM Votes WHERE PlaylistId=Playlist.id)`), "upvote_tally"],
                         "title",
                         "id",
                         // eslint-disable-next-line quotes
-                        [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
+                        [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=Playlist.Userid)`), "username"],
                         // eslint-disable-next-line quotes
-                        [db.Sequelize.literal(`(SELECT votes.upvote FROM votes WHERE PlaylistId = playlist.id  AND UserId = ${req.user.id})`), "upvoted"],
+                        [db.Sequelize.literal(`(SELECT Votes.upvote FROM Votes WHERE PlaylistId = Playlist.id  AND UserId = ${req.user.id})`), "upvoted"],
                     ],
                     order: db.sequelize.literal("title, song_order ASC"),
                 });
@@ -44,11 +44,11 @@ module.exports = function (app) {
                     ],
                     attributes: [
                         // eslint-disable-next-line quotes
-                        [db.Sequelize.literal(`(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)`), "upvote_tally"],
+                        [db.Sequelize.literal(`(SELECT SUM(Votes.upvote) FROM Votes WHERE PlaylistId=Playlist.id)`), "upvote_tally"],
                         "title",
                         "id",
                         // eslint-disable-next-line quotes
-                        [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
+                        [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=Playlist.Userid)`), "username"],
                     ],
                     order: db.sequelize.literal("title, song_order ASC"),
                 });
@@ -156,15 +156,15 @@ module.exports = function (app) {
             ],
             attributes: [
                 // eslint-disable-next-line quotes
-                [db.Sequelize.literal(`(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)`), "upvote_tally"],
+                [db.Sequelize.literal(`(SELECT SUM(Votes.upvote) FROM Votes WHERE PlaylistId=playlist.id)`), "upvote_tally"],
                 "title",
                 "id",
                 // eslint-disable-next-line quotes
                 [db.Sequelize.literal(`(SELECT users.username FROM users WHERE id=playlist.Userid)`), "username"],
                 // eslint-disable-next-line quotes
-                [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = 1)`), "user_total_upvotes"],
+                [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=user.id AND Votes.upvote = 1)`), "user_total_upvotes"],
                 // eslint-disable-next-line quotes
-                [db.Sequelize.literal(`(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = -1)`), "user_total_downvotes"],
+                [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=user.id AND Votes.upvote = -1)`), "user_total_downvotes"],
             ],
             // eslint-disable-next-line quotes
             // where: db.sequelize.literal(`(users.username) = ${req.params.username}`),

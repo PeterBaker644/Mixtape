@@ -12,11 +12,11 @@ module.exports = function (app) {
         let attributeCall = {};
         if (req.user) {
             attributeCall = {
-                include: [[db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"],[db.Sequelize.literal(`(SELECT votes.upvote FROM votes WHERE PlaylistId = playlist.id AND UserId = ${req.user.id})`), "upvoted"]]
+                include: [[db.Sequelize.literal("(SELECT SUM(Votes.upvote) FROM Votes WHERE PlaylistId=Playlist.id)"), "upvotes"],[db.Sequelize.literal(`(SELECT Votes.upvote FROM Votes WHERE PlaylistId = Playlist.id AND UserId = ${req.user.id})`), "upvoted"]]
             };
         } else {
             attributeCall = {
-                include: [[db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"]]
+                include: [[db.Sequelize.literal("(SELECT SUM(Votes.upvote) FROM Votes WHERE PlaylistId=Playlist.id)"), "upvotes"]]
             };
         }
         try {
@@ -81,7 +81,7 @@ module.exports = function (app) {
                 { model: db.Song, attributes: ["song_title", "song_artist"] }
                 ],
                 attributes: {
-                    include: [[db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"], [db.Sequelize.literal("(SELECT users.username FROM users WHERE id=playlist.Userid)"), "username"], [db.Sequelize.literal("(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = 1)"), "user_total_upvotes"], [db.Sequelize.literal("(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = -1)"), "user_total_downvotes"],[db.Sequelize.literal(`(SELECT votes.upvote FROM votes WHERE PlaylistId = playlist.id AND UserId = ${req.user.id})`), "upvoted"]]
+                    include: [[db.Sequelize.literal("(SELECT SUM(Votes.upvote) FROM Votes WHERE PlaylistId=Playlist.id)"), "upvotes"], [db.Sequelize.literal("(SELECT users.username FROM users WHERE id=Playlist.Userid)"), "username"], [db.Sequelize.literal("(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=User.id AND Votes.upvote = 1)"), "user_total_upvotes"], [db.Sequelize.literal("(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=User.id AND Votes.upvote = -1)"), "user_total_downvotes"],[db.Sequelize.literal(`(SELECT Votes.upvote FROM Votes WHERE PlaylistId = Playlist.id AND UserId = ${req.user.id})`), "upvoted"]]
                 },
                 order: db.sequelize.literal("title, song_order ASC"),
             });
@@ -110,7 +110,7 @@ module.exports = function (app) {
                 ],
                 attributes: {
                     include: [
-                        [db.Sequelize.literal("(SELECT SUM(votes.upvote) FROM votes WHERE PlaylistId=playlist.id)"), "upvotes"],[db.Sequelize.literal("(SELECT users.username FROM users WHERE id=playlist.Userid)"), "username"],[db.Sequelize.literal("(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = 1)"), "user_total_upvotes"],[db.Sequelize.literal("(SELECT COUNT(votes.upvote) FROM votes WHERE UserId=user.id AND votes.upvote = -1)"), "user_total_downvotes"],[db.Sequelize.literal(`(SELECT votes.upvote FROM votes WHERE PlaylistId = playlist.id AND UserId = ${req.user.id})`), "upvoted"]
+                        [db.Sequelize.literal("(SELECT SUM(Votes.upvote) FROM Votes WHERE PlaylistId=Playlist.id)"), "upvotes"],[db.Sequelize.literal("(SELECT users.username FROM users WHERE id=Playlist.Userid)"), "username"],[db.Sequelize.literal("(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=User.id AND Votes.upvote = 1)"), "user_total_upvotes"],[db.Sequelize.literal("(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=User.id AND Votes.upvote = -1)"), "user_total_downvotes"],[db.Sequelize.literal(`(SELECT Votes.upvote FROM Votes WHERE PlaylistId = Playlist.id AND UserId = ${req.user.id})`), "upvoted"]
                     ]
                 },
                 order: db.sequelize.literal("title, song_order ASC"),
