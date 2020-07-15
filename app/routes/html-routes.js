@@ -37,6 +37,7 @@ module.exports = function (app) {
                 res.render("index", hbsObject);
             }
         } catch (err) {
+            console.log(err);
             // maybe address this
             res.status(404).render("index");
         }
