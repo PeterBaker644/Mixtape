@@ -1,5 +1,3 @@
-//w3 schools
-
 //expiration.. how to make sure user only sees splash the first time they 
 //visit the page?
 function setCookie(cname, cvalue, exdays) {
@@ -16,24 +14,25 @@ function getCookie(cname) {
     const ca = decodedCookie.split(";");
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) == " ") {
+        while (c.charAt(0) === " ") {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
+        if (c.indexOf(name) === 0) {
             return c.substring(name.length, c.length);
         }
     }
     return "";
 }
 //if the user comes back to mixtape, they will be directed to index.
+// eslint-disable-next-line no-unused-vars
 function checkCookie() {
     const user = getCookie("username");
-    if (user != "") {
+    if (user !== "") {
         //how to redirect to main page?
         alert("Welcome again " + user);
     } else {
         user = prompt("Please enter your name:", "");
-        if (user != "" && user != null) {
+        if (user != "" && user !== null) {
             setCookie("username", user, 30);
         }
     }
