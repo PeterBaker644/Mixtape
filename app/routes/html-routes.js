@@ -1,7 +1,6 @@
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 const db = require("../models");
 // const user = require("../models/user");
-// const { Sequelize } = require("sequelize");
 
 module.exports = function (app) {
 
@@ -13,7 +12,7 @@ module.exports = function (app) {
         let attributeCall = {};
         if (req.user) {
             attributeCall = {
-                include: [
+                              include: [
                     [db.Sequelize.literal("(SELECT SUM(Votes.upvote) FROM Votes WHERE PlaylistId=Playlist.id)"), "upvotes"],
                     [db.Sequelize.literal(`(SELECT Votes.upvote FROM Votes WHERE PlaylistId = Playlist.id AND UserId = ${req.user.id})`), "upvoted"]
                 ]
@@ -80,9 +79,7 @@ module.exports = function (app) {
                     attributes: ["first_name", "last_name", "email", "username", "createdAt", "last_login"],
                     where: { username: req.user.username }
                 },
-                { model: db.Song, attributes: ["song_title", "song_artist"] },
-                db.Vote
-                // { model: db.Vote, attributes: [[Sequelize.fn("SUM", Sequelize.col("upvote")), "upvote_tally2"]] }
+                { model: db.Song, attributes: ["song_title", "song_artist"] }
                 ],
                 attributes: {
                     include: [
@@ -95,23 +92,22 @@ module.exports = function (app) {
                         //used to determine if user has voted on this playlist or not
                         [db.Sequelize.literal(`(SELECT Votes.upvote FROM Votes WHERE PlaylistId = Playlist.id AND UserId = ${req.user.id})`), "upvoted"],
                         //this will display all the upvotes and downvotes that the user has received from any of their playlists
-                        // [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE Votes.UserId = ${req.user.id} AND Votes.upvote = 1 AND Playlist.Userid = ${req.user.id})`), "user_total_upvotes_received"],
-                        // [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE Votes.UserId = ${req.user.id} AND Votes.upvote = -1 AND Playlist.Userid = ${req.user.id})`), "user_total_downvotes_received"],
-                        // [ Sequelize.fn("SUM", Sequelize.col("Votes.upvote")), "upvote_tally"]
+                        // [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE Votes.UserId = ${req.user.id} AND Votes.upvote = 1)`), "user_total_upvotes_received"],
+                        // [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE Votes.UserId = ${req.user.id} AND Votes.upvote = -1)`), "user_total_downvotes_received"],
                     ]
                 },
                 order: db.sequelize.literal("title, song_order ASC"),
             });
             if (data) {
                 const hbsObject = { playlists: data };
-                console.log(hbsObject.playlists[0]);
+                // console.log(hbsObject.playlists[0].User);
                 res.render("settings", hbsObject);
             }
         } catch (err) {
             // maybe address this
             res.status(404).render("index");
         }
-    });
+    });;
 
     app.get("/user/:username", async (req, res) => {
         // talk to gene about this tomorrow and how maybe we get rid of it?
@@ -132,10 +128,7 @@ module.exports = function (app) {
                         [db.Sequelize.literal("(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=User.id AND Votes.upvote = 1)"), "user_total_upvotes"],
                         [db.Sequelize.literal("(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=User.id AND Votes.upvote = -1)"), "user_total_downvotes"],
                         [db.Sequelize.literal(`(SELECT Votes.upvote FROM Votes WHERE PlaylistId = Playlist.id AND UserId = ${req.user.id})`), "upvoted"]
-                    ]
-                },
-                order: db.sequelize.literal("title, song_order ASC"),
-            });
+          });
             if (data) {
                 const hbsObject = { playlists: data };
                 console.log(hbsObject.playlists);
