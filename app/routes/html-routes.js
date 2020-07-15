@@ -107,7 +107,7 @@ module.exports = function (app) {
             // maybe address this
             res.status(404).render("index");
         }
-    });;
+    });
 
     app.get("/user/:username", async (req, res) => {
         // talk to gene about this tomorrow and how maybe we get rid of it?
