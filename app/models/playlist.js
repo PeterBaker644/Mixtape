@@ -13,6 +13,11 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT,
             allowNull: true,
             validate: { notEmpty: true }
+        },
+        playlist_link: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+            validate: { notEmpty: true }
         }
     });
     //this 'has many' means the playlist can have many upvotes associated with it
