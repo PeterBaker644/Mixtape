@@ -7,12 +7,6 @@ $(document).ready(() => {
     const username = $("input#user-name-input");
     const passwordInput = $("input#password-input");
 
-    //This does nothing, please fix.
-    function handleLoginErr(err) {
-        $("#alert .msg").text(err.responseJSON);
-        $("#alert").fadeIn(500);
-    }
-
     //=================COLOR=STUFF==================
     $(".random-color").each(function () {
         $(this).css("color", randomColor({
