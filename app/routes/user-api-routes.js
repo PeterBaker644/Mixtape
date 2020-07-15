@@ -2,6 +2,8 @@
 const db = require("../models");
 const passport = require("../config/passport");
 const moment = require("moment");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
+const { Op } = require("sequelize");
 
 module.exports = function (app) {
 
@@ -36,6 +38,51 @@ module.exports = function (app) {
                 res.status(401).json(err);
                 console.log(err);
             });
+    });
+
+    app.post("/api/user", isAuthenticated, async (req, res) => {
+        // Look for username, see if it exists already.
+        try {
+            let usernameInUse = await db.User.findOne({
+                where: {
+                    username: req.body.username,
+                    id: {
+                        [Op.not]: req.user.id
+                    }
+                }
+            });
+            // Look for email, see if it exists already.
+            let emailInUse = await db.User.findOne({
+                where: {
+                    email: req.body.email,
+                    id: {
+                        [Op.not]: req.user.id
+                    }
+                }
+            });
+            console.log(usernameInUse);
+            console.log(emailInUse);
+            if (!usernameInUse && !emailInUse) {
+                console.log("[USER-ROUTES] Make update request");
+                await db.User.update({
+                    first_name: req.body.firstName,
+                    last_name: req.body.lastName,
+                    email: req.body.email,
+                    username: req.body.username
+                }, {
+                    where: {
+                        id: req.user.id
+                    }
+                });
+                res.status(200).render("settings");
+            } else {
+                res.status(403).render("settings");
+            }
+        } catch (err) {
+            console.log(err);
+            // maybe address this
+            res.status(404).render("index");
+        }
     });
 
     // Might not be necessary any longer.

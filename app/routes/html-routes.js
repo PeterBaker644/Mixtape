@@ -1,6 +1,7 @@
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 const db = require("../models");
 // const user = require("../models/user");
+// const { Sequelize } = require("sequelize");
 
 module.exports = function (app) {
 
@@ -79,7 +80,9 @@ module.exports = function (app) {
                     attributes: ["first_name", "last_name", "email", "username", "createdAt", "last_login"],
                     where: { username: req.user.username }
                 },
-                { model: db.Song, attributes: ["song_title", "song_artist"] }
+                { model: db.Song, attributes: ["song_title", "song_artist"] },
+                db.Vote
+                // { model: db.Vote, attributes: [[Sequelize.fn("SUM", Sequelize.col("upvote")), "upvote_tally2"]] }
                 ],
                 attributes: {
                     include: [
@@ -92,15 +95,16 @@ module.exports = function (app) {
                         //used to determine if user has voted on this playlist or not
                         [db.Sequelize.literal(`(SELECT Votes.upvote FROM Votes WHERE PlaylistId = Playlist.id AND UserId = ${req.user.id})`), "upvoted"],
                         //this will display all the upvotes and downvotes that the user has received from any of their playlists
-                        [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE Votes.UserId = ${req.user.id} AND Votes.upvote = 1)`), "user_total_upvotes_received"],
-                        [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE Votes.UserId = ${req.user.id} AND Votes.upvote = -1)`), "user_total_downvotes_received"],
+                        // [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE Votes.UserId = ${req.user.id} AND Votes.upvote = 1 AND Playlist.Userid = ${req.user.id})`), "user_total_upvotes_received"],
+                        // [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE Votes.UserId = ${req.user.id} AND Votes.upvote = -1 AND Playlist.Userid = ${req.user.id})`), "user_total_downvotes_received"],
+                        // [ Sequelize.fn("SUM", Sequelize.col("Votes.upvote")), "upvote_tally"]
                     ]
                 },
                 order: db.sequelize.literal("title, song_order ASC"),
             });
             if (data) {
                 const hbsObject = { playlists: data };
-                console.log(hbsObject.playlists[0].User);
+                console.log(hbsObject.playlists[0]);
                 res.render("settings", hbsObject);
             }
         } catch (err) {

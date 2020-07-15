@@ -43,13 +43,13 @@
                 <div class="card-text mx-2">
                     <div class="text-muted mb-1">Date Created :</div>
                     <div class="font-block h2 m-0" data-date="{{User.dataValues.createdAt}}" id="date-created"></div>
-                    <div class="text-muted mb-1">Total upvotes :</div>
+                    <div class="text-muted mb-1">Total upvoted :</div>
                     <div class="font-block h2 m-0">{{dataValues.user_total_upvotes}}</div>
                 </div>
                 <div class="card-text mx-2">
                     <div class="text-muted mb-1">Last login :</div>
                     <div class="font-block h2 m-0" data-date="{{User.dataValues.last_login}}" id="last-login"></div>
-                    <div class="text-muted mb-1">Total downvotes :</div>
+                    <div class="text-muted mb-1">Total downvoted :</div>
                     <div class="font-block h2 m-0">{{dataValues.user_total_downvotes}}</div>
                 </div>
             </div>
@@ -80,7 +80,8 @@
             </div>
             <div class="">
                 <button type="button" class="btn btn-dark btn-xlg font-block pt-2 mt-2 toggle-fade" id="edit">Edit my Information</button>
-                <button type="button" class="btn btn-dark btn-xlg font-block pull-right pt-2 toggle-fade hidden" id="submit">Submit Changes</button>
+                <button type="button" class="btn btn-dark btn-xlg font-block pull-right pt-2 mx-2 toggle-fade hidden" id="cancel">Cancel</button>
+                <button type="button" class="btn btn-primary btn-xlg font-block pull-right pt-2 toggle-fade hidden" id="submit">Submit Changes</button>
             </div>
         </div>
     </div>
