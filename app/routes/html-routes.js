@@ -12,7 +12,7 @@ module.exports = function (app) {
         let attributeCall = {};
         if (req.user) {
             attributeCall = {
-                              include: [
+                include: [
                     [db.Sequelize.literal("(SELECT SUM(Votes.upvote) FROM Votes WHERE PlaylistId=Playlist.id)"), "upvotes"],
                     [db.Sequelize.literal(`(SELECT Votes.upvote FROM Votes WHERE PlaylistId = Playlist.id AND UserId = ${req.user.id})`), "upvoted"]
                 ]
@@ -128,7 +128,10 @@ module.exports = function (app) {
                         [db.Sequelize.literal("(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=User.id AND Votes.upvote = 1)"), "user_total_upvotes"],
                         [db.Sequelize.literal("(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=User.id AND Votes.upvote = -1)"), "user_total_downvotes"],
                         [db.Sequelize.literal(`(SELECT Votes.upvote FROM Votes WHERE PlaylistId = Playlist.id AND UserId = ${req.user.id})`), "upvoted"]
-          });
+                    ]
+                },
+                order: db.sequelize.literal("title, song_order ASC"),
+            });
             if (data) {
                 const hbsObject = { playlists: data };
                 console.log(hbsObject.playlists);
