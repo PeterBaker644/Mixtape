@@ -8,6 +8,7 @@ orange = FE3326
 
 * {
     --random-color: #3772FF; 
+    --random-dark: #14213D; 
 }
 
 body {
@@ -205,6 +206,15 @@ tr:last-of-type td:last-of-type {
 
 /* ====================== Bootstrap Tweaks Below ====================== */
 
+.btn-primary {
+    background-color: var(--random-dark) !important;
+    border: none !important;
+}
+
+.btn-primary:hover {
+    background-color: #1d2023 !important;
+}
+
 .modal-content {
     background-color: #1d2023 !important;
     border-color: #3D4148 !important; 
@@ -225,7 +235,7 @@ tr:last-of-type td:last-of-type {
 }
 
 .form-control:valid {
-    background-color:inherit;
+    background-color: #1d2023;
     border:inherit;
     color:inherit;
 }

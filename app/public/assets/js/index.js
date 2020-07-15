@@ -47,7 +47,11 @@ $(document).ready(() => {
     });
     $(".text-random").mouseleave(() => {
         $("*").css("--random-color", randomColor());
+        $("*").css("--random-dark", randomColor({
+            luminosity: "dark",
+        }));
     });
+
 
     parseDates();
 
