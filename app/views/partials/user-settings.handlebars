@@ -58,30 +58,39 @@
                 <form class="card-body d-flex flex-wrap p-0" id="edit-panel">
                     <div class="card-text col-lg p-0 mx-1">
                         <label for="username" class="text-muted font-marker my-1">Username :</label>
-                        <input type="text" class="form-control" id="username"
-                            value="{{User.dataValues.username}}"></input>
+                        <input type="text" class="form-control" id="username" value="{{User.dataValues.username}}"></input>
+                        <div class="invalid-feedback">Field cannot be left blank.</div>
                     </div>
                     <div class="card-text col-lg p-0 mx-1">
                         <label for="email" class="text-muted font-marker my-1">Email :</label>
                         <input type="email" class="form-control" id="email" value="{{User.dataValues.email}}"></input>
+                        <div class="invalid-feedback">Field cannot be left blank.</div>
                     </div>
                     <div class="card-text col-lg p-0 mx-1">
                         <label for="firstName" class="text-muted font-marker my-1">First Name :</label>
-                        <input type="text" class="form-control" id="firstName"
-                            value="{{User.dataValues.first_name}}"></input>
+                        <input type="text" class="form-control" id="firstName" value="{{User.dataValues.first_name}}"></input>
+                        <div class="invalid-feedback">Field cannot be left blank.</div>
                     </div>
                     <div class="card-text col-lg p-0 mx-1">
                         <label for="lastName" class="text-muted font-marker my-1">Last Name :</label>
-                        <input type="text" class="form-control" id="lastName"
-                            value="{{User.dataValues.last_name}}"></input>
+                        <input type="text" class="form-control" id="lastName" value="{{User.dataValues.last_name}}"></input>
+                        <div class="invalid-feedback">Field cannot be left blank.</div>
                     </div>
                 </form>
                 <hr>
             </div>
             <div class="">
                 <button type="button" class="btn btn-dark btn-xlg font-block pt-2 mt-2 toggle-fade" id="edit">Edit my Information</button>
-                <button type="button" class="btn btn-dark btn-xlg font-block pull-right pt-2 mx-2 toggle-fade hidden" id="cancel">Cancel</button>
+                <button type="button" class="btn btn-dark btn-xlg font-block pull-right pt-2 ml-2 toggle-fade hidden" id="cancel">Cancel</button>
                 <button type="button" class="btn btn-primary btn-xlg font-block pull-right pt-2 toggle-fade hidden" id="submit">Submit Changes</button>
+                <div class="pull-right mx-4">
+                    <div class="alert alert-danger py-2 alert-dismissible fade" role="alert" id="db-alert">
+                        <h3 class="font-block mb-0 mt-1" id="alert-text">Test</h3>
+                        <button type="button" class="close anti-button" data-hide="alert" aria-label="Close">
+                            <i class="fa fa-times text-danger"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

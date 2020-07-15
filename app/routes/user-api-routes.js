@@ -76,12 +76,15 @@ module.exports = function (app) {
                 });
                 res.status(200).render("settings");
             } else {
-                res.status(403).render("settings");
+                let message = usernameInUse ? "Username is in use" : "Email address is in use";
+                res.status(409).json({ message: message });
+                // res.status(409).render("settings");
             }
         } catch (err) {
+            console.log("[USER-API Server Error]");
             console.log(err);
             // maybe address this
-            res.status(404).render("index");
+            res.status(500).render("index");
         }
     });
 

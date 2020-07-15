@@ -1,6 +1,12 @@
 $(document).ready(() => {
     let songArray = [];
 
+    $(function(){
+        $("[data-hide]").on("click", function(){
+            $(this).closest("." + $(this).attr("data-hide")).removeClass("show").text("");
+        });
+    });
+
     function populateTable() {
         $(".song-table").empty();
         for ([i, song] of songArray.entries()) {
@@ -62,20 +68,12 @@ $(document).ready(() => {
             for (let i = 0; i < rows.length; i++) {
                 sortingArray.push(Number(rows[i].id));
             }
-            // console.log("=========Sort-By=========");
-            // console.log(sortingArray);
-            // console.log("=========To-be-sorted=========");
-            // console.log(songArray);
             songArray.sort(function (a, b) {
                 return sortingArray.indexOf(a.songPosition) - sortingArray.indexOf(b.songPosition);
             });
             for (let i = 0; i < songArray.length; i++) {
                 songArray[i].songPosition = i;
             }
-            // console.log("=========Sorted=========");
-            // console.log(songArray);
-            // console.log("=========Post-Sorting-Array=========");
-            // console.log(sortingArray);
             populateTable();
         }
     });
@@ -93,12 +91,17 @@ $(document).ready(() => {
         event.preventDefault();
         event.stopPropagation();
         let songName = $("#song-name").val().trim();
+        songName ? $("#song-name").removeClass("is-invalid") : $("#song-name").addClass("is-invalid");
         let songArtist = $("#song-artist").val().trim();
-        songArray.push({ "songName": songName, "songArtist": songArtist, "songPosition": songArray.length });
-        populateTable();
-        console.log(songArray);
-        $("#song-name").val("");
-        $("#song-artist").val("");
+        songArtist ? $("#song-artist").removeClass("is-invalid") : $("#song-artist").addClass("is-invalid");
+        if (!$(".song-div input").hasClass("is-invalid")) {
+            songArray.push({ "songName": songName, "songArtist": songArtist, "songPosition": songArray.length });
+            populateTable();
+            console.log(songArray);
+            $("#song-name").val("");
+            $("#song-artist").val("");
+        }
+        console.log("Missing Data");
     });
 
     $(".song-table").on("click", ".delete", function (event) {
@@ -111,21 +114,33 @@ $(document).ready(() => {
 
     $("#submit-playlist").on("click", function (event) {
         event.preventDefault();
-        // console.log("submit playlist!");
-        // console.log(playlistTitle);
-        // console.log(playlistDescription);
-        // console.log(playlistContents);
-        $.post("/api/playlists", {
-            playlistTitle: $("#playlist-title").val().trim(),
-            playlistDescription: $("#playlist-description").val().trim(),
-            playlistContents: songArray
-            // eslint-disable-next-line no-unused-vars
-        }).then((res) => {
-            window.location.replace("/playlists");
-            // If there's an error, handle it by throwing up a bootstrap alert
-        }).catch(err => {
-            console.log(err);
-        });
+        let playlistTitle = $("#playlist-title").val().trim();
+        playlistTitle ? $("#playlist-title").removeClass("is-invalid") : $("#playlist-title").addClass("is-invalid");
+        let playlistDescription = $("#playlist-description").val().trim();
+        playlistDescription ? $("#playlist-description").removeClass("is-invalid") : $("#song-name").addClass("playlist-description");
+        if (!$("input").hasClass("is-invalid")) {
+            if (songArray.length === 0) {
+                $("#alert-text").text("Playlist is empty");
+                $(".alert").addClass("show");
+            } else {
+                $.post("/api/playlists", {
+                    playlistTitle: playlistTitle,
+                    playlistDescription: playlistDescription,
+                    playlistContents: songArray
+                    // eslint-disable-next-line no-unused-vars
+                }).done((res) => {
+                    console.log(res);
+                    location.reload();
+                    // If there's an error, handle it by throwing up a bootstrap alert
+                }).fail(function (jqXHR) {
+                    console.log(jqXHR.responseJSON.message);
+                    $("#alert-text").text(jqXHR.responseJSON.message);
+                    $(".alert").addClass("show");
+                });
+            }
+        } else {
+            console.log("Fields are missing");
+        }
     });
 
     // Toggle plus minus icon on show hide of collapse element

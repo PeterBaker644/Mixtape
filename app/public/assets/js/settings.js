@@ -11,7 +11,7 @@ $(document).ready(() => {
         });
     }
 
-    $("#edit, #submit, #cancel").on("click", function (event) {
+    $("#edit, #cancel").on("click", function (event) {
         console.log("you pressed the button");
         event.preventDefault();
         $(".toggle").slideToggle();
@@ -21,21 +21,31 @@ $(document).ready(() => {
     $("#submit").on("click", function (event) {
         event.preventDefault();
         let username = $("#username").val();
+        username ? $("#username").removeClass("is-invalid") : $("#username").addClass("is-invalid");
+        console.log(username);
         let email = $("#email").val();
+        email ? $("#email").removeClass("is-invalid") : $("#email").addClass("is-invalid");
+        console.log(email);
         let firstName = $("#firstName").val();
+        firstName ? $("#firstName").removeClass("is-invalid") : $("#firstName").addClass("is-invalid");
+        console.log(firstName);
         let lastName = $("#lastName").val();
-        $.post("/api/user", {
-            username: username,
-            email: email,
-            firstName: firstName,
-            lastName: lastName
-        }).then(() => {
-            // trigger the modal here to warn the user or to confrim they have changed succesfully.
-            window.location.replace("/profile/settings");
-            // If there's an error, handle it by DOING NOTHING
-        }).catch(err => {
-            console.log(err);
-        });
+        lastName ? $("#lastName").removeClass("is-invalid") : $("#lastName").addClass("is-invalid");
+        console.log(lastName);
+        if (!$("input").hasClass("is-invalid")) {
+            $.post("/api/user", {
+                username: username,
+                email: email,
+                firstName: firstName,
+                lastName: lastName
+            }).done((res) => {
+                console.log(res);
+            }).fail(function (jqXHR) {
+                console.log(jqXHR.responseJSON.message);
+                $("#alert-text").text(jqXHR.responseJSON.message);
+                $(".alert").addClass("show");
+            });
+        }
     });
 
     $(".playlist-container").append("<button class='font-comment d-flex delete-playlist' data-toggle='modal' data-target='#deleteWarning'><span class='d-none d-lg-block'>Delete Playlist </span><i class='fa fa-times m-3 m-lg-1'></i></button>");
