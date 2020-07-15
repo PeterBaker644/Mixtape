@@ -106,6 +106,8 @@ module.exports = function (app) {
             });
             //...log out duplicate found if playlist already exists.
             if (playlistduplicatesearch) {
+                let message = "Playlist Name Already Exists";
+                res.status(409).json({ message: message });
                 console.log("[PLAYLIST-ROUTES] Duplicate found");
                 res.json("[PLAYLIST-ROUTES] Duplicate found");
             } else {

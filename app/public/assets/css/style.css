@@ -153,13 +153,17 @@ tr:last-of-type td:last-of-type {
 }
 
 .icon-vote {
+    color:#E4E7E9 !important;
+    line-height: 0.8rem;
+}
+
+.anti-button {
     background-color: inherit !important;
     border:none !important;
     box-shadow:none;
     outline:none;
-    color:#E4E7E9 !important;
-    line-height: 0.8rem;
-    cursor: pointer;
+    cursor: pointer;  
+    text-shadow:none; 
 }
 
 .icon-vote:active, .icon-vote:focus {
@@ -205,6 +209,13 @@ tr:last-of-type td:last-of-type {
 }
 
 /* ====================== Bootstrap Tweaks Below ====================== */
+
+.alert {
+    border-image: none;
+    background-color: #2E191C !important;
+    border: solid 2px #721c24 !important;
+    /* display:inline-block; */
+}
 
 .btn-primary {
     background-color: var(--random-dark) !important;
