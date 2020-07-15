@@ -24,7 +24,7 @@ passport.use(new LocalStrategy(
                 console.log("[PASSPORT] ==========The password is valid=============");
                 return done(null, user);
             } catch (err) {
-                console.log(err);
+                return done(null, false, { message: "Invalid Credentials" });
             }
             // db.User.findOne({
             //     where: { username: username }

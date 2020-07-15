@@ -53,7 +53,6 @@ module.exports = function (sequelize, DataTypes) {
     User.prototype.validPassword = async (user, password) => {
         try {
             console.log("[USER] validPasword triggered");
-            console.log("[USER] sees " + password + " " + user.password);
             let passwordCheck = await argon2.verify(user.password, password);
             console.log("[USER] argon2.verify evaluates to: " + passwordCheck);
             return passwordCheck;

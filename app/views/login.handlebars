@@ -22,19 +22,23 @@
                     <form class="login">
                         <div class="form-group">
                             <label for="username-input">Username</label>
-                            <input type="text" class="form-control" id="username-input" placeholder="Username" autocorrect="off" autocapitalize="off" spellcheck="false" required>
+                            <input type="text" class="form-control" id="username-input" placeholder="Username"
+                                autocorrect="off" autocapitalize="off" spellcheck="false">
                         </div>
                         <div class="form-group">
                             <label for="password-input">Password</label>
-                            <input type="password" class="form-control" id="password-input" placeholder="Password"
-                                required>
+                            <input type="password" class="form-control" id="password-input" placeholder="Password">
                         </div>
-                        {{!-- This next line might be garbage and need to be redesigned. --}}
-                        <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            <span class="sr-only">Error:</span> <span class="msg"></span>
+                        <div class="alert alert-danger mt-3 py-2 alert-dismissible" role="alert"
+                            id="db-alert">
+                            <h4 class="font-block mb-0 mt-1" id="alert-text"></h4>
+                            <button type="button" class="close anti-button" data-hide="alert" aria-label="Close">
+                                <i class="fa fa-times text-danger"></i>
+                            </button>
                         </div>
-                        <button type="submit" class="btn btn-block btn-lg btn-xlg btn-dark font-block mt-4 text-bright">Login to Mixtape</button>
+                        <button type="submit"
+                            class="btn btn-block btn-lg btn-xlg btn-dark font-block mt-4 text-bright">Login to
+                            Mixtape</button>
                     </form>
                 </div>
             </div>
