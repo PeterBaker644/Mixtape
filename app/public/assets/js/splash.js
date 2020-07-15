@@ -23,6 +23,7 @@ function getCookie(cname) {
     return "";
 }
 
+// eslint-disable-next-line no-unused-vars
 function checkCookie() {
     const user = getCookie("username");
     if (user !== "") {
