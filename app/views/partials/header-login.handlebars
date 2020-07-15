@@ -1,30 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-medium">
-    <a class="navbar-brand text-white" href="/playlists">Mixtape</a>
+    <a class="navbar-brand text-light" href="/playlists">Mixtape<span class="random-color ml-1">.</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-md-auto">
+        <ul class="navbar-nav ml-md-auto d-flex align-items-center">
+            <li class="font-comment random-light">already a user?</li>
             <li class="nav-item">
-                <a class="nav-link text-bright h3 font-subtitle mb-0" href="/login">Login <span
-                        class="sr-only">(current)</span></a>
+                <a class="nav-link text-random h3 font-block mb-0" href="/login">Login </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-bright h3 font-subtitle mb-0" href="/signup">Sign Up <span class="sr-only">(current)</span></a>
+                <a class="nav-link text-random h3 font-block mb-0" href="/signup">Sign Up </a>
             </li>
         </ul>
     </div>  
 </nav>
 
-
-
 <div class="container">
     <div class="card text-white bg-xtradark my-4">
-        {{!-- <h1 class="display-4">Hello!</h1> --}}
         <div class="d-flex justify-content-around align-items-center">
             <div class="h3 font-comment">Today is a great day to create a playlist.</div>
-            <a class="h3 font-title ml-2 text-bright text-decoration-none" href="/signup">Make a New Account</a>
+            <a class="h3 font-marker ml-2 text-random text-decoration-none" href="/signup">Make a New Account</a>
         </div>
     </div>
 </div>

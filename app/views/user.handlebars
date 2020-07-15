@@ -1,11 +1,14 @@
 {{#if authenticated}}
     {{> header-user}}
-    {{> create-playlist}}
     <script type="text/javascript" src="/assets/js/vote.js"></script>  
 {{else}}
     {{> header-login}}
-    <script type="text/javascript" src="/assets/js/vote-guest.js"></script>
+    <script type="text/javascript" src="/assets/js/vote-guest.js"></script>  
 {{/if}}
+
+{{#with playlists.[0]}} 
+    {{> user-info}}
+{{/with}}
 
 <div class="container mb-4">
     <div class="accordion" id="accordionExample">
@@ -16,5 +19,6 @@
         </div>
     </div>
 </div>
+
 
 <script type="text/javascript" src="/assets/js/index.js"></script>

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-medium">
-    <a class="navbar-brand text-light" href="/playlists">Mixtape</a>
+    <a class="navbar-brand text-white" href="/playlists">Mixtape<span class="random-color ml-1">.</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,8 +7,8 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-md-auto">
             <li class="nav-item d-flex align-items-center">
-                <a class="nav-link text-white font-comment" href="/login">Already have an account? 
-                    <span class="text-bright h3 font-subtitle mb-0 ml-2"> Login</span>
+                <a class="nav-link font-comment random-light" href="/login">Already have an account?
+                    <span class="text-random h3 font-block mb-0 ml-2"> Login</span>
                 </a>
             </li>
         </ul>
@@ -19,7 +19,7 @@
         <div class="col-md-6">
             <div class="card card-gap">
                 <div class="card-header">
-                    <h2 class="text-center font-title">Create New Account</h2>
+                    <h2 class="text-center font-marker">Create New Account</h2>
                     <form class="signup">
                         <div class="form-group">
                             <label for="exampleInputFname1">First Name</label>
@@ -42,10 +42,10 @@
                             <input type="password" class="form-control" id="password-input" placeholder="Password">
                         </div>
                         <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            <span class="sr-only">Error:</span> <span class="msg"></span>
+                            <h4 class="font-block mb-0 mt-1" id="alert-text"></h4>
                         </div>
-                        <button type="submit" class="btn btn-block btn-lg btn-xlg btn-dark font-subtitle mt-4">Sign Up for Mixtape</button>
+                        <button type="submit" class="btn btn-block btn-lg btn-xlg btn-dark font-block mt-4">Sign Up for
+                            Mixtape</button>
                     </form>
                 </div>
             </div>
