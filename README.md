@@ -38,8 +38,8 @@ This repository uses an open-source license. Please check the readme badges or r
 Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
 
 ## Testing
-To test this project, run the following commands:
-'npm run test'
+To test this project, after cloning the git and installing packages, run the following commands:
+`npm run test`
 
 ## Screenshots
 
