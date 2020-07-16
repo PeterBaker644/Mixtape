@@ -40,7 +40,7 @@ module.exports = function (app) {
             .then(() => {
                 res.redirect(307, "/api/login");
             })
-            .fail(err => {
+            .catch(err => {
                 res.status(401).json(err);
                 console.log(err);
             });
@@ -105,7 +105,6 @@ module.exports = function (app) {
         }).then(dbUser => res.json({ dbUser }));
     });
 
-    // Would like this to display the username in the api path, but I don't know how I want to do that now. Revisit later.
     app.get("/api/profile/settings", (req, res) => {
         if (!req.user) {
             // The user is not logged in, send back an empty object

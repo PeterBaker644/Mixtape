@@ -1,11 +1,10 @@
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 const db = require("../models");
-// const user = require("../models/user");
 
 module.exports = function (app) {
 
     app.get("/", (req, res) => {
-        res.redirect("/playlists");
+        res.render("splash");
     });
 
     app.get("/playlists", async (req, res) => {
@@ -41,7 +40,6 @@ module.exports = function (app) {
             }
         } catch (err) {
             console.log(err);
-            // maybe address this
             res.status(404).render("index");
         }
     });
@@ -55,14 +53,12 @@ module.exports = function (app) {
     });
 
     app.get("/logout", isAuthenticated, (req, res) => {
-        // console.log(`[HTML-ROUTES] User ${req.user.username}`)
         let name = req.user.username;
         console.log("[HTML-ROUTES] User " + name + " logged out.");
         req.logout();
         res.redirect("/playlists");
     });
 
-    // Needs to handle if the user is already authenticed. line 11.
     app.get("/signup", (req, res) => {
         if (req.user) {
             res.redirect("/playlists");
@@ -92,9 +88,6 @@ module.exports = function (app) {
                         [db.Sequelize.literal("(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=User.id AND Votes.upvote = -1)"), "user_total_downvotes"],
                         //used to determine if user has voted on this playlist or not
                         [db.Sequelize.literal(`(SELECT Votes.upvote FROM Votes WHERE PlaylistId = Playlist.id AND UserId = ${req.user.id})`), "upvoted"],
-                        //this will display all the upvotes and downvotes that the user has received from any of their playlists
-                        // [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE Votes.UserId = ${req.user.id} AND Votes.upvote = 1)`), "user_total_upvotes_received"],
-                        // [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE Votes.UserId = ${req.user.id} AND Votes.upvote = -1)`), "user_total_downvotes_received"],
                     ]
                 },
                 order: db.sequelize.literal("title, song_order ASC"),
@@ -105,7 +98,6 @@ module.exports = function (app) {
                 res.render("settings", hbsObject);
             }
         } catch (err) {
-            // maybe address this
             res.status(404).render("index");
         }
     });
@@ -153,7 +145,6 @@ module.exports = function (app) {
             }
         } catch (err) {
             console.log(err);
-            // Maybe throw some kind of 'user not found' alert. This needs to be handled in the html with handlebars. See example for details.
             res.status(404).render("index", {
                 message: "User not found."
             });

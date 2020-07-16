@@ -97,7 +97,6 @@ module.exports = function (app) {
                 let message = "Playlist Name Already Exists";
                 res.status(409).json({ message: message });
                 console.log("[PLAYLIST-ROUTES] Duplicate found");
-                res.json("[PLAYLIST-ROUTES] Duplicate found");
             } else {
                 //creates the playlist title author and description
                 const PlaylistCreated = await db.Playlist.create({

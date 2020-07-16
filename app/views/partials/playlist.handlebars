@@ -20,11 +20,14 @@
         <div class="col btn text-left text-white ml-2" type="button" data-toggle="collapse"
             data-target="#collapse{{dataValues.id}}" aria-expanded="true" aria-controls="collapse{{dataValues.id}}">
             {{!-- THIS WILL FAIL GIVEN A LONG ENOUGH NAME, FIX --}}
-            <h2 class="m-0 font-marker text-truncate">{{dataValues.title}}
-                <span class="font-block lead random-color">Authored by: </span>
-                <span class="font-block lead text-bright author-link">{{User.dataValues.username}}</span>
+            <h2 class="m-0 row font-marker">
+                <div class="col-fluid text-truncate pr-3">{{dataValues.title}}</div>
+                <div class="col-fluid">
+                    <span class="h4 font-block random-color author">Authored by: </span>
+                    <span class="h4 font-block text-bright author-link author">{{User.dataValues.username}}</span>
+                </div>
             </h2>
-            <div class="font-comment text-muted">{{dataValues.description}}</div>
+            <div class="font-comment text-muted text-truncate">{{dataValues.description}}</div>
         </div>
         {{!-- <button class='font-comment d-flex delete-playlist' data-toggle='modal' data-target='#deleteWarning'>
                 <span class='d-none d-lg-block'>Delete Playlist </span>

@@ -5,8 +5,6 @@
 //     req.body.playlistAuthorId,
 //     req.body.playlistContents
 
-
-
 // playlistContents = [
 //     { songName: "Name of the song", songArtist: "Artist of the song" },
 //     { songName: "Name of the song", songArtist: "Artist of the song" }
