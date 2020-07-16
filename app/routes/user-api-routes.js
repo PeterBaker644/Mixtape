@@ -11,10 +11,16 @@ module.exports = function (app) {
     app.post("/api/login", passport.authenticate("local"), async (req, res) => {
         console.log("[USER-ROUTES] Login API is being triggered");
         try {// eslint-disable-next-line camelcase
+            console.log("[USER-ROUTES User API is running]");
             db.User.update({ last_login: (moment().format()) }, {
                 where: {
                     id: req.user.id
                 }
+            }).then(() => {
+                res.status(200).json({
+                    username: req.user.username,
+                    id: req.user.id
+                });
             });
         } catch (err) {
             res.status(401).json(err);
@@ -31,10 +37,10 @@ module.exports = function (app) {
             username: req.body.username,
             password: req.body.password
         })
-            .then(() => {
+            .success(() => {
                 res.redirect(307, "/api/login");
             })
-            .catch(err => {
+            .fail(err => {
                 res.status(401).json(err);
                 console.log(err);
             });

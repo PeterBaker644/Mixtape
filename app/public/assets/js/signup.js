@@ -32,7 +32,7 @@ $(document).ready(() => {
             email: email,
             username: username,
             password: password
-        }).done(() => {
+        }).sucess(() => {
             window.location.replace("/playlists");
             // If there's an error, handle it by throwing up a bootstrap alert
         }).fail((jqXHR, textStatus, errorThrown) =>{

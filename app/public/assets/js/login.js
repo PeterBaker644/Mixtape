@@ -31,7 +31,7 @@ $(document).ready(() => {
             $.post("/api/login", {
                 username: usernameInput,
                 password: passwordInput
-            }).done(() => {
+            }).success(() => {
                 window.location.replace("/playlists");
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 if (errorThrown === "Unauthorized") {

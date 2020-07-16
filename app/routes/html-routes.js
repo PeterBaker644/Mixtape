@@ -70,6 +70,7 @@ module.exports = function (app) {
             res.render("signup");
         }
     });
+
     app.get("/profile/settings", isAuthenticated, async (req, res) => {
         try {
             let data = await db.Playlist.findAll({
