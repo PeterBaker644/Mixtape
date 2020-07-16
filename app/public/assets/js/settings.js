@@ -38,8 +38,8 @@ $(document).ready(() => {
                 email: email,
                 firstName: firstName,
                 lastName: lastName
-            }).done((res) => {
-                console.log(res);
+            }).done(() => {
+                window.location.replace("/profile/settings");
             }).fail(function (jqXHR) {
                 console.log(jqXHR.responseJSON.message);
                 $("#alert-text").text(jqXHR.responseJSON.message);
