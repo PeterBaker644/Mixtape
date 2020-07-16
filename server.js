@@ -18,17 +18,16 @@ app.use(passport.session());
 
 app.use((req, res, next) => {
     console.log("[SERVER] Preparing to check for user.");
-    console.log(req);
-    if (!req.user) {
-        console.log("[SERVER +++++++++ New User :D +++++++++]");
-    }
+    // if (!req.user) {
+    //     console.log("[SERVER] Annoying splash page, currently don't know how to only display once");
+    //     res.render("splash");
+    // }
     if (req.user) {
         console.log("[SERVER] Found req.user. Details are all follows:");
         console.log(req.user);
         // res.locals.isAuthenticated = req.isAuthenticated();
         res.locals.authenticated = true;
         res.locals.user = req.user;
-        // console.log("what even is" + req.locals.isAuthenticated);
     } else {
         console.log("[SERVER] Failed to authenticate the user.");
     }
@@ -37,7 +36,6 @@ app.use((req, res, next) => {
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-// maybe implement dirname later.
 app.set("views", "./app/views");
 
 require("./app/routes/html-routes.js")(app);
