@@ -40,7 +40,7 @@ module.exports = function (app) {
             .then(() => {
                 res.redirect(307, "/api/login");
             })
-            .fail(err => {
+            .catch(err => {
                 res.status(401).json(err);
                 console.log(err);
             });
