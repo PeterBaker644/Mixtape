@@ -121,7 +121,7 @@ module.exports = function (app) {
                     await db.playlist_song_junction_table.create({
                         PlaylistId: NewPlaylistID,
                         SongId: NewSongID,
-                        song_order: (i + 1),
+                        song_order: Number(i + 1),
                     });
                 }
                 res.json("[PLAYLIST-ROUTES] Created playlist");

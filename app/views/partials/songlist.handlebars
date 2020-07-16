@@ -9,7 +9,7 @@
     <tbody class="font-comment">
         {{#each dataValues.Songs}}
             <tr>
-                <td scope="row">{{playlist_song_junction_table.dataValues.song_order}}</td>
+                <td scope="row">{{toInt playlist_song_junction_table.dataValues.song_order}}</td>
                 <td>{{dataValues.song_title}}</td>
                 <td>{{dataValues.song_artist}}</td>
             </tr>

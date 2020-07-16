@@ -5,6 +5,8 @@ const passport = require("./app/config/passport");
 const PORT = process.env.PORT || 3000;
 const db = require("./app/models");
 const exphbs = require("express-handlebars");
+const hbshelpers = require("handlebars-helpers");
+const multihelpers = hbshelpers();
 
 const app = express();
 
@@ -34,7 +36,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ helpers: multihelpers, defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 app.set("views", "./app/views");
 
