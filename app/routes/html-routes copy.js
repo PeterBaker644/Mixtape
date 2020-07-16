@@ -5,7 +5,7 @@ const db = require("../models");
 module.exports = function (app) {
 
     app.get("/", (req, res) => {
-        res.redirect("/playlists");
+        res.redirect("/splash");
     });
 
     app.get("/playlists", async (req, res) => {
