@@ -85,12 +85,20 @@ $(document).ready(() => {
     }
 
     $(".author-link").on("click", function (event) {
-        console.log("you clicked the author");
-        event.stopPropagation();
+        event.preventDefault();
+        event.stopImmediatePropagation();
         author = $(this).text();
         window.location.replace("/user/" + author);
-
     });
+
+    $("a").on("click", function (event) {
+        event.stopImmediatePropagation();
+    });
+
+    // $(".icon-link").on("click", function (event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    // });
 
     $("#add-song").on("click", function (event) {
         console.log(songArray);
