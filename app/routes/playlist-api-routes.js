@@ -109,7 +109,6 @@ module.exports = function (app) {
                 let message = "Playlist Name Already Exists";
                 res.status(409).json({ message: message });
                 console.log("[PLAYLIST-ROUTES] Duplicate found");
-                res.json("[PLAYLIST-ROUTES] Duplicate found");
             } else {
                 //creates the playlist title author and description
                 const PlaylistCreated = await db.Playlist.create({
@@ -144,9 +143,6 @@ module.exports = function (app) {
         }
     });
 
-
-
-    //PARAM URLS GO LAST
     app.get("/api/playlists/user/:username", (req, res) => {
         //this finds all by a specific username playlists and orders by title.
         //this includes username title, and array of songs and orders those songs by song order
@@ -170,38 +166,11 @@ module.exports = function (app) {
             ],
             // eslint-disable-next-line quotes
             // where: db.sequelize.literal(`(users.username) = ${req.params.username}`),
-            // where: {rainbows:req.params.username},
             order: db.sequelize.literal("title, song_order ASC"),
         })
             .then(function (dbPlaylist) {
                 res.json(dbPlaylist);
             });
     });
-
-
-
-
-    // I think we need the authenticate line here. We'll double check when testing though.
-    // app.post("/api/playlists", passport.authenticate("local"), (req, res) => {
-    //     db.Playlist.create({
-    //         req.body.playlistTitle,
-    //         req.body.playlistDescription,
-    //         req.body.playlistContents,
-    //         req.body.playlistAuthorId
-
-    //         playlistContents = [
-    //             {songName:"Name of the song", songArtist:"Artist of the song"},
-    //             {songName:"Name of the song", songArtist:"Artist of the song"}
-    //         ]
-    //     })
-    //         .then(() => {
-    //             // I don't know what we'd want to do here.
-    //             res.status(200);
-    //         })
-    //         .catch(err => {
-    //             res.status(401).json(err);
-    //         });
-    // });
-
 
 };
