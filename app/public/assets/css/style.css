@@ -350,9 +350,12 @@ input:-webkit-autofill:active  {
     .card {
         border-radius: 0 !important;
     }
+    .form-control::placeholder {
+        font-size: 1rem !important;
+    }
     .icon-link {
         font-size: 1.4rem;
-        line-height: 0.8rem;
+        line-height: 0.4rem;
     }
     td {
         font-size: 1.4rem;
