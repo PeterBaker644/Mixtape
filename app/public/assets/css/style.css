@@ -317,6 +317,9 @@ input:-webkit-autofill:active  {
     .card-gap {
         margin-top: 3rem;
     }
+    .display-3 {
+        text-align: center !important;
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -334,6 +337,9 @@ input:-webkit-autofill:active  {
 @media screen and (max-width: 480px) {
     .container {
         padding: 0;
+    }
+    .display-3 {
+        font-size: 3.5rem !important;
     }
     .card {
         border-radius: 0 !important;
