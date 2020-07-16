@@ -1,9 +1,11 @@
 $(document).ready(() => {
     let songArray = [];
 
+    $(".alert").hide();
+
     $(function(){
         $("[data-hide]").on("click", function(){
-            $(this).closest("." + $(this).attr("data-hide")).removeClass("show").text("");
+            $(this).closest("." + $(this).attr("data-hide")).slideToggle();
         });
     });
 
@@ -57,7 +59,6 @@ $(document).ready(() => {
             luminosity: "dark",
         }));
     });
-
 
     parseDates();
 
@@ -121,7 +122,7 @@ $(document).ready(() => {
         if (!$("input").hasClass("is-invalid")) {
             if (songArray.length === 0) {
                 $("#alert-text").text("Playlist is empty");
-                $(".alert").addClass("show");
+                $(".alert").show();
             } else {
                 $.post("/api/playlists", {
                     playlistTitle: playlistTitle,
