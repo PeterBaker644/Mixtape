@@ -35,6 +35,7 @@ module.exports = function (app) {
             });
             if (data) {
                 const hbsObject = { playlists: data };
+                console.log(hbsObject.playlists);
                 // res.json(hbsObject);
                 res.render("index", hbsObject);
             }
