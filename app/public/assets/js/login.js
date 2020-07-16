@@ -4,7 +4,7 @@ $(document).ready(() => {
 
     $(function(){
         $("[data-hide]").on("click", function(){
-            $(this).closest("." + $(this).attr("data-hide")).hide();
+            $(this).closest("." + $(this).attr("data-hide")).slideToggle();
         });
     });
 

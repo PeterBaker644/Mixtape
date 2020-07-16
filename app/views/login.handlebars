@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-medium">
-    <a class="navbar-brand text-light" href="/playlists">Mixtape<span class="random-color ml-1">.</span></a>
+    <a class="navbar-brand text-light mr-0 pr-0" href="/playlists">Mixtape<span class="random-color ml-1">.</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -29,8 +29,7 @@
                             <label for="password-input">Password</label>
                             <input type="password" class="form-control" id="password-input" placeholder="Password">
                         </div>
-                        <div class="alert alert-danger mt-3 py-2 alert-dismissible" role="alert"
-                            id="db-alert">
+                        <div class="alert alert-danger mt-3 py-2 alert-dismissible" role="alert" id="db-alert">
                             <h4 class="font-block mb-0 mt-1" id="alert-text"></h4>
                             <button type="button" class="close anti-button" data-hide="alert" aria-label="Close">
                                 <i class="fa fa-times text-danger"></i>
@@ -44,6 +43,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="mt-3">
+    {{> footer}}
 </div>
 
 <script type="text/javascript" src="/assets/js/login.js"></script>
