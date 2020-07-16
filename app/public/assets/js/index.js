@@ -1,5 +1,6 @@
 $(document).ready(() => {
     let songArray = [];
+    const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 
     $(".alert").hide();
 
@@ -22,7 +23,9 @@ $(document).ready(() => {
             let row = $("<tr>").append(idCell, nameCell, artistCell, buttonCell).attr("id", (i));
             $(".song-table").append(row);
         }
-        $("#table-songs").tableDnDUpdate();
+        if (!isMobile) {
+            $("#table-songs").tableDnDUpdate();
+        }
         // console.log("=========Repopulated=========");
         // console.log(songArray);
     }
@@ -62,22 +65,24 @@ $(document).ready(() => {
 
     parseDates();
 
-    $("#table-songs").tableDnD({
-        onDrop: (table) => {
-            let rows = table.tBodies[0].rows;
-            let sortingArray = [];
-            for (let i = 0; i < rows.length; i++) {
-                sortingArray.push(Number(rows[i].id));
+    if (!isMobile) {
+        $("#table-songs").tableDnD({
+            onDrop: (table) => {
+                let rows = table.tBodies[0].rows;
+                let sortingArray = [];
+                for (let i = 0; i < rows.length; i++) {
+                    sortingArray.push(Number(rows[i].id));
+                }
+                songArray.sort(function (a, b) {
+                    return sortingArray.indexOf(a.songPosition) - sortingArray.indexOf(b.songPosition);
+                });
+                for (let i = 0; i < songArray.length; i++) {
+                    songArray[i].songPosition = i;
+                }
+                populateTable();
             }
-            songArray.sort(function (a, b) {
-                return sortingArray.indexOf(a.songPosition) - sortingArray.indexOf(b.songPosition);
-            });
-            for (let i = 0; i < songArray.length; i++) {
-                songArray[i].songPosition = i;
-            }
-            populateTable();
-        }
-    });
+        });
+    }
 
     $(".author-link").on("click", function (event) {
         console.log("you clicked the author");
