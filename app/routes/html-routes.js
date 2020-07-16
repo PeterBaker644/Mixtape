@@ -111,8 +111,6 @@ module.exports = function (app) {
     });
 
     app.get("/user/:username", async (req, res) => {
-        // talk to gene about this tomorrow and how maybe we get rid of it?
-        console.log("testing 123");
         try {
             if (req.user) {
                 attributeCall = {
@@ -134,7 +132,6 @@ module.exports = function (app) {
                     ]
                 };
             }
-            console.log("testing 234");
             const data = await db.Playlist.findAll({
                 order: ["title"],
                 include: [{
@@ -147,7 +144,6 @@ module.exports = function (app) {
                 attributes: attributeCall,
                 order: db.sequelize.literal("title, song_order ASC"),
             });
-            console.log("345");
             if (data) {
                 const hbsObject = { playlists: data };
                 console.log(hbsObject.playlists);
