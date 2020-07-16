@@ -36,12 +36,6 @@ module.exports = function (app) {
             });
             if (data) {
                 const hbsObject = { playlists: data };
-                // console.log(hbsObject.playlists[0].dataValues);
-                // console.log(hbsObject.playlists[0].Songs);
-                for (entry of hbsObject.playlists[0].Songs){
-                    console.log(entry.dataValues);
-                }
-                // res.json(hbsObject);
                 res.render("index", hbsObject);
             }
         } catch (err) {
@@ -143,8 +137,6 @@ module.exports = function (app) {
             });
             if (data) {
                 const hbsObject = { playlists: data };
-                console.log(hbsObject.playlists);
-                console.log(hbsObject.playlists[0].dataValues.Songs[0].playlist_song_junction_table.dataValues.song_order);
                 // res.json(hbsObject);
                 res.render("user", hbsObject);
             }
