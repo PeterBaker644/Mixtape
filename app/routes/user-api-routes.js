@@ -37,7 +37,7 @@ module.exports = function (app) {
             username: req.body.username,
             password: req.body.password
         })
-            .done(() => {
+            .then(() => {
                 res.redirect(307, "/api/login");
             })
             .fail(err => {
