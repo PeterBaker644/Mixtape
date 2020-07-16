@@ -4,7 +4,7 @@
 
 It has never been more important than it is right now to stay connected with friends and share parts of your life, so we created a fast and easy way to share with friends / family your current music rotation. 
 
-Try it now: (https://project-2-mixtape.herokuapp.com/)
+Try it now: https://project-2-mixtape.herokuapp.com/
 
 Mixtape is a social media music sharing website built on node-express and MySQL. It has a simple interface for sharing and voting on playlist. We want the user to be solely focused on the music, and so we designed a fun and easy-to-use, mobile-friendly website for just that. We use cutting-edge Argon2 encryption to keep our user information safe, and the PassportJS for front to back user authentication.
 
