@@ -31,11 +31,16 @@ module.exports = function (app) {
                 { model: db.Song, attributes: ["song_title", "song_artist"] }
                 ],
                 attributes: attributeCall,
-                order: db.sequelize.literal("upvotes DESC, song_order ASC"),
+                // Very hacky solution for ordering string numbers.
+                order: db.sequelize.literal("upvotes DESC, CHAR_LENGTH(song_order), song_order ASC"),
             });
             if (data) {
                 const hbsObject = { playlists: data };
-                // console.log(hbsObject.playlists);
+                // console.log(hbsObject.playlists[0].dataValues);
+                // console.log(hbsObject.playlists[0].Songs);
+                for (entry of hbsObject.playlists[0].Songs){
+                    console.log(entry.dataValues);
+                }
                 // res.json(hbsObject);
                 res.render("index", hbsObject);
             }
@@ -95,7 +100,6 @@ module.exports = function (app) {
             });
             if (data) {
                 const hbsObject = { playlists: data };
-                console.log(hbsObject.playlists[0].User);
                 res.render("settings", hbsObject);
             }
         } catch (err) {
