@@ -174,18 +174,6 @@ tr:last-of-type td:last-of-type {
     outline:none;
 }
 
-.info-jumbo {
-
-}
-
-.info-title {
-    
-}
-
-.info-title {
-    
-}
-
 :disabled, :disabled:hover {
     color:#3D4148 !important;
     pointer-events: none;
