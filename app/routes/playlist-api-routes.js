@@ -1,14 +1,10 @@
 /* eslint-disable camelcase */
 const db = require("../models");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
-// const passport = require("../config/passport");
 
 module.exports = function (app) {
-
-
     // if AUTH then return upvote info for that AUThed user and ALSO show below
     // if not authed, show below and upvote buttons greyed out anyways.
-
     app.get("/api/playlists/include_all_orderby_title", async (req, res) => {
         let output = {};
         if (req.user.id) {
@@ -59,10 +55,6 @@ module.exports = function (app) {
         res.json(output);
     });
 
-    // when frontend sends data
-    // change .get to post
-    // change req to reqtest and delete 10 lines of code immediately after app.post
-    // this will take out the dummy testing object and use the incoming object instead
     app.post("/api/playlists_destroy", isAuthenticated, async (req, res) => {
         // this queries the DB to find the user id of the requested playlist title. stores it to useridQuery
         useridQuery = await db.Playlist.findOne({
@@ -92,10 +84,6 @@ module.exports = function (app) {
         }
     });
 
-    //when frontend sends data
-    //change .get to post
-    //change req to reqtest and delete 10 lines of code immediately after app.post
-    //this will take out the dummy testing object and use the incoming object instead
     app.post("/api/playlists", isAuthenticated, async (req, res) => {
         try {
             //this will search for the incoming playlist and...
@@ -146,7 +134,6 @@ module.exports = function (app) {
     app.get("/api/playlists/user/:username", (req, res) => {
         //this finds all by a specific username playlists and orders by title.
         //this includes username title, and array of songs and orders those songs by song order
-        //confirmed working in postman
         db.Playlist.findAll({
             include: [
                 { model: db.Song, attributes: ["song_title", "song_artist"] },
@@ -164,13 +151,10 @@ module.exports = function (app) {
                 // eslint-disable-next-line quotes
                 [db.Sequelize.literal(`(SELECT COUNT(Votes.upvote) FROM Votes WHERE UserId=user.id AND Votes.upvote = -1)`), "user_total_downvotes"],
             ],
-            // eslint-disable-next-line quotes
-            // where: db.sequelize.literal(`(users.username) = ${req.params.username}`),
             order: db.sequelize.literal("title, song_order ASC"),
         })
             .then(function (dbPlaylist) {
                 res.json(dbPlaylist);
             });
     });
-
 };
