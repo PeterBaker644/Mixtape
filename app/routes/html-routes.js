@@ -31,11 +31,11 @@ module.exports = function (app) {
                 { model: db.Song, attributes: ["song_title", "song_artist"] }
                 ],
                 attributes: attributeCall,
-                order: db.sequelize.literal("title, song_order ASC"),
+                order: db.sequelize.literal("upvotes DESC, song_order ASC"),
             });
             if (data) {
                 const hbsObject = { playlists: data };
-                console.log(hbsObject.playlists);
+                // console.log(hbsObject.playlists);
                 // res.json(hbsObject);
                 res.render("index", hbsObject);
             }
