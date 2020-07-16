@@ -320,7 +320,7 @@ input:-webkit-autofill:active  {
 }
 
 @media screen and (max-width: 576px) {
-    .author {
+    .h4 {
         font-size: 1.2rem !important;
     }
     .card-gap {
@@ -337,5 +337,29 @@ input:-webkit-autofill:active  {
     }
     .card {
         border-radius: 0 !important;
+    }
+    td {
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .font-comment {
+        font-size: 1.1rem;
+    }
+    .display-1 {
+        font-size: 5rem;
+    }
+    .h2, h2 {
+        font-size: 1.5rem !important;
+    }
+    .h4 {
+        font-size: 1rem !important;
+    }
+    body {
+        font-size: 0.7rem;
+    }
+    td {
+        font-size: 1.3rem;
     }
 }

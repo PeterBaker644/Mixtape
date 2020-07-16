@@ -1,4 +1,3 @@
-//do we need this? I don't even know.
 const db = require("../models");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
