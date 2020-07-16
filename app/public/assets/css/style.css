@@ -160,6 +160,7 @@ tr:last-of-type td:last-of-type {
 }
 
 .icon-link {
+    color: #73767B !important;
     font-size: 1.5rem;
 }
 
