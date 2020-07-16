@@ -18,6 +18,9 @@ app.use(passport.session());
 
 app.use((req, res, next) => {
     console.log("[SERVER] Preparing to check for user.");
+    if (!req.session.user) {
+        console.log("[SERVER +++++++++ New User :D +++++++++]");
+    }
     if (req.user) {
         console.log("[SERVER] Found req.user. Details are all follows:");
         console.log(req.user);
