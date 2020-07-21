@@ -2,7 +2,7 @@
 
 [![GitHub license](https://img.shields.io/github/license/PeterBaker644/Mixtape)](https://github.com/PeterBaker644/Mixtape/blob/master/LICENSE) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://www.contributor-covenant.org/version/2/0/code_of_conduct/code_of_conduct.md)
 
-It has never been more important than it is right now to stay connected with friends and share parts of your life, so we created a fast and easy way to share with friends / family your current music rotation. 
+It has never been more important than it is right now to stay connected with friends and share parts of your life, so we created a fast and easy way to share your current music rotation. 
 
 Try it now: https://project-2-mixtape.herokuapp.com/
 
