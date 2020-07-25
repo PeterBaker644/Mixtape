@@ -1,3 +1,4 @@
 app/models/index.js
 node_modules
 app/routes/bogus-routes.js
+app/public/assets/js/index.min.js

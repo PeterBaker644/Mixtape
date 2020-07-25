@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const passport = require("./app/config/passport");
+const compression = require("compression");
 
 const PORT = process.env.PORT || 3000;
 const db = require("./app/models");
@@ -10,6 +11,7 @@ const multihelpers = hbshelpers();
 
 const app = express();
 
+app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("./app/public"));
